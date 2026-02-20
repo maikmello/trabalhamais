@@ -1,5 +1,5 @@
-<svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Badge icon (centered) -->
+<svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Badge icon (centered, gap 3px to text) -->
   <g transform="translate(64, 0)">
     <!-- Badge body -->
     <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
@@ -10,6 +10,6 @@
     <!-- Body -->
     <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
   </g>
-  <!-- Wordmark: "Trabalha+" centered below -->
-  <text x="100" y="140" font-family="Nunito, sans-serif" font-weight="800" font-size="30" letter-spacing="-0.02em" text-anchor="middle" fill="#FFFFFF">Trabalha<tspan fill="#E8631A">+</tspan></text>
+  <!-- Wordmark: "Trabalha+" centered below (3px gap) -->
+  <text x="100" y="130" font-family="Nunito, sans-serif" font-weight="800" font-size="30" letter-spacing="-0.02em" text-anchor="middle" fill="#FFFFFF">Trabalha<tspan fill="#E8631A">+</tspan></text>
 </svg>
