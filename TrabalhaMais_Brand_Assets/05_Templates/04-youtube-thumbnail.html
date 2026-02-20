@@ -1,1353 +1,331 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrabalhaMais - Templates YouTube Thumbnail</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    /* ========================================================
-       TrabalhaMais - YouTube Thumbnail Templates
-       Brand Colors:
-         Orange:     #E8631A
-         Orange Dk:  #C44F0E
-         Navy:       #1A2744
-         Teal:       #1A9E7A
-         Cloud:      #F5F6FA
-         White:      #FFFFFF
-       Font: Nunito 400/600/700/800/900, Inter fallback
-       Thumbnail: 1280x720 native, displayed ~380px wide
-       ======================================================== */
-
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #0d1117;
-      color: #c9d1d9;
-      font-family: 'Nunito', 'Inter', system-ui, sans-serif;
-      padding: 48px 24px 80px;
-      min-height: 100vh;
-    }
-
-    /* ---------- Page header ---------- */
-    .page-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .page-header h1 {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 36px;
-      color: #FFFFFF;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-
-    .page-header h1 span {
-      color: #E8631A;
-    }
-
-    .page-header p {
-      font-size: 15px;
-      color: #8b949e;
-      font-weight: 400;
-    }
-
-    .page-header .brand-mark {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .page-header .brand-mark svg {
-      width: 32px;
-      height: auto;
-    }
-
-    .page-header .brand-mark span {
-      font-weight: 800;
-      font-size: 20px;
-      color: #E8631A;
-    }
-
-    /* ---------- Section ---------- */
-    .section {
-      max-width: 1320px;
-      margin: 0 auto 56px;
-    }
-
-    .section-title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: #FFFFFF;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding: 3px 10px;
-      border-radius: 4px;
-      position: relative;
-      top: -1px;
-    }
-
-    .section-title .badge--dark {
-      background: #1A2744;
-      color: #8b949e;
-    }
-
-    .section-title .badge--light {
-      background: rgba(232,99,26,0.15);
-      color: #E8631A;
-    }
-
-    .section-subtitle {
-      font-size: 13px;
-      color: #8b949e;
-      margin-bottom: 24px;
-      font-weight: 400;
-    }
-
-    /* ---------- Grid ---------- */
-    .thumb-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    @media (max-width: 1100px) {
-      .thumb-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 720px) {
-      .thumb-grid {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-        margin: 0 auto;
-      }
-    }
-
-    /* ---------- Thumb card ---------- */
-    .thumb-card {
-      background: #161b22;
-      border: 1px solid #21262d;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .thumb-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-    }
-
-    .thumb-card__canvas {
-      width: 100%;
-      aspect-ratio: 1280 / 720;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .thumb-card__caption {
-      padding: 14px 16px;
-    }
-
-    .thumb-card__caption h3 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e6edf3;
-      margin-bottom: 3px;
-    }
-
-    .thumb-card__caption p {
-      font-size: 12px;
-      color: #8b949e;
-      font-weight: 400;
-    }
-
-    .thumb-card__caption .dims {
-      font-size: 11px;
-      color: #484f58;
-      margin-top: 4px;
-      font-family: 'Inter', monospace;
-    }
-
-    /* =====================================================
-       THUMBNAIL ARTBOARDS
-       Each .tb is a 1280x720 "canvas" scaled to fit card.
-       We use transform:scale inside the wrapper.
-       ===================================================== */
-
-    .tb {
-      width: 1280px;
-      height: 720px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top left;
-      font-family: 'Nunito', sans-serif;
-      overflow: hidden;
-    }
-
-    /* JS-free responsive scaling via container query */
-    .thumb-card__canvas {
-      container-type: inline-size;
-    }
-
-    .tb {
-      /* scale factor = container-width / 1280  */
-      transform: scale(calc(100cqw / 1280));
-    }
-
-    /* -------------------------------------------------------
-       V1 - TUTORIAL (Dark)
-       Left 60% navy, right 40% orange, phone mockup
-       ------------------------------------------------------- */
-    .tb--v1-dark {
-      display: flex;
-    }
-
-    .tb--v1-dark .left {
-      width: 60%;
-      height: 100%;
-      background: #1A2744;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 60px;
-      position: relative;
-    }
-
-    .tb--v1-dark .left .logo {
-      position: absolute;
-      top: 32px;
-      left: 48px;
-    }
-
-    .tb--v1-dark .left .logo svg {
-      width: 40px;
-      height: auto;
-    }
-
-    .tb--v1-dark .left .logo-text {
-      position: absolute;
-      top: 40px;
-      left: 96px;
-      font-weight: 800;
-      font-size: 20px;
-      color: #FFFFFF;
-      opacity: 0.7;
-    }
-
-    .tb--v1-dark .left .tag {
-      display: inline-block;
-      background: #E8631A;
-      color: #FFF;
-      font-size: 22px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding: 6px 18px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      align-self: flex-start;
-    }
-
-    .tb--v1-dark .left h2 {
-      font-size: 62px;
-      font-weight: 900;
-      color: #FFFFFF;
-      line-height: 1.08;
-      letter-spacing: -1px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
-    }
-
-    .tb--v1-dark .right {
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(160deg, #E8631A 0%, #C44F0E 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .tb--v1-dark .right::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 300px;
-      height: 300px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-
-    .tb--v1-dark .phone {
-      width: 200px;
-      height: 400px;
-      background: #FFF;
-      border-radius: 28px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-      position: relative;
-      overflow: hidden;
-      border: 4px solid rgba(255,255,255,0.3);
-    }
-
-    .tb--v1-dark .phone .phone-screen {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, #F5F6FA 0%, #e8ecf2 100%);
-      border-radius: 24px;
-      display: flex;
-      flex-direction: column;
-      padding: 24px 16px;
-      align-items: center;
-    }
-
-    .tb--v1-dark .phone .phone-screen .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #E8631A;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tb--v1-dark .phone .phone-screen .avatar svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .tb--v1-dark .phone .phone-screen .line {
-      width: 80%;
-      height: 10px;
-      background: #d1d5db;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .tb--v1-dark .phone .phone-screen .line.short {
-      width: 55%;
-    }
-
-    .tb--v1-dark .phone .phone-screen .line.med {
-      width: 70%;
-    }
-
-    .tb--v1-dark .phone .phone-screen .section-block {
-      width: 100%;
-      background: #FFF;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 14px;
-    }
-
-    .tb--v1-dark .phone .phone-screen .section-block .sline {
-      width: 100%;
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 4px;
-      margin-bottom: 8px;
-    }
-
-    .tb--v1-dark .phone .phone-screen .section-block .sline:last-child {
-      width: 60%;
-      margin-bottom: 0;
-    }
-
-    /* -------------------------------------------------------
-       V1 - TUTORIAL (Light)
-       ------------------------------------------------------- */
-    .tb--v1-light {
-      display: flex;
-    }
-
-    .tb--v1-light .left {
-      width: 60%;
-      height: 100%;
-      background: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 60px;
-      position: relative;
-    }
-
-    .tb--v1-light .left .logo {
-      position: absolute;
-      top: 32px;
-      left: 48px;
-    }
-
-    .tb--v1-light .left .logo svg {
-      width: 40px;
-      height: auto;
-    }
-
-    .tb--v1-light .left .logo-text {
-      position: absolute;
-      top: 40px;
-      left: 96px;
-      font-weight: 800;
-      font-size: 20px;
-      color: #1A2744;
-      opacity: 0.5;
-    }
-
-    .tb--v1-light .left .tag {
-      display: inline-block;
-      background: #E8631A;
-      color: #FFF;
-      font-size: 22px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding: 6px 18px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      align-self: flex-start;
-    }
-
-    .tb--v1-light .left h2 {
-      font-size: 62px;
-      font-weight: 900;
-      color: #1A2744;
-      line-height: 1.08;
-      letter-spacing: -1px;
-    }
-
-    .tb--v1-light .left h2 em {
-      font-style: normal;
-      color: #E8631A;
-    }
-
-    .tb--v1-light .right {
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(160deg, #E8631A 0%, #C44F0E 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .tb--v1-light .right::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 300px;
-      height: 300px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-
-    .tb--v1-light .phone {
-      width: 200px;
-      height: 400px;
-      background: #FFF;
-      border-radius: 28px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-      position: relative;
-      overflow: hidden;
-      border: 4px solid rgba(255,255,255,0.3);
-    }
-
-    .tb--v1-light .phone .phone-screen {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, #F5F6FA 0%, #e8ecf2 100%);
-      border-radius: 24px;
-      display: flex;
-      flex-direction: column;
-      padding: 24px 16px;
-      align-items: center;
-    }
-
-    .tb--v1-light .phone .phone-screen .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #E8631A;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tb--v1-light .phone .phone-screen .avatar svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .tb--v1-light .phone .phone-screen .line {
-      width: 80%;
-      height: 10px;
-      background: #d1d5db;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .tb--v1-light .phone .phone-screen .line.short { width: 55%; }
-    .tb--v1-light .phone .phone-screen .line.med   { width: 70%; }
-
-    .tb--v1-light .phone .phone-screen .section-block {
-      width: 100%;
-      background: #FFF;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 14px;
-    }
-
-    .tb--v1-light .phone .phone-screen .section-block .sline {
-      width: 100%;
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 4px;
-      margin-bottom: 8px;
-    }
-
-    .tb--v1-light .phone .phone-screen .section-block .sline:last-child {
-      width: 60%;
-      margin-bottom: 0;
-    }
-
-    /* -------------------------------------------------------
-       V2 - LISTA / RANKING (Dark)
-       Full navy bg, big TOP 5, orange bottom bar
-       ------------------------------------------------------- */
-    .tb--v2-dark {
-      background: #1A2744;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .tb--v2-dark::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(circle at 15% 25%, rgba(232,99,26,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 75%, rgba(26,158,122,0.06) 0%, transparent 50%);
-    }
-
-    .tb--v2-dark .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      margin-top: -30px;
-    }
-
-    .tb--v2-dark .number-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #E8631A;
-      margin-bottom: 14px;
-      box-shadow: 0 6px 24px rgba(232,99,26,0.4);
-    }
-
-    .tb--v2-dark .number-badge svg {
-      width: 36px;
-      height: 36px;
-      fill: #FFF;
-    }
-
-    .tb--v2-dark .top-text {
-      font-size: 140px;
-      font-weight: 900;
-      color: #E8631A;
-      line-height: 1;
-      letter-spacing: -4px;
-      text-shadow: 0 4px 24px rgba(232,99,26,0.3);
-    }
-
-    .tb--v2-dark .subtitle {
-      font-size: 42px;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-top: 4px;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-    }
-
-    .tb--v2-dark .subtitle em {
-      font-style: normal;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .tb--v2-dark .bottom-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 72px;
-      background: #E8631A;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      z-index: 2;
-    }
-
-    .tb--v2-dark .bottom-bar .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tb--v2-dark .bottom-bar .logo-area svg {
-      width: 32px;
-      height: auto;
-    }
-
-    .tb--v2-dark .bottom-bar .logo-area span {
-      font-weight: 800;
-      font-size: 22px;
-      color: #FFF;
-    }
-
-    .tb--v2-dark .bottom-bar .year {
-      font-weight: 900;
-      font-size: 28px;
-      color: rgba(255,255,255,0.7);
-    }
-
-    /* Number circles on sides */
-    .tb--v2-dark .num-circles {
-      position: absolute;
-      z-index: 1;
-    }
-
-    .tb--v2-dark .num-circle {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 3px solid rgba(232,99,26,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 22px;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 8px;
-    }
-
-    .tb--v2-dark .nums-left {
-      left: 44px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .tb--v2-dark .nums-right {
-      right: 44px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    /* -------------------------------------------------------
-       V2 - LISTA / RANKING (Light)
-       ------------------------------------------------------- */
-    .tb--v2-light {
-      background: #F5F6FA;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .tb--v2-light::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(circle at 15% 25%, rgba(232,99,26,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 85% 75%, rgba(26,39,68,0.04) 0%, transparent 50%);
-    }
-
-    .tb--v2-light .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      margin-top: -30px;
-    }
-
-    .tb--v2-light .number-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #E8631A;
-      margin-bottom: 14px;
-      box-shadow: 0 6px 24px rgba(232,99,26,0.25);
-    }
-
-    .tb--v2-light .number-badge svg {
-      width: 36px;
-      height: 36px;
-      fill: #FFF;
-    }
-
-    .tb--v2-light .top-text {
-      font-size: 140px;
-      font-weight: 900;
-      color: #E8631A;
-      line-height: 1;
-      letter-spacing: -4px;
-      text-shadow: 0 2px 12px rgba(232,99,26,0.15);
-    }
-
-    .tb--v2-light .subtitle {
-      font-size: 42px;
-      font-weight: 800;
-      color: #1A2744;
-      margin-top: 4px;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-    }
-
-    .tb--v2-light .subtitle em {
-      font-style: normal;
-      color: rgba(26,39,68,0.4);
-    }
-
-    .tb--v2-light .bottom-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 72px;
-      background: #1A2744;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      z-index: 2;
-    }
-
-    .tb--v2-light .bottom-bar .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tb--v2-light .bottom-bar .logo-area svg {
-      width: 32px;
-      height: auto;
-    }
-
-    .tb--v2-light .bottom-bar .logo-area span {
-      font-weight: 800;
-      font-size: 22px;
-      color: #FFF;
-    }
-
-    .tb--v2-light .bottom-bar .year {
-      font-weight: 900;
-      font-size: 28px;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .tb--v2-light .num-circles {
-      position: absolute;
-      z-index: 1;
-    }
-
-    .tb--v2-light .num-circle {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 3px solid rgba(26,39,68,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 22px;
-      color: rgba(26,39,68,0.2);
-      margin-bottom: 8px;
-    }
-
-    .tb--v2-light .nums-left {
-      left: 44px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .tb--v2-light .nums-right {
-      right: 44px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    /* -------------------------------------------------------
-       V3 - URGENCIA / NOTICIA (Dark)
-       Orange-to-navy diagonal gradient
-       ------------------------------------------------------- */
-    .tb--v3-dark {
-      background: linear-gradient(135deg, #E8631A 0%, #C44F0E 35%, #1A2744 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 64px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tb--v3-dark::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 500px;
-      height: 500px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 50%;
-    }
-
-    .tb--v3-dark::after {
-      content: '';
-      position: absolute;
-      bottom: -150px;
-      left: -80px;
-      width: 400px;
-      height: 400px;
-      background: rgba(26,158,122,0.08);
-      border-radius: 50%;
-    }
-
-    .tb--v3-dark .logo-top {
-      position: absolute;
-      top: 32px;
-      right: 48px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .tb--v3-dark .logo-top svg {
-      width: 36px;
-      height: auto;
-    }
-
-    .tb--v3-dark .logo-top span {
-      font-weight: 800;
-      font-size: 20px;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .tb--v3-dark .urgente-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #1A9E7A;
-      color: #FFF;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      padding: 8px 22px;
-      border-radius: 6px;
-      margin-bottom: 24px;
-      align-self: flex-start;
-      box-shadow: 0 4px 16px rgba(26,158,122,0.4);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-dark .urgente-badge::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #FFF;
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .tb--v3-dark .main-title {
-      font-size: 86px;
-      font-weight: 900;
-      color: #FFFFFF;
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-      text-shadow: 0 4px 24px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-dark .sub-info {
-      font-size: 34px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.8);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-dark .sub-info strong {
-      color: #FFF;
-      font-weight: 900;
-    }
-
-    .tb--v3-dark .bottom-stripe {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 8px;
-      background: #1A9E7A;
-    }
-
-    /* -------------------------------------------------------
-       V3 - URGENCIA / NOTICIA (Light)
-       White bg with orange accent stripe
-       ------------------------------------------------------- */
-    .tb--v3-light {
-      background: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 64px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tb--v3-light .accent-stripe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 10px;
-      background: linear-gradient(90deg, #E8631A 0%, #C44F0E 100%);
-    }
-
-    .tb--v3-light .accent-side {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 10px;
-      height: 100%;
-      background: #E8631A;
-    }
-
-    .tb--v3-light .accent-corner {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 260px;
-      height: 260px;
-      background: linear-gradient(135deg, rgba(232,99,26,0.08) 0%, transparent 60%);
-    }
-
-    .tb--v3-light .logo-top {
-      position: absolute;
-      top: 32px;
-      right: 48px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .tb--v3-light .logo-top svg {
-      width: 36px;
-      height: auto;
-    }
-
-    .tb--v3-light .logo-top span {
-      font-weight: 800;
-      font-size: 20px;
-      color: #1A2744;
-      opacity: 0.5;
-    }
-
-    .tb--v3-light .urgente-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #1A9E7A;
-      color: #FFF;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      padding: 8px 22px;
-      border-radius: 6px;
-      margin-bottom: 24px;
-      align-self: flex-start;
-      box-shadow: 0 4px 16px rgba(26,158,122,0.25);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-light .urgente-badge::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #FFF;
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-
-    .tb--v3-light .main-title {
-      font-size: 86px;
-      font-weight: 900;
-      color: #1A2744;
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-light .main-title em {
-      font-style: normal;
-      color: #E8631A;
-    }
-
-    .tb--v3-light .sub-info {
-      font-size: 34px;
-      font-weight: 700;
-      color: rgba(26,39,68,0.6);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tb--v3-light .sub-info strong {
-      color: #1A2744;
-      font-weight: 900;
-    }
-
-    .tb--v3-light .bottom-stripe {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 8px;
-      background: #1A9E7A;
-    }
-
-    /* ---------- Divider ---------- */
-    .divider {
-      max-width: 1320px;
-      margin: 0 auto 48px;
-      border: none;
-      border-top: 1px solid #21262d;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Templates YouTube Thumbnail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E8631A;--orange-dk:#C44F0E;--navy:#1A2744;--teal:#1A9E7A;--cloud:#F5F6FA;--bg:#0d1117;--card:#161b22;--border:#21262d;--text:#e6edf3;--muted:#8b949e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;padding:48px 24px 80px}
+
+/* Page Header */
+.page-header{text-align:center;margin-bottom:56px}
+.page-header h1{font-weight:900;font-size:36px;color:#fff;letter-spacing:-0.5px;margin-bottom:8px}
+.page-header h1 span{color:var(--orange)}
+.page-header p{font-size:15px;color:var(--muted)}
+.brand-mark{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.brand-mark svg{width:32px;height:auto}
+.brand-mark span{font-weight:800;font-size:20px;color:var(--orange)}
+
+/* Section */
+.section{max-width:1320px;margin:0 auto 56px}
+.section-title{font-weight:800;font-size:22px;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 10px;border-radius:4px}
+.badge-dark{background:var(--navy);color:var(--muted)}
+.badge-light{background:rgba(232,99,26,0.15);color:var(--orange)}
+.section-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+
+/* Thumb Card */
+.thumb-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+.thumb-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+.canvas-wrap{width:100%;aspect-ratio:1280/720;position:relative;overflow:hidden}
+.caption{padding:14px 16px}
+.caption h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.caption p{font-size:12px;color:var(--muted)}
+.caption .dims{font-size:11px;color:#484f58;margin-top:4px;font-family:monospace}
+
+/* Thumbnail Canvas - 1280x720 artboard scaled to fit */
+.tb{width:1280px;height:720px;position:absolute;top:0;left:0;transform-origin:top left;font-family:'Nunito',sans-serif;overflow:hidden}
+
+/* ==============================================
+   V1 - TUTORIAL
+   ============================================== */
+
+/* Dark */
+.v1d{display:flex}
+.v1d .left{width:60%;height:100%;background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:56px 60px;position:relative}
+.v1d .logo-area{position:absolute;top:32px;left:48px;display:flex;align-items:center;gap:10px}
+.v1d .logo-area svg{width:36px;height:auto}
+.v1d .logo-area span{font-weight:800;font-size:18px;color:#fff;opacity:0.6}
+.v1d .tag{display:inline-block;background:var(--orange);color:#fff;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:2px;padding:6px 18px;border-radius:5px;margin-bottom:20px;align-self:flex-start}
+.v1d h2{font-size:58px;font-weight:900;color:#fff;line-height:1.08;letter-spacing:-1px}
+.v1d .right{width:40%;height:100%;background:linear-gradient(160deg,var(--orange),var(--orange-dk));display:flex;align-items:center;justify-content:center;position:relative}
+.v1d .phone{width:200px;height:400px;background:#fff;border-radius:28px;box-shadow:0 16px 48px rgba(0,0,0,0.35);overflow:hidden;border:4px solid rgba(255,255,255,0.3)}
+.v1d .phone-inner{width:100%;height:100%;background:linear-gradient(180deg,#F5F6FA,#e8ecf2);border-radius:24px;display:flex;flex-direction:column;padding:24px 16px;align-items:center}
+.v1d .ph-avatar{width:56px;height:56px;border-radius:50%;background:var(--orange);margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.v1d .ph-line{width:80%;height:10px;background:#d1d5db;border-radius:5px;margin-bottom:10px}
+.v1d .ph-line.s{width:55%}.v1d .ph-line.m{width:70%}
+.v1d .ph-block{width:100%;background:#fff;border-radius:10px;padding:14px;margin-top:14px}
+.v1d .ph-bl{width:100%;height:8px;background:#e5e7eb;border-radius:4px;margin-bottom:8px}
+.v1d .ph-bl:last-child{width:60%;margin-bottom:0}
+
+/* Light */
+.v1l{display:flex}
+.v1l .left{width:60%;height:100%;background:#fff;display:flex;flex-direction:column;justify-content:center;padding:56px 60px;position:relative}
+.v1l .logo-area{position:absolute;top:32px;left:48px;display:flex;align-items:center;gap:10px}
+.v1l .logo-area svg{width:36px;height:auto}
+.v1l .logo-area span{font-weight:800;font-size:18px;color:var(--navy);opacity:0.5}
+.v1l .tag{display:inline-block;background:var(--orange);color:#fff;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:2px;padding:6px 18px;border-radius:5px;margin-bottom:20px;align-self:flex-start}
+.v1l h2{font-size:58px;font-weight:900;color:var(--navy);line-height:1.08;letter-spacing:-1px}
+.v1l h2 em{font-style:normal;color:var(--orange)}
+.v1l .right{width:40%;height:100%;background:linear-gradient(160deg,var(--orange),var(--orange-dk));display:flex;align-items:center;justify-content:center}
+.v1l .phone{width:200px;height:400px;background:#fff;border-radius:28px;box-shadow:0 16px 48px rgba(0,0,0,0.35);overflow:hidden;border:4px solid rgba(255,255,255,0.3)}
+.v1l .phone-inner{width:100%;height:100%;background:linear-gradient(180deg,#F5F6FA,#e8ecf2);border-radius:24px;display:flex;flex-direction:column;padding:24px 16px;align-items:center}
+.v1l .ph-avatar{width:56px;height:56px;border-radius:50%;background:var(--orange);margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.v1l .ph-line{width:80%;height:10px;background:#d1d5db;border-radius:5px;margin-bottom:10px}
+.v1l .ph-line.s{width:55%}.v1l .ph-line.m{width:70%}
+.v1l .ph-block{width:100%;background:#fff;border-radius:10px;padding:14px;margin-top:14px}
+.v1l .ph-bl{width:100%;height:8px;background:#e5e7eb;border-radius:4px;margin-bottom:8px}
+.v1l .ph-bl:last-child{width:60%;margin-bottom:0}
+
+/* ==============================================
+   V2 - LISTA / RANKING
+   ============================================== */
+
+/* Dark */
+.v2d{background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.v2d .top-text{font-size:140px;font-weight:900;color:var(--orange);line-height:1;letter-spacing:-4px}
+.v2d .subtitle{font-size:42px;font-weight:800;color:#fff;margin-top:4px;line-height:1.15;letter-spacing:-0.5px;text-align:center}
+.v2d .subtitle em{font-style:normal;color:rgba(255,255,255,0.5)}
+.v2d .nums-l,.v2d .nums-r{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px}
+.v2d .nums-l{left:44px}.v2d .nums-r{right:44px}
+.v2d .num{width:52px;height:52px;border-radius:50%;border:3px solid rgba(232,99,26,0.3);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:rgba(255,255,255,0.35)}
+.v2d .bottom-bar{position:absolute;bottom:0;left:0;right:0;height:72px;background:var(--orange);display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.v2d .bottom-bar .bl{display:flex;align-items:center;gap:12px}
+.v2d .bottom-bar svg{width:32px;height:auto}
+.v2d .bottom-bar .bname{font-weight:800;font-size:22px;color:#fff}
+.v2d .bottom-bar .byear{font-weight:900;font-size:28px;color:rgba(255,255,255,0.7)}
+
+/* Light */
+.v2l{background:var(--cloud);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.v2l .top-text{font-size:140px;font-weight:900;color:var(--orange);line-height:1;letter-spacing:-4px}
+.v2l .subtitle{font-size:42px;font-weight:800;color:var(--navy);margin-top:4px;line-height:1.15;letter-spacing:-0.5px;text-align:center}
+.v2l .subtitle em{font-style:normal;color:rgba(26,39,68,0.4)}
+.v2l .nums-l,.v2l .nums-r{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px}
+.v2l .nums-l{left:44px}.v2l .nums-r{right:44px}
+.v2l .num{width:52px;height:52px;border-radius:50%;border:3px solid rgba(26,39,68,0.12);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:rgba(26,39,68,0.2)}
+.v2l .bottom-bar{position:absolute;bottom:0;left:0;right:0;height:72px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.v2l .bottom-bar .bl{display:flex;align-items:center;gap:12px}
+.v2l .bottom-bar svg{width:32px;height:auto}
+.v2l .bottom-bar .bname{font-weight:800;font-size:22px;color:#fff}
+.v2l .bottom-bar .byear{font-weight:900;font-size:28px;color:rgba(255,255,255,0.5)}
+
+/* ==============================================
+   V3 - URGÊNCIA / NOTÍCIA
+   ============================================== */
+
+/* Dark */
+.v3d{background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dk) 35%,var(--navy) 100%);display:flex;flex-direction:column;justify-content:center;padding:56px 64px;position:relative;overflow:hidden}
+.v3d .logo-top{position:absolute;top:32px;right:48px;display:flex;align-items:center;gap:10px}
+.v3d .logo-top svg{width:36px;height:auto}
+.v3d .logo-top span{font-weight:800;font-size:20px;color:rgba(255,255,255,0.7)}
+.v3d .urgente{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;padding:8px 22px;border-radius:6px;margin-bottom:24px;align-self:flex-start;box-shadow:0 4px 16px rgba(26,158,122,0.4)}
+.v3d .urgente::before{content:'';width:10px;height:10px;border-radius:50%;background:#fff;animation:pulse 1.5s ease-in-out infinite}
+.v3d .main-title{font-size:86px;font-weight:900;color:#fff;line-height:0.95;letter-spacing:-2px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.v3d .sub-info{font-size:34px;font-weight:700;color:rgba(255,255,255,0.8)}
+.v3d .sub-info strong{color:#fff;font-weight:900}
+.v3d .bottom-stripe{position:absolute;bottom:0;left:0;right:0;height:8px;background:var(--teal)}
+
+/* Light */
+.v3l{background:#fff;display:flex;flex-direction:column;justify-content:center;padding:56px 64px;position:relative;overflow:hidden}
+.v3l .accent-top{position:absolute;top:0;left:0;width:100%;height:10px;background:linear-gradient(90deg,var(--orange),var(--orange-dk))}
+.v3l .accent-side{position:absolute;top:0;left:0;width:10px;height:100%;background:var(--orange)}
+.v3l .logo-top{position:absolute;top:32px;right:48px;display:flex;align-items:center;gap:10px}
+.v3l .logo-top svg{width:36px;height:auto}
+.v3l .logo-top span{font-weight:800;font-size:20px;color:var(--navy);opacity:0.5}
+.v3l .urgente{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;padding:8px 22px;border-radius:6px;margin-bottom:24px;align-self:flex-start;box-shadow:0 4px 16px rgba(26,158,122,0.25)}
+.v3l .urgente::before{content:'';width:10px;height:10px;border-radius:50%;background:#fff;animation:pulse 1.5s ease-in-out infinite}
+.v3l .main-title{font-size:86px;font-weight:900;color:var(--navy);line-height:0.95;letter-spacing:-2px;margin-bottom:16px}
+.v3l .main-title em{font-style:normal;color:var(--orange)}
+.v3l .sub-info{font-size:34px;font-weight:700;color:rgba(26,39,68,0.6)}
+.v3l .sub-info strong{color:var(--navy);font-weight:900}
+.v3l .bottom-stripe{position:absolute;bottom:0;left:0;right:0;height:8px;background:var(--teal)}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* Divider */
+.divider{max-width:1320px;margin:0 auto 48px;border:none;border-top:1px solid var(--border)}
+</style>
 </head>
 <body>
 
-  <!-- ========== PAGE HEADER ========== -->
-  <header class="page-header">
-    <div class="brand-mark">
-      <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-      </svg>
-      <span>TrabalhaMais</span>
-    </div>
-    <h1>Templates <span>YouTube Thumbnail</span></h1>
-    <p>1280 x 720 px &mdash; 3 variantes em Dark Mode e Light Mode</p>
-  </header>
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="brand-mark">
+    <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+    <span>TrabalhaMais</span>
+  </div>
+  <h1>Templates <span>YouTube Thumbnail</span></h1>
+  <p>1280 x 720 px - 3 variações em Dark Mode e Light Mode</p>
+</header>
 
-  <!-- ========== DARK MODE ROW ========== -->
-  <section class="section">
-    <h2 class="section-title">Dark Mode <span class="badge badge--dark">3 templates</span></h2>
-    <p class="section-subtitle">Fundos escuros para alto contraste no feed do YouTube</p>
+<!-- DARK MODE -->
+<section class="section">
+  <h2 class="section-title">Dark Mode <span class="badge badge-dark">3 templates</span></h2>
+  <p class="section-sub">Fundos escuros para alto contraste no feed do YouTube</p>
+  <div class="grid">
 
-    <div class="thumb-grid">
-
-      <!-- V1 DARK - Tutorial -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v1-dark">
-            <div class="left">
-              <div class="logo">
-                <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-                  <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                  <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-                  <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-                </svg>
-              </div>
-              <span class="logo-text">TrabalhaMais</span>
-              <span class="tag">Tutorial</span>
-              <h2>Como criar seu curriculo pelo celular</h2>
-            </div>
-            <div class="right">
-              <div class="phone">
-                <div class="phone-screen">
-                  <div class="avatar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
-                  </div>
-                  <div class="line"></div>
-                  <div class="line short"></div>
-                  <div class="line med"></div>
-                  <div class="section-block">
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                  </div>
-                  <div class="section-block">
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="thumb-card__caption">
-          <h3>Tutorial</h3>
-          <p>Como criar seu curriculo pelo celular</p>
-          <div class="dims">1280 x 720 px &middot; Dark</div>
-        </div>
-      </div>
-
-      <!-- V2 DARK - Lista/Ranking -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v2-dark">
-            <div class="num-circles nums-left">
-              <div class="num-circle">1</div>
-              <div class="num-circle">2</div>
-              <div class="num-circle">3</div>
-            </div>
-            <div class="content">
-              <div class="number-badge">
-                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-              </div>
-              <div class="top-text">TOP 5</div>
-              <div class="subtitle">vagas que mais<br>contratam <em>em 2026</em></div>
-            </div>
-            <div class="num-circles nums-right">
-              <div class="num-circle">4</div>
-              <div class="num-circle">5</div>
-              <div class="num-circle" style="border-color:rgba(232,99,26,0.15);color:rgba(255,255,255,0.15);">+</div>
-            </div>
-            <div class="bottom-bar">
-              <div class="logo-area">
-                <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="10" width="68" height="88" rx="8" fill="#FFF"/>
-                  <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                  <circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/>
-                  <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(232,99,26,0.15)"/>
-                </svg>
-                <span>TrabalhaMais</span>
-              </div>
-              <span class="year">2026</span>
-            </div>
-          </div>
-        </div>
-        <div class="thumb-card__caption">
-          <h3>Lista / Ranking</h3>
-          <p>TOP 5 vagas que mais contratam em 2026</p>
-          <div class="dims">1280 x 720 px &middot; Dark</div>
-        </div>
-      </div>
-
-      <!-- V3 DARK - Urgencia/Noticia -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v3-dark">
-            <div class="logo-top">
-              <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-              </svg>
+    <!-- V1 Dark - Tutorial -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v1d">
+          <div class="left">
+            <div class="logo-area">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
               <span>TrabalhaMais</span>
             </div>
-            <div class="urgente-badge">Urgente</div>
-            <div class="main-title">NOVAS<br>VAGAS</div>
-            <div class="sub-info">abertas essa semana &mdash; <strong>17 empresas</strong> contratando</div>
-            <div class="bottom-stripe"></div>
+            <span class="tag">Tutorial</span>
+            <h2>Como criar seu currículo pelo celular</h2>
+          </div>
+          <div class="right">
+            <div class="phone"><div class="phone-inner">
+              <div class="ph-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+              <div class="ph-line"></div><div class="ph-line s"></div><div class="ph-line m"></div>
+              <div class="ph-block"><div class="ph-bl"></div><div class="ph-bl"></div><div class="ph-bl"></div></div>
+              <div class="ph-block"><div class="ph-bl"></div><div class="ph-bl"></div></div>
+            </div></div>
           </div>
         </div>
-        <div class="thumb-card__caption">
-          <h3>Urgencia / Noticia</h3>
-          <p>NOVAS VAGAS abertas essa semana</p>
-          <div class="dims">1280 x 720 px &middot; Dark</div>
-        </div>
       </div>
-
+      <div class="caption"><h3>Tutorial</h3><p>Como criar seu currículo pelo celular</p><div class="dims">1280 x 720 px - Dark</div></div>
     </div>
-  </section>
 
-  <hr class="divider">
-
-  <!-- ========== LIGHT MODE ROW ========== -->
-  <section class="section">
-    <h2 class="section-title">Light Mode <span class="badge badge--light">3 templates</span></h2>
-    <p class="section-subtitle">Variantes claras para contraste em feeds escuros do YouTube</p>
-
-    <div class="thumb-grid">
-
-      <!-- V1 LIGHT - Tutorial -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v1-light">
-            <div class="left">
-              <div class="logo">
-                <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-                  <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                  <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-                  <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-                </svg>
-              </div>
-              <span class="logo-text">TrabalhaMais</span>
-              <span class="tag">Tutorial</span>
-              <h2>Como criar seu <em>curriculo</em> pelo celular</h2>
+    <!-- V2 Dark - Lista/Ranking -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v2d">
+          <div class="nums-l"><div class="num">1</div><div class="num">2</div><div class="num">3</div></div>
+          <div class="top-text">TOP 5</div>
+          <div class="subtitle">vagas que mais<br>contratam <em>em 2026</em></div>
+          <div class="nums-r"><div class="num">4</div><div class="num">5</div><div class="num" style="border-color:rgba(232,99,26,0.15);color:rgba(255,255,255,0.15)">+</div></div>
+          <div class="bottom-bar">
+            <div class="bl">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#FFF"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(232,99,26,0.15)"/></svg>
+              <span class="bname">TrabalhaMais</span>
             </div>
-            <div class="right">
-              <div class="phone">
-                <div class="phone-screen">
-                  <div class="avatar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
-                  </div>
-                  <div class="line"></div>
-                  <div class="line short"></div>
-                  <div class="line med"></div>
-                  <div class="section-block">
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                  </div>
-                  <div class="section-block">
-                    <div class="sline"></div>
-                    <div class="sline"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <span class="byear">2026</span>
           </div>
         </div>
-        <div class="thumb-card__caption">
-          <h3>Tutorial</h3>
-          <p>Como criar seu curriculo pelo celular</p>
-          <div class="dims">1280 x 720 px &middot; Light</div>
-        </div>
       </div>
+      <div class="caption"><h3>Lista / Ranking</h3><p>TOP 5 vagas que mais contratam em 2026</p><div class="dims">1280 x 720 px - Dark</div></div>
+    </div>
 
-      <!-- V2 LIGHT - Lista/Ranking -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v2-light">
-            <div class="num-circles nums-left">
-              <div class="num-circle">1</div>
-              <div class="num-circle">2</div>
-              <div class="num-circle">3</div>
-            </div>
-            <div class="content">
-              <div class="number-badge">
-                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-              </div>
-              <div class="top-text">TOP 5</div>
-              <div class="subtitle">vagas que mais<br>contratam <em>em 2026</em></div>
-            </div>
-            <div class="num-circles nums-right">
-              <div class="num-circle">4</div>
-              <div class="num-circle">5</div>
-              <div class="num-circle" style="border-color:rgba(26,39,68,0.06);color:rgba(26,39,68,0.1);">+</div>
-            </div>
-            <div class="bottom-bar">
-              <div class="logo-area">
-                <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-                  <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                  <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-                  <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-                </svg>
-                <span>TrabalhaMais</span>
-              </div>
-              <span class="year">2026</span>
-            </div>
+    <!-- V3 Dark - Urgência -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v3d">
+          <div class="logo-top">
+            <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+            <span>TrabalhaMais</span>
           </div>
-        </div>
-        <div class="thumb-card__caption">
-          <h3>Lista / Ranking</h3>
-          <p>TOP 5 vagas que mais contratam em 2026</p>
-          <div class="dims">1280 x 720 px &middot; Light</div>
+          <div class="urgente">Urgente</div>
+          <div class="main-title">NOVAS<br>VAGAS</div>
+          <div class="sub-info">abertas essa semana - <strong>17 empresas</strong> contratando</div>
+          <div class="bottom-stripe"></div>
         </div>
       </div>
+      <div class="caption"><h3>Urgência / Notícia</h3><p>NOVAS VAGAS abertas essa semana</p><div class="dims">1280 x 720 px - Dark</div></div>
+    </div>
 
-      <!-- V3 LIGHT - Urgencia/Noticia -->
-      <div class="thumb-card">
-        <div class="thumb-card__canvas">
-          <div class="tb tb--v3-light">
-            <div class="accent-stripe"></div>
-            <div class="accent-side"></div>
-            <div class="accent-corner"></div>
-            <div class="logo-top">
-              <svg viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
-                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
-                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
-                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
-              </svg>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LIGHT MODE -->
+<section class="section">
+  <h2 class="section-title">Light Mode <span class="badge badge-light">3 templates</span></h2>
+  <p class="section-sub">Variações claras para contraste em feeds escuros</p>
+  <div class="grid">
+
+    <!-- V1 Light - Tutorial -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v1l">
+          <div class="left">
+            <div class="logo-area">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
               <span>TrabalhaMais</span>
             </div>
-            <div class="urgente-badge">Urgente</div>
-            <div class="main-title"><em>NOVAS</em><br>VAGAS</div>
-            <div class="sub-info">abertas essa semana &mdash; <strong>17 empresas</strong> contratando</div>
-            <div class="bottom-stripe"></div>
+            <span class="tag">Tutorial</span>
+            <h2>Como criar seu <em>currículo</em> pelo celular</h2>
+          </div>
+          <div class="right">
+            <div class="phone"><div class="phone-inner">
+              <div class="ph-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+              <div class="ph-line"></div><div class="ph-line s"></div><div class="ph-line m"></div>
+              <div class="ph-block"><div class="ph-bl"></div><div class="ph-bl"></div><div class="ph-bl"></div></div>
+              <div class="ph-block"><div class="ph-bl"></div><div class="ph-bl"></div></div>
+            </div></div>
           </div>
         </div>
-        <div class="thumb-card__caption">
-          <h3>Urgencia / Noticia</h3>
-          <p>NOVAS VAGAS abertas essa semana</p>
-          <div class="dims">1280 x 720 px &middot; Light</div>
+      </div>
+      <div class="caption"><h3>Tutorial</h3><p>Como criar seu currículo pelo celular</p><div class="dims">1280 x 720 px - Light</div></div>
+    </div>
+
+    <!-- V2 Light - Lista/Ranking -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v2l">
+          <div class="nums-l"><div class="num">1</div><div class="num">2</div><div class="num">3</div></div>
+          <div class="top-text">TOP 5</div>
+          <div class="subtitle">vagas que mais<br>contratam <em>em 2026</em></div>
+          <div class="nums-r"><div class="num">4</div><div class="num">5</div><div class="num" style="border-color:rgba(26,39,68,0.06);color:rgba(26,39,68,0.1)">+</div></div>
+          <div class="bottom-bar">
+            <div class="bl">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="bname">TrabalhaMais</span>
+            </div>
+            <span class="byear">2026</span>
+          </div>
         </div>
       </div>
-
+      <div class="caption"><h3>Lista / Ranking</h3><p>TOP 5 vagas que mais contratam em 2026</p><div class="dims">1280 x 720 px - Light</div></div>
     </div>
-  </section>
 
+    <!-- V3 Light - Urgência -->
+    <div class="thumb-card">
+      <div class="canvas-wrap">
+        <div class="tb v3l">
+          <div class="accent-top"></div>
+          <div class="accent-side"></div>
+          <div class="logo-top">
+            <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59,26 52,36 52 C46 52,54 59,54 69 L54 79 C54 81,52 83,49 83 L23 83 C20 83,18 81,18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+            <span>TrabalhaMais</span>
+          </div>
+          <div class="urgente">Urgente</div>
+          <div class="main-title"><em>NOVAS</em><br>VAGAS</div>
+          <div class="sub-info">abertas essa semana - <strong>17 empresas</strong> contratando</div>
+          <div class="bottom-stripe"></div>
+        </div>
+      </div>
+      <div class="caption"><h3>Urgência / Notícia</h3><p>NOVAS VAGAS abertas essa semana</p><div class="dims">1280 x 720 px - Light</div></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// Scale 1280x720 artboards to fit their container
+function scaleThumbs(){
+  document.querySelectorAll('.canvas-wrap').forEach(wrap=>{
+    const tb=wrap.querySelector('.tb');
+    if(!tb)return;
+    const scale=wrap.offsetWidth/1280;
+    tb.style.transform='scale('+scale+')';
+  });
+}
+scaleThumbs();
+window.addEventListener('resize',scaleThumbs);
+</script>
 </body>
 </html>
