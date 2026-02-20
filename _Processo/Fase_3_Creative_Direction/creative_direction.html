@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais — Creative Direction (Fase 3)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8631A;
+    --orange-dark: #C44F0E;
+    --orange-light: #F28C4E;
+    --orange-wash: #FFF0E6;
+    --navy: #1A2744;
+    --navy-mid: #2D3E5E;
+    --navy-light: #4A5A78;
+    --teal: #1A9E7A;
+    --teal-wash: #E6F7F2;
+    --cloud: #F5F6FA;
+    --white: #FFFFFF;
+    --gray-100: #E8EAF0;
+    --gray-300: #A0A8B8;
+    --error: #DC3545;
+    --warning: #E8921A;
+    --info: #3B7DD8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cloud);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: white;
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,99,26,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,99,26,0.2);
+    color: var(--orange-light);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    padding: 80px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-dark {
+    background: var(--navy);
+    color: white;
+    max-width: 100%;
+    padding: 80px 32px;
+  }
+  .section-dark .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-orange {
+    background: var(--orange);
+    color: white;
+    max-width: 100%;
+    padding: 80px 32px;
+  }
+  .section-orange .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .section-dark .section-label { color: var(--orange-light); }
+  .section-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .section-subtitle {
+    font-size: 16px;
+    color: var(--navy-light);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .section-dark .section-subtitle { color: rgba(255,255,255,0.6); }
+
+  /* ===== COLOR PALETTE ===== */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .color-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.08);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .color-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(26,39,68,0.12);
+  }
+  .color-swatch {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+  .color-swatch span {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Inter', monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.25);
+    color: white;
+  }
+  .color-info {
+    padding: 12px 16px;
+  }
+  .color-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .color-role {
+    font-size: 12px;
+    color: var(--navy-light);
+  }
+
+  /* ===== 60-30-10 BAR ===== */
+  .ratio-bar {
+    display: flex;
+    height: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.1);
+  }
+  .ratio-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+  }
+  .ratio-labels {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .ratio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--navy-light);
+  }
+  .ratio-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  .type-specimen {
+    margin-bottom: 32px;
+    padding: 32px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.06);
+  }
+  .type-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .type-meta {
+    font-size: 12px;
+    color: var(--gray-300);
+    font-family: 'Inter', monospace;
+    margin-top: 8px;
+  }
+  .type-h1 { font-size: 48px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+  .type-h2 { font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+  .type-h3 { font-size: 24px; font-weight: 700; line-height: 1.3; }
+  .type-body { font-size: 16px; font-weight: 400; line-height: 1.6; max-width: 65ch; }
+  .type-body-strong { font-size: 16px; font-weight: 600; line-height: 1.6; }
+  .type-caption { font-size: 14px; font-weight: 400; color: var(--navy-light); }
+  .type-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--orange-wash);
+    color: var(--orange-dark);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease-out;
+    text-decoration: none;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(232,99,26,0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+  .btn-secondary:hover {
+    background: var(--navy);
+    color: white;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--orange);
+    padding: 14px 16px;
+  }
+  .btn-ghost:hover {
+    background: var(--orange-wash);
+  }
+  .btn-navy {
+    background: var(--navy);
+    color: white;
+  }
+  .btn-navy:hover {
+    background: var(--navy-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26,39,68,0.3);
+  }
+  .btn-teal {
+    background: var(--teal);
+    color: white;
+  }
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .btn-lg {
+    padding: 18px 36px;
+    font-size: 18px;
+  }
+
+  /* ===== CARDS ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.06);
+    transition: all 0.2s ease-out;
+    border: 1px solid var(--gray-100);
+  }
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(26,39,68,0.1);
+    border-color: var(--orange-light);
+    transform: translateY(-4px);
+  }
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .card-icon-orange { background: var(--orange-wash); color: var(--orange); }
+  .card-icon-teal { background: var(--teal-wash); color: var(--teal); }
+  .card-icon-navy { background: var(--cloud); color: var(--navy); }
+  .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--navy-light);
+    line-height: 1.6;
+  }
+
+  /* ===== VAGA CARD (B2C) ===== */
+  .vaga-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.06);
+    border: 1px solid var(--gray-100);
+    transition: all 0.2s ease-out;
+  }
+  .vaga-card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 8px 24px rgba(232,99,26,0.1);
+    transform: translateY(-2px);
+  }
+  .vaga-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .vaga-company-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--orange-wash);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--orange);
+  }
+  .vaga-save {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--cloud);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+  }
+  .vaga-save:hover { background: var(--orange-wash); }
+  .vaga-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .vaga-company-name {
+    font-size: 14px;
+    color: var(--navy-light);
+    margin-bottom: 12px;
+  }
+  .vaga-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .vaga-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--cloud);
+    color: var(--navy-mid);
+  }
+  .vaga-tag-dist {
+    background: var(--teal-wash);
+    color: var(--teal);
+  }
+  .vaga-tag-new {
+    background: var(--orange-wash);
+    color: var(--orange-dark);
+  }
+  .vaga-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .vaga-salary {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .vaga-salary span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--navy-light);
+  }
+
+  /* ===== CANDIDATO CARD (B2B) ===== */
+  .candidato-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.06);
+    border: 1px solid var(--gray-100);
+    transition: all 0.2s ease-out;
+  }
+  .candidato-card:hover {
+    border-color: var(--navy-mid);
+    box-shadow: 0 4px 16px rgba(26,39,68,0.1);
+  }
+  .candidato-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .candidato-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .candidato-name {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .candidato-role {
+    font-size: 13px;
+    color: var(--navy-light);
+  }
+  .candidato-match {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .match-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--gray-100);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .match-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--teal);
+  }
+  .match-pct {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal);
+    font-family: 'Inter', sans-serif;
+  }
+  .candidato-info {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--navy-light);
+  }
+  .candidato-info span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ===== WHATSAPP MOCK ===== */
+  .whatsapp-mock {
+    max-width: 360px;
+    margin: 0 auto;
+    background: #E5DDD5;
+    border-radius: 16px;
+    padding: 24px 16px;
+    position: relative;
+  }
+  .whatsapp-mock::before {
+    content: 'WhatsApp';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #075E54;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 16px 16px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .wpp-msg {
+    background: white;
+    border-radius: 0 12px 12px 12px;
+    padding: 12px 16px;
+    margin-top: 48px;
+    max-width: 280px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #303030;
+  }
+  .wpp-msg strong { color: var(--navy); }
+  .wpp-msg .wpp-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--orange);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .wpp-time {
+    text-align: right;
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+  }
+
+  /* ===== MOODBOARD COMPARISON ===== */
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .mood-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.1);
+    position: relative;
+  }
+  .mood-card.recommended {
+    border: 3px solid var(--orange);
+  }
+  .mood-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--orange);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+  .mood-colors {
+    display: flex;
+    height: 120px;
+  }
+  .mood-colors div { flex: 1; }
+  .mood-info {
+    padding: 24px;
+    background: white;
+  }
+  .mood-info h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .mood-adj {
+    font-size: 13px;
+    color: var(--navy-light);
+    margin-bottom: 12px;
+  }
+  .mood-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mood-score-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mood-score-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .mood-score-val {
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== STATS ===== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .stat {
+    text-align: center;
+    padding: 32px 16px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-number {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--orange);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  /* ===== CONTRAST TABLE ===== */
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .contrast-item {
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .contrast-text {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .contrast-ratio {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Inter', monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.2);
+  }
+  .contrast-pass {
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+
+  /* ===== ICON SHOWCASE ===== */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+  }
+  .icon-item {
+    text-align: center;
+    padding: 20px 8px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--gray-100);
+    transition: all 0.2s;
+  }
+  .icon-item:hover {
+    border-color: var(--orange);
+    background: var(--orange-wash);
+  }
+  .icon-item svg {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+  }
+  .icon-item span {
+    font-size: 11px;
+    color: var(--navy-light);
+    display: block;
+  }
+
+  /* ===== BIFOCAL DEMO ===== */
+  .bifocal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 768px) {
+    .bifocal-grid { grid-template-columns: 1fr; }
+  }
+  .bifocal-panel {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.1);
+  }
+  .bifocal-header {
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bifocal-b2c .bifocal-header {
+    background: var(--orange);
+    color: white;
+  }
+  .bifocal-b2b .bifocal-header {
+    background: var(--navy);
+    color: white;
+  }
+  .bifocal-body {
+    padding: 24px;
+    background: white;
+  }
+
+  /* ===== PHOTO DIRECTION ===== */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  .photo-example {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+  .photo-example span {
+    background: rgba(26,39,68,0.8);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  .photo-do {
+    border: 2px solid var(--teal);
+  }
+  .photo-do::after {
+    content: '✓';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    background: var(--teal);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .photo-dont {
+    border: 2px solid var(--error);
+  }
+  .photo-dont::after {
+    content: '✕';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    background: var(--error);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ===== SPACING DEMO ===== */
+  .spacing-demo {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .spacing-block {
+    background: var(--orange-wash);
+    border: 2px dashed var(--orange-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange-dark);
+    font-family: 'Inter', monospace;
+  }
+
+  /* ===== ANTI-REF ===== */
+  .antiref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .antiref-item {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--gray-100);
+    opacity: 0.7;
+    position: relative;
+  }
+  .antiref-item::after {
+    content: '✕';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background: var(--error);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .antiref-item .antiref-swatch {
+    height: 60px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .antiref-item span {
+    font-size: 11px;
+    color: var(--navy-light);
+  }
+
+  /* ===== MANIFEST ===== */
+  .manifesto-block {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .manifesto-block p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .manifesto-block p strong {
+    color: var(--orange);
+    font-weight: 800;
+  }
+  .manifesto-block .manifesto-sig {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--orange);
+    margin-top: 32px;
+  }
+  .manifesto-block .manifesto-tagline {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+  }
+  .footer strong { color: var(--orange); }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    width: 60px;
+    height: 4px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin: 48px 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px; }
+    .section { padding: 48px 24px; }
+    .section-dark, .section-orange { padding: 48px 24px; }
+    .mood-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .contrast-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-badge">Fase 3 — Creative Direction</div>
+  <h1><span>Trabalha</span>Mais</h1>
+  <p>Direcao criativa completa: paleta, tipografia, componentes e principios visuais da marca.</p>
+</div>
+
+<!-- ===== MOODBOARDS ===== -->
+<div class="section">
+  <div class="section-label">3.2 Moodboards</div>
+  <div class="section-title">3 Direcoes Visuais</div>
+  <div class="section-subtitle">Cada direcao e uma interpretacao visual da estrategia. A escolha e emocional + pratica.</div>
+
+  <div class="mood-grid">
+    <!-- A: Laranja -->
+    <div class="mood-card recommended">
+      <div class="mood-badge">Recomendada</div>
+      <div class="mood-colors">
+        <div style="background: #E8631A"></div>
+        <div style="background: #1A2744"></div>
+        <div style="background: #1A9E7A"></div>
+        <div style="background: #F5F6FA"></div>
+      </div>
+      <div class="mood-info">
+        <h3>A: Laranja Acolhedor</h3>
+        <div class="mood-adj">Quente, energetico, acessivel, brasileiro</div>
+        <div class="mood-score">
+          <div class="mood-score-bar"><div class="mood-score-fill" style="width: 88%; background: var(--orange)"></div></div>
+          <div class="mood-score-val" style="color: var(--orange)">8.8</div>
+        </div>
+        <p style="font-size:13px; color: var(--navy-light); margin-top:12px;">NENHUM concorrente usa laranja como primaria. Maximo de diferenciacao + calor humano.</p>
+      </div>
+    </div>
+
+    <!-- B: Verde -->
+    <div class="mood-card">
+      <div class="mood-colors">
+        <div style="background: #22A85F"></div>
+        <div style="background: #2D3142"></div>
+        <div style="background: #E8921A"></div>
+        <div style="background: #F5F6FA"></div>
+      </div>
+      <div class="mood-info">
+        <h3>B: Verde Esperanca</h3>
+        <div class="mood-adj">Fresco, esperancoso, crescimento, novo comeco</div>
+        <div class="mood-score">
+          <div class="mood-score-bar"><div class="mood-score-fill" style="width: 75%; background: #22A85F"></div></div>
+          <div class="mood-score-val" style="color: #22A85F">7.5</div>
+        </div>
+        <p style="font-size:13px; color: var(--navy-light); margin-top:12px;">Risco: proximidade com Emprego Ligado (mesmo setor, mesma cor).</p>
+      </div>
+    </div>
+
+    <!-- C: Azul -->
+    <div class="mood-card">
+      <div class="mood-colors">
+        <div style="background: #3B7DD8"></div>
+        <div style="background: #E8614D"></div>
+        <div style="background: #F2B705"></div>
+        <div style="background: #F5F6FA"></div>
+      </div>
+      <div class="mood-info">
+        <h3>C: Azul Caloroso</h3>
+        <div class="mood-adj">Confiavel, quente, equilibrado, seguro</div>
+        <div class="mood-score">
+          <div class="mood-score-bar"><div class="mood-score-fill" style="width: 65%; background: #3B7DD8"></div></div>
+          <div class="mood-score-val" style="color: #3B7DD8">6.5</div>
+        </div>
+        <p style="font-size:13px; color: var(--navy-light); margin-top:12px;">Escolha segura, porem blende com 80% dos concorrentes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COLOR PALETTE ===== -->
+<div class="section-dark">
+  <div class="section-inner">
+    <div class="section-label">3.3 Paleta de Cores</div>
+    <div class="section-title" style="color: white">Sistema Cromatico Completo</div>
+    <div class="section-subtitle">13 cores. 3 temperaturas. Diferenciacao maxima no setor.</div>
+
+    <!-- Primary -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color: var(--orange-light); margin-bottom:16px;">Primaria — Ancora emocional</p>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E8631A"><span>#E8631A</span></div>
+        <div class="color-info"><div class="color-name">TrabalhaMais Orange</div><div class="color-role">Logo, CTAs, hero, marca</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #C44F0E"><span>#C44F0E</span></div>
+        <div class="color-info"><div class="color-name">Orange Dark</div><div class="color-role">Hover, bordas, texto destaque</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #F28C4E"><span>#F28C4E</span></div>
+        <div class="color-info"><div class="color-name">Orange Light</div><div class="color-role">Fills suaves, backgrounds</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FFF0E6"><span>#FFF0E6</span></div>
+        <div class="color-info"><div class="color-name">Orange Wash</div><div class="color-role">Badges, tags, fundo sutil</div></div>
+      </div>
+    </div>
+
+    <!-- Secondary -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color: rgba(255,255,255,0.5); margin-bottom:16px;">Secundaria — Ancora de profissionalismo</p>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #1A2744"><span>#1A2744</span></div>
+        <div class="color-info"><div class="color-name">TrabalhaMais Navy</div><div class="color-role">Texto, headers, autoridade</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #2D3E5E"><span>#2D3E5E</span></div>
+        <div class="color-info"><div class="color-name">Navy Mid</div><div class="color-role">Texto secundario</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #4A5A78"><span>#4A5A78</span></div>
+        <div class="color-info"><div class="color-name">Navy Light</div><div class="color-role">Texto terciario, placeholders</div></div>
+      </div>
+    </div>
+
+    <!-- Functional -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color: var(--teal); margin-bottom:16px;">Funcional — Sucesso e conexao</p>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #1A9E7A"><span>#1A9E7A</span></div>
+        <div class="color-info"><div class="color-name">TrabalhaMais Teal</div><div class="color-role">Match, sucesso, checks, links</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E6F7F2"><span>#E6F7F2</span></div>
+        <div class="color-info"><div class="color-name">Teal Wash</div><div class="color-role">Badge positivo, fundo sucesso</div></div>
+      </div>
+    </div>
+
+    <!-- Neutrals -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color: rgba(255,255,255,0.5); margin-bottom:16px;">Neutras</p>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #F5F6FA; border-bottom: 1px solid #E8EAF0"><span style="background: rgba(0,0,0,0.5)">#F5F6FA</span></div>
+        <div class="color-info"><div class="color-name">Cloud</div><div class="color-role">Background principal</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FFFFFF; border-bottom: 1px solid #E8EAF0"><span style="background: rgba(0,0,0,0.5)">#FFFFFF</span></div>
+        <div class="color-info"><div class="color-name">White</div><div class="color-role">Cards, areas limpas</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E8EAF0"><span style="background: rgba(0,0,0,0.4)">#E8EAF0</span></div>
+        <div class="color-info"><div class="color-name">Gray 100</div><div class="color-role">Borders, separadores</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #A0A8B8"><span>#A0A8B8</span></div>
+        <div class="color-info"><div class="color-name">Gray 300</div><div class="color-role">Desabilitado, placeholders</div></div>
+      </div>
+    </div>
+
+    <!-- Semantic -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color: rgba(255,255,255,0.5); margin-bottom:16px;">Semanticas (UI)</p>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #1A9E7A"><span>#1A9E7A</span></div>
+        <div class="color-info"><div class="color-name">Sucesso</div><div class="color-role">Confirmacao, match</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #DC3545"><span>#DC3545</span></div>
+        <div class="color-info"><div class="color-name">Erro</div><div class="color-role">Erro, campo invalido</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E8921A"><span>#E8921A</span></div>
+        <div class="color-info"><div class="color-name">Aviso</div><div class="color-role">Alerta, atencao</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #3B7DD8"><span>#3B7DD8</span></div>
+        <div class="color-info"><div class="color-name">Info</div><div class="color-role">Informacao, dica</div></div>
+      </div>
+    </div>
+
+    <!-- 60-30-10 -->
+    <div class="divider" style="background: rgba(255,255,255,0.2)"></div>
+    <p style="font-size:16px; font-weight:700; margin-bottom:16px; color:white;">Regra 60-30-10</p>
+    <div class="ratio-bar">
+      <div class="ratio-segment" style="width:60%; background: var(--navy)">60%</div>
+      <div class="ratio-segment" style="width:30%; background: var(--orange)">30%</div>
+      <div class="ratio-segment" style="width:10%; background: var(--teal)">10%</div>
+    </div>
+    <div class="ratio-labels">
+      <div class="ratio-label"><div class="ratio-dot" style="background: var(--navy)"></div>Navy + Neutras (estrutura)</div>
+      <div class="ratio-label"><div class="ratio-dot" style="background: var(--orange)"></div>Orange (identidade)</div>
+      <div class="ratio-label"><div class="ratio-dot" style="background: var(--teal)"></div>Teal (sucesso)</div>
+    </div>
+
+    <!-- Contrast check -->
+    <p style="font-size:16px; font-weight:700; margin-bottom:16px; color:white;">Acessibilidade (WCAG AA)</p>
+    <div class="contrast-grid">
+      <div class="contrast-item" style="background: var(--navy)">
+        <span class="contrast-text" style="color: white">Navy sobre White</span>
+        <span><span class="contrast-ratio">14.85:1</span><span class="contrast-pass">AAA</span></span>
+      </div>
+      <div class="contrast-item" style="background: white">
+        <span class="contrast-text" style="color: var(--orange-dark)">Orange Dark sobre White</span>
+        <span><span class="contrast-ratio" style="background: rgba(0,0,0,0.08); color: var(--navy)">5.03:1</span><span class="contrast-pass">AA</span></span>
+      </div>
+      <div class="contrast-item" style="background: var(--orange)">
+        <span class="contrast-text" style="color: var(--navy)">Navy sobre Orange</span>
+        <span><span class="contrast-ratio">4.83:1</span><span class="contrast-pass">AA lg</span></span>
+      </div>
+      <div class="contrast-item" style="background: var(--teal)">
+        <span class="contrast-text" style="color: white">White sobre Teal</span>
+        <span><span class="contrast-ratio">3.72:1</span><span class="contrast-pass">AA lg</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TYPOGRAPHY ===== -->
+<div class="section">
+  <div class="section-label">3.4 Tipografia</div>
+  <div class="section-title">Sistema Tipografico</div>
+  <div class="section-subtitle">Nunito — sans-serif arredondada. Acolhe sem infantilizar, profissional sem intimidar.</div>
+
+  <div class="type-specimen">
+    <div class="type-label">H1 — ExtraBold 800 / 48px</div>
+    <div class="type-h1">Encontre trabalho perto de voce</div>
+    <div class="type-meta">font-weight: 800 · letter-spacing: -0.02em · line-height: 1.15</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">H2 — Bold 700 / 36px</div>
+    <div class="type-h2">Vagas na sua regiao, agora</div>
+    <div class="type-meta">font-weight: 700 · letter-spacing: -0.02em · line-height: 1.2</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">H3 — Bold 700 / 24px</div>
+    <div class="type-h3">Candidatos filtrados por disponibilidade</div>
+    <div class="type-meta">font-weight: 700 · line-height: 1.3</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Body — Regular 400 / 16px</div>
+    <div class="type-body">O TrabalhaMais conecta empresas a trabalhadores operacionais de forma rapida, inteligente e acessivel. Cadastre seu perfil pelo celular, sem precisar de curriculo formatado, e receba vagas perto de casa direto no seu WhatsApp.</div>
+    <div class="type-meta">font-weight: 400 · line-height: 1.6 · max-width: 65ch</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Body Strong — SemiBold 600 / 16px</div>
+    <div class="type-body-strong">12 candidatos novos na sua regiao esta semana.</div>
+    <div class="type-meta">font-weight: 600 · line-height: 1.6</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Caption — Regular 400 / 14px</div>
+    <div class="type-caption">Publicada ha 2 horas · Vila Velha, ES · 3.2 km de voce</div>
+    <div class="type-meta">font-weight: 400 · color: Navy Light #4A5A78</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Tag / Badge — Bold 700 + Uppercase / 12px</div>
+    <div><span class="type-tag">NOVA</span> &nbsp; <span class="type-tag" style="background: var(--teal-wash); color: var(--teal)">PERTO DE VOCE</span> &nbsp; <span class="type-tag" style="background: var(--cloud); color: var(--navy-mid)">CLT</span></div>
+    <div class="type-meta">font-weight: 700 · text-transform: uppercase · letter-spacing: 0.05em</div>
+  </div>
+
+  <div class="type-specimen" style="background: var(--navy); color: white; border-radius: 16px;">
+    <div class="type-label" style="color: var(--orange-light);">Inter — Fonte auxiliar (dashboards B2B)</div>
+    <div style="font-family: 'Inter', sans-serif;">
+      <div style="font-size: 40px; font-weight: 700; color: var(--orange); letter-spacing: -0.02em;">2.404</div>
+      <div style="font-size: 14px; color: rgba(255,255,255,0.5);">candidatos disponiveis na regiao</div>
+    </div>
+    <div class="type-meta" style="color: rgba(255,255,255,0.3);">Uso: numeros grandes, tabelas, metricas — apenas no painel empresa</div>
+  </div>
+</div>
+
+<!-- ===== BUTTONS & COMPONENTS ===== -->
+<div class="section" style="background: white; max-width: 100%; padding: 80px 32px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-label">3.5 Componentes</div>
+    <div class="section-title">Botoes, Cards e Elementos</div>
+    <div class="section-subtitle">Todos os componentes seguem cantos arredondados (8-16px) e touch target minimo de 48px.</div>
+
+    <!-- Buttons -->
+    <p style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--navy-light); margin-bottom: 16px;">Botoes</p>
+    <div class="btn-row">
+      <button class="btn btn-primary btn-lg">Ver vagas perto de mim</button>
+      <button class="btn btn-primary">Candidatar agora</button>
+      <button class="btn btn-primary btn-sm">Salvar</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-navy">Filtrar candidatos</button>
+      <button class="btn btn-secondary">Ver detalhes</button>
+      <button class="btn btn-ghost">Saiba mais →</button>
+    </div>
+    <div class="btn-row" style="margin-bottom: 48px;">
+      <button class="btn btn-teal btn-sm">✓ Match confirmado</button>
+      <button class="btn btn-sm" style="background: var(--error); color: white;">Cancelar</button>
+    </div>
+
+    <!-- Icons -->
+    <p style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--navy-light); margin-bottom: 16px;">Iconografia (estilo Rounded, 2px stroke)</p>
+    <div class="icon-grid" style="margin-bottom: 48px;">
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Localizacao</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--navy)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Busca</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--navy)"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Perfil</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--navy)"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span>Empresa</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--teal)"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Sucesso</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--navy)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>WhatsApp</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--navy)"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        <span>Filtro</span>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>Rapido</span>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <p style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--navy-light); margin-bottom: 16px;">Cards de feature</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon card-icon-orange">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Rapido de verdade</h3>
+        <p>Candidatos filtrados na sua regiao em segundos. Sem esperar semanas por uma contratacao.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon card-icon-teal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Perto de voce</h3>
+        <p>Vagas e candidatos filtrados por geolocalizacao. Encontre quem esta proximo e disponivel.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon card-icon-navy">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Sem curriculo complicado</h3>
+        <p>Cadastro simples pelo celular. Sem necessidade de documento formatado ou experiencia comprovada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BIFOCAL DEMO ===== -->
+<div class="section">
+  <div class="section-label">3.5.6 Adaptacao Bifocal</div>
+  <div class="section-title">Mesma marca, dosagem diferente</div>
+  <div class="section-subtitle">B2C pesa no laranja e na simplicidade. B2B pesa no navy e na funcionalidade.</div>
+
+  <div class="bifocal-grid">
+    <!-- B2C -->
+    <div class="bifocal-panel bifocal-b2c">
+      <div class="bifocal-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Trabalhador (B2C)
+      </div>
+      <div class="bifocal-body" style="background: var(--cloud);">
+        <div style="text-align:center; margin-bottom:24px;">
+          <div style="font-size:24px; font-weight:800; margin-bottom:4px;">Vagas perto de voce</div>
+          <div style="font-size:14px; color: var(--navy-light);">Vila Velha, ES</div>
+        </div>
+
+        <div class="vaga-card" style="margin-bottom: 16px;">
+          <div class="vaga-header">
+            <div class="vaga-company-icon">M</div>
+            <div class="vaga-save">♡</div>
+          </div>
+          <div class="vaga-title">Vendedor(a) de Loja</div>
+          <div class="vaga-company-name">Moda Center — Shopping Vila Velha</div>
+          <div class="vaga-tags">
+            <span class="vaga-tag vaga-tag-new">NOVA</span>
+            <span class="vaga-tag vaga-tag-dist">📍 1.2 km</span>
+            <span class="vaga-tag">CLT</span>
+            <span class="vaga-tag">6h-14h</span>
+          </div>
+          <div class="vaga-footer">
+            <div class="vaga-salary">R$ 1.680 <span>/mes</span></div>
+            <button class="btn btn-primary btn-sm">Ver vaga</button>
+          </div>
+        </div>
+
+        <div class="vaga-card">
+          <div class="vaga-header">
+            <div class="vaga-company-icon" style="background: var(--teal-wash); color: var(--teal);">C</div>
+            <div class="vaga-save">♡</div>
+          </div>
+          <div class="vaga-title">Repositor de Supermercado</div>
+          <div class="vaga-company-name">Carone Supermercados</div>
+          <div class="vaga-tags">
+            <span class="vaga-tag vaga-tag-dist">📍 2.8 km</span>
+            <span class="vaga-tag">CLT</span>
+          </div>
+          <div class="vaga-footer">
+            <div class="vaga-salary">R$ 1.520 <span>/mes</span></div>
+            <button class="btn btn-primary btn-sm">Ver vaga</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2B -->
+    <div class="bifocal-panel bifocal-b2b">
+      <div class="bifocal-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Empresa (B2B)
+      </div>
+      <div class="bifocal-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <div>
+            <div style="font-size:14px; color: var(--navy-light);">Candidatos disponiveis</div>
+            <div style="font-size:28px; font-weight:800; font-family:'Inter',sans-serif; color: var(--navy);">347</div>
+          </div>
+          <button class="btn btn-navy btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtrar
+          </button>
+        </div>
+
+        <div class="candidato-card" style="margin-bottom: 12px;">
+          <div class="candidato-header">
+            <div class="candidato-avatar">WS</div>
+            <div>
+              <div class="candidato-name">Wesley Santos</div>
+              <div class="candidato-role">Repositor · 22 anos · Vila Velha</div>
+            </div>
+          </div>
+          <div class="candidato-match">
+            <div style="font-size:12px; color:var(--navy-light)">Match</div>
+            <div class="match-bar"><div class="match-fill" style="width: 87%"></div></div>
+            <div class="match-pct">87%</div>
+          </div>
+          <div class="candidato-info">
+            <span>📍 2.1 km</span>
+            <span>🕐 Disponivel agora</span>
+            <span>📋 3 experiencias</span>
+          </div>
+        </div>
+
+        <div class="candidato-card">
+          <div class="candidato-header">
+            <div class="candidato-avatar" style="background: var(--navy-mid);">AF</div>
+            <div>
+              <div class="candidato-name">Ana Ferreira</div>
+              <div class="candidato-role">Vendedora · 28 anos · Cariacica</div>
+            </div>
+          </div>
+          <div class="candidato-match">
+            <div style="font-size:12px; color:var(--navy-light)">Match</div>
+            <div class="match-bar"><div class="match-fill" style="width: 74%"></div></div>
+            <div class="match-pct">74%</div>
+          </div>
+          <div class="candidato-info">
+            <span>📍 5.4 km</span>
+            <span>🕐 Disponivel em 7 dias</span>
+            <span>📋 5 experiencias</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHATSAPP MOCK ===== -->
+<div class="section" style="background: white; max-width: 100%; padding: 80px 32px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-label">Tom de Voz em Acao</div>
+    <div class="section-title">Notificacao WhatsApp</div>
+    <div class="section-subtitle">Como a marca fala no canal principal do trabalhador.</div>
+
+    <div class="whatsapp-mock">
+      <div class="wpp-msg">
+        Oi, <strong>Wesley</strong>! 👋<br><br>
+        Tem <strong>3 vagas novas</strong> perto de voce em Vila Velha.<br>
+        Uma delas e de <strong>vendedor</strong> no Shopping — comeca semana que vem.<br>
+        <span class="wpp-link">Ver vagas agora →</span>
+        <div class="wpp-time">14:32 ✓✓</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SPACING ===== -->
+<div class="section">
+  <div class="section-label">3.5.4 Espacamento</div>
+  <div class="section-title">Grid 8px — Respiracao e clareza</div>
+  <div class="section-subtitle">Todo espacamento e multiplo de 8. O publico se sente sobrecarregado com informacao densa.</div>
+
+  <div class="spacing-demo">
+    <div class="spacing-block" style="width:32px; height:32px;">8</div>
+    <div class="spacing-block" style="width:40px; height:40px;">16</div>
+    <div class="spacing-block" style="width:48px; height:48px;">24</div>
+    <div class="spacing-block" style="width:56px; height:56px;">32</div>
+    <div class="spacing-block" style="width:72px; height:72px;">48</div>
+    <div class="spacing-block" style="width:88px; height:88px;">64</div>
+    <div class="spacing-block" style="width:104px; height:104px;">80</div>
+    <div class="spacing-block" style="width:120px; height:120px;">96</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--gray-100);">
+      <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); margin-bottom: 12px;">✓ Respirado (on-brand)</p>
+      <div style="padding: 24px; background: var(--cloud); border-radius: 12px;">
+        <div style="font-size: 20px; font-weight: 800; margin-bottom: 16px;">Vagas perto de voce</div>
+        <div style="font-size: 14px; color: var(--navy-light); margin-bottom: 24px;">3 vagas novas na sua regiao</div>
+        <button class="btn btn-primary btn-sm">Ver vagas</button>
+      </div>
+    </div>
+    <div style="background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--gray-100);">
+      <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--error); margin-bottom: 12px;">✕ Denso (off-brand)</p>
+      <div style="padding: 8px; background: var(--cloud); border-radius: 4px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 2px;">Vagas perto de voce</div>
+        <div style="font-size: 11px; color: var(--navy-light); margin-bottom: 4px;">3 vagas novas na sua regiao</div>
+        <div style="font-size: 11px; color: var(--navy-light); margin-bottom: 4px;">Filtrar por: Distancia | Salario | Data</div>
+        <div style="font-size: 11px; color: var(--navy-light); margin-bottom: 4px;">Candidatos: 347 | Vagas: 23 | Match: 87%</div>
+        <button class="btn btn-primary" style="padding:4px 8px; font-size:11px;">Ver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANTI-REFERENCES ===== -->
+<div class="section" style="background: white; max-width: 100%; padding: 80px 32px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-label">Anti-referencias</div>
+    <div class="section-title">O que o visual NAO deve ser</div>
+    <div class="section-subtitle">Direcoes visuais a evitar na construcao da marca.</div>
+
+    <div class="antiref-grid">
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: linear-gradient(135deg, #0A66C2, #004182)"></div>
+        <span>Corporate Blue Frio<br><small>(Gupy/LinkedIn vibe)</small></span>
+      </div>
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: linear-gradient(135deg, #1a1a2e, #16213e); display:flex; align-items:center; justify-content:center; color: #00ff41; font-family: monospace; font-size: 11px;">$ dark_mode</div>
+        <span>Dark/Hacker<br><small>(tech intimidador)</small></span>
+      </div>
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: linear-gradient(135deg, #D4A853, #1a1a1a)"></div>
+        <span>Premium/Luxo<br><small>(exclusionario)</small></span>
+      </div>
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: linear-gradient(135deg, #FF6B9D, #FFE66D, #4ECDC4); display:flex; align-items:center; justify-content:center; font-size: 20px;">🎮</div>
+        <span>Infantil/Cartoon<br><small>(RH nao leva a serio)</small></span>
+      </div>
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: #E8EAF0; display:flex; align-items:center; justify-content:center;"><div style="width:80%; height:5px; background:#ccc; border-radius:2px; margin-bottom:4px;"></div></div>
+        <span>Layout Denso<br><small>(sobrecarrega publico)</small></span>
+      </div>
+      <div class="antiref-item">
+        <div class="antiref-swatch" style="background: linear-gradient(135deg, #E8EAF0, #fff); display:flex; align-items:center; justify-content:center; font-size: 11px; color: #999;">📸 STOCK</div>
+        <span>Foto Stock Cliche<br><small>(terno, aperto de mao)</small></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MANIFESTO ===== -->
+<div class="section-dark" style="padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="manifesto-block">
+      <p>Todo dia, milhoes de brasileiros saem de casa procurando uma coisa simples: <strong>trabalho.</strong></p>
+      <p>Nao pedem muito. Pedem uma chance.</p>
+      <p>Entre quem procura e quem precisa, existe um abismo. Feito de burocracia, de distancia, de sistemas que nao foram feitos pra essa realidade.</p>
+      <p><strong>O TrabalhaMais existe pra fechar esse abismo.</strong></p>
+      <p>A gente acredita que contratar nao precisa ser um desgaste.<br>E que procurar emprego nao precisa ser uma humilhacao.</p>
+      <p><strong>Simples assim. Porque deveria sempre ter sido simples.</strong></p>
+      <div class="manifesto-sig">TrabalhaMais</div>
+      <div class="manifesto-tagline">A vaga certa, na hora certa.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATS (como ficaria em uso) ===== -->
+<div class="section-orange">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:48px;">
+      <div class="section-title" style="color: white">Numeros que importam</div>
+      <p style="color: rgba(255,255,255,0.7); font-size: 16px;">Exemplo de como dados aparecem com a paleta da marca.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat" style="border-color: rgba(255,255,255,0.2);">
+        <div class="stat-number" style="color: white; font-size: 36px;">26.6M</div>
+        <div class="stat-label" style="color: rgba(255,255,255,0.7);">admissoes formais/ano</div>
+      </div>
+      <div class="stat" style="border-color: rgba(255,255,255,0.2);">
+        <div class="stat-number" style="color: white; font-size: 36px;">56%</div>
+        <div class="stat-label" style="color: rgba(255,255,255,0.7);">turnover anual medio</div>
+      </div>
+      <div class="stat" style="border-color: rgba(255,255,255,0.2);">
+        <div class="stat-number" style="color: white; font-size: 36px;">99%</div>
+        <div class="stat-label" style="color: rgba(255,255,255,0.7);">das empresas sao PMEs</div>
+      </div>
+      <div class="stat" style="border-color: rgba(255,255,255,0.2);">
+        <div class="stat-number" style="color: white; font-size: 36px;">147M</div>
+        <div class="stat-label" style="color: rgba(255,255,255,0.7);">usuarios WhatsApp no Brasil</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <strong>TrabalhaMais</strong> — Brand Studio, Fase 3: Creative Direction<br>
+  Documento de trabalho · Fevereiro 2026 · Todos os elementos sujeitos a validacao do cliente
+</div>
+
+</body>
+</html>

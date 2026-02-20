@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Quick Reference Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:#0d1117;color:#e6edf3;padding:32px}
+.page{max-width:900px;margin:0 auto;background:#161b22;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.full{grid-column:1/-1}
+h1{font-weight:800;font-size:1.8rem;letter-spacing:-0.02em;color:#fff}
+h2{font-weight:700;font-size:1rem;color:#E8631A;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid rgba(232,99,26,0.2)}
+.wordmark{font-weight:800;letter-spacing:-0.02em}
+.swatch-row{display:flex;gap:8px;flex-wrap:wrap}
+.swatch{width:48px;height:48px;border-radius:8px;position:relative}
+.swatch-info{font-size:11px;color:#8b949e;margin-top:4px}
+.swatch-name{font-size:12px;font-weight:700;color:#e6edf3}
+.font-sample{margin-bottom:8px}
+.font-name{font-size:12px;color:#8b949e}
+.font-demo{font-size:20px;color:#fff}
+.rule{font-size:13px;color:#e6edf3;padding:4px 0;display:flex;align-items:center;gap:8px}
+.rule::before{content:"";width:6px;height:6px;border-radius:50%;background:#E8631A;flex-shrink:0}
+.dont{font-size:13px;color:#DC3545;padding:4px 0;display:flex;align-items:center;gap:8px}
+.dont::before{content:"✕";color:#DC3545;font-weight:900;font-size:11px;flex-shrink:0}
+table{width:100%;font-size:12px;border-collapse:collapse}
+table th{text-align:left;padding:6px 8px;color:#E8631A;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.08)}
+table td{padding:6px 8px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.04)}
+.logo-box{display:flex;align-items:center;gap:12px}
+@media(max-width:700px){.page{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="full" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.08)">
+<div class="logo-box">
+<svg viewBox="0 0 72 100" fill="none" style="height:36px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<h1><span style="color:#fff">Trabalha</span><span style="color:#E8631A">+</span> <span style="font-weight:400;font-size:0.6em;color:#8b949e">Quick Reference</span></h1>
+</div>
+<span style="font-size:12px;color:#8b949e">Brand Book v1.0 - Fev 2026</span>
+</div>
+
+<!-- CORES -->
+<div>
+<h2>Cores</h2>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div><div class="swatch-row"><div class="swatch" style="background:#E8631A"></div><div><p class="swatch-name">Orange</p><p class="swatch-info">#E8631A</p></div></div></div>
+<div><div class="swatch-row"><div class="swatch" style="background:#1A2744"></div><div><p class="swatch-name">Navy</p><p class="swatch-info">#1A2744</p></div></div></div>
+<div><div class="swatch-row"><div class="swatch" style="background:#1A9E7A"></div><div><p class="swatch-name">Teal</p><p class="swatch-info">#1A9E7A</p></div></div></div>
+<div><div class="swatch-row"><div class="swatch" style="background:#F5F6FA;border:1px solid rgba(255,255,255,0.1)"></div><div><p class="swatch-name">Cloud</p><p class="swatch-info">#F5F6FA</p></div></div></div>
+</div>
+<p style="font-size:12px;color:#8b949e;margin-top:12px">Regra 60-30-10: Navy 60% · Orange 30% · Teal 10%</p>
+</div>
+
+<!-- TIPOGRAFIA -->
+<div>
+<h2>Tipografia</h2>
+<div class="font-sample"><p class="font-name">Principal: Nunito (Google Fonts)</p><p class="font-demo" style="font-weight:800">Aa Bb Cc 123</p></div>
+<div class="font-sample"><p class="font-name">Auxiliar: Inter (dashboards)</p><p class="font-demo" style="font-family:Inter;font-weight:500">Aa Bb Cc 123</p></div>
+<div style="margin-top:8px">
+<p class="rule">Corpo minimo: 16px</p>
+<p class="rule">Line-height: 1.6</p>
+<p class="rule">Wordmark: Nunito 800</p>
+</div>
+</div>
+
+<!-- LOGO -->
+<div>
+<h2>Logo</h2>
+<div style="display:flex;gap:16px;align-items:flex-end;margin-bottom:12px">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<svg viewBox="0 0 72 72" fill="none" style="width:48px;height:48px"><rect width="72" height="72" rx="16" fill="#E8631A"/><rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/><rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/><circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/><path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/></svg>
+</div>
+<p class="rule">Clear space = altura do grampo</p>
+<p class="rule">Tamanho minimo: 24px</p>
+<p class="dont">Nao distorcer ou rotacionar</p>
+<p class="dont">Nao alterar cores do logo</p>
+<p class="dont">Nao usar sem o grampo</p>
+</div>
+
+<!-- TOM DE VOZ -->
+<div>
+<h2>Tom de Voz</h2>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p class="rule">Acolhedor, mas nao infantil</p>
+<p class="rule">Direto, mas nao frio</p>
+<p class="rule">Profissional, mas nao corporativo</p>
+<p class="rule">Esperancoso, mas nao ilusorio</p>
+</div>
+<table style="margin-top:12px">
+<tr><th style="color:#1A9E7A">Usar</th><th style="color:#DC3545">Evitar</th></tr>
+<tr><td>vaga, trabalho</td><td>oportunidade de carreira</td></tr>
+<tr><td>voce, a gente</td><td>senhor(a), nos</td></tr>
+<tr><td>perto de voce</td><td>na sua localidade</td></tr>
+<tr><td>rapido</td><td>com agilidade</td></tr>
+</table>
+</div>
+
+<!-- CONTEXTOS -->
+<div class="full">
+<h2>Contextos de Uso do Logo</h2>
+<table>
+<tr><th>Contexto</th><th>Formato</th><th>Fundo</th></tr>
+<tr><td>App icon</td><td>Icone solo (72x72)</td><td>Sistema</td></tr>
+<tr><td>Favicon</td><td>Icone solo</td><td>Transparente</td></tr>
+<tr><td>Navbar web</td><td>Lockup horizontal</td><td>White / Navy</td></tr>
+<tr><td>Redes sociais (avatar)</td><td>Icone solo</td><td>Automatico</td></tr>
+<tr><td>Redes sociais (capa)</td><td>Lockup horizontal</td><td>Navy</td></tr>
+<tr><td>Cartao de visita</td><td>Lockup horizontal</td><td>White</td></tr>
+<tr><td>Email</td><td>Lockup horizontal</td><td>White</td></tr>
+<tr><td>WhatsApp</td><td>Icone solo</td><td>Automatico</td></tr>
+<tr><td>Documentos formais</td><td>Lockup horizontal</td><td>White</td></tr>
+</table>
+</div>
+
+<!-- FOOTER -->
+<div class="full" style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08)">
+<p style="font-size:12px;color:#8b949e">TrabalhaMais - A vaga certa, na hora certa | Brand Book v1.0 | Fev 2026</p>
+</div>
+
+</div>
+</body>
+</html>

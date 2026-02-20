@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais — Analise Competitiva</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-hover: #222632;
+    --border: #2a2e3a;
+    --text: #e4e4e7;
+    --text-muted: #9ca3af;
+    --accent: #f97316;
+    --accent-soft: rgba(249,115,22,0.12);
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --yellow: #eab308;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, #f97316, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  h2 .tier-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tier-1 { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .tier-2 { background: rgba(249,115,22,0.15); color: #f97316; }
+  .tier-3 { background: rgba(59,130,246,0.15); color: #3b82f6; }
+
+  /* Stats banner */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* Competitor cards */
+  .competitor-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .competitor-card:hover {
+    border-color: var(--accent);
+    background: var(--card-hover);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .card-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .color-swatches {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 2px solid rgba(255,255,255,0.1);
+    position: relative;
+    cursor: default;
+  }
+
+  .swatch-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 2px;
+    max-width: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .swatch-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  .card-field {
+    font-size: 0.85rem;
+  }
+
+  .card-field strong {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-right: 0.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .tag-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .tag-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .tag-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+  .tag-yellow { background: rgba(234,179,8,0.15); color: #eab308; }
+  .tag-purple { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+  /* Positioning Map */
+  .map-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-visual {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .map-axis-x, .map-axis-y {
+    position: absolute;
+    background: var(--border);
+  }
+
+  .map-axis-x {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+  }
+
+  .map-axis-y {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+  }
+
+  .map-label {
+    position: absolute;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .map-label-top { top: 8px; left: 50%; transform: translateX(-50%); }
+  .map-label-bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+  .map-label-left { left: 8px; top: 50%; transform: translateY(-50%); }
+  .map-label-right { right: 8px; top: 50%; transform: translateY(-50%); }
+
+  .map-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: default;
+    z-index: 2;
+  }
+
+  .map-dot-label {
+    position: absolute;
+    font-size: 0.65rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    top: 14px;
+    left: 50%;
+    text-align: center;
+  }
+
+  .map-dot-target {
+    width: 16px;
+    height: 16px;
+    border: 3px solid var(--accent);
+    background: rgba(249,115,22,0.3);
+    box-shadow: 0 0 12px rgba(249,115,22,0.4);
+    z-index: 3;
+  }
+
+  .map-opportunity {
+    position: absolute;
+    border: 2px dashed var(--accent);
+    border-radius: 12px;
+    background: rgba(249,115,22,0.05);
+    z-index: 1;
+  }
+
+  .map-opp-label {
+    position: absolute;
+    font-size: 0.65rem;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    bottom: 8px;
+    right: 10px;
+  }
+
+  /* Color analysis table */
+  .color-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+  }
+
+  .color-table th {
+    text-align: left;
+    padding: 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 2px solid var(--border);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  .color-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .color-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .color-inline {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hex-code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Insight boxes */
+  .insight-box {
+    background: var(--accent-soft);
+    border: 1px solid rgba(249,115,22,0.25);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .insight-box h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .insight-box p, .insight-box li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .insight-box ul {
+    padding-left: 1.25rem;
+  }
+
+  .insight-box li {
+    margin-bottom: 0.25rem;
+  }
+
+  /* Persona cards */
+  .persona-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .persona-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .persona-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .persona-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .persona-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .persona-quote {
+    font-style: italic;
+    color: var(--accent);
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 8px 8px 0;
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    .persona-grid { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+    h1 { font-size: 1.6rem; }
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<h1>TrabalhaMais</h1>
+<p class="subtitle">Analise Competitiva — Fase 1: Discovery &bull; Fevereiro 2026</p>
+
+<!-- MARKET STATS -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number">103M</div>
+    <div class="stat-label">Ocupados no Brasil (recorde)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">56%</div>
+    <div class="stat-label">Turnover anual (maior do mundo)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">26.6M</div>
+    <div class="stat-label">Admissoes formais/ano</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">R$2.404</div>
+    <div class="stat-label">Custo medio por contratacao</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">99%</div>
+    <div class="stat-label">PMEs (criam 70% dos empregos)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">147M</div>
+    <div class="stat-label">Usuarios WhatsApp no Brasil</div>
+  </div>
+</div>
+
+<!-- TIER 1 -->
+<h2><span class="tier-badge tier-1">Tier 1</span> Concorrentes Diretos — Foco em Vagas Operacionais</h2>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Recrut.ai</div>
+      <div class="card-tagline">"Especialista em Volume Hiring"</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#F41C5A"></div>
+        <div class="swatch-label">#F41C5A</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#013088"></div>
+        <div class="swatch-label">#013088</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#D89B7C"></div>
+        <div class="swatch-label">#D89B7C</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>Nasceu da dor de que "ATS nao funciona pra operacional". IA comportamental com Big Five + 9 marcadores</div>
+    <div class="card-field"><strong>Visual</strong>Moderno, tech-forward, estetica de startup. Magenta diferencia no mar de azuis</div>
+    <div class="card-field"><strong>Publico</strong>Enterprise only (Meta, Savagnago). NAO atende PMEs</div>
+    <div class="card-field"><strong>Modelo</strong>SaaS subscription, pricing customizado (alto)</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">Candidatura 1 min sem login</span><span class="tag tag-green">80% reducao time-to-hire</span><span class="tag tag-green">Best HR Tech 2022-23</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Enterprise only</span><span class="tag tag-red">Pricing opaco</span><span class="tag tag-red">Pouca awareness</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Emprego Ligado</div>
+      <div class="card-tagline">"O maior site de emprego operacional do Brasil"</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#2ecc71"></div>
+        <div class="swatch-label">Verde</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#ffffff; border-color: rgba(255,255,255,0.3)"></div>
+        <div class="swatch-label">Branco</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>100% operacional. Mobile-first. Geolocalizacao para vagas perto de casa. SMS/WhatsApp</div>
+    <div class="card-field"><strong>Visual</strong>Simples, funcional, "app utilitario". Prioriza acessibilidade sobre estetica</div>
+    <div class="card-field"><strong>Publico</strong>Porteiros, repositores, caixas, limpeza, pedreiros, motoristas, garcons</div>
+    <div class="card-field"><strong>Modelo</strong>Gratuito pro trabalhador. B2B para empresas. Premiado Google (2015) e Facebook (2016)</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">100% operacional</span><span class="tag tag-green">Geolocalizacao</span><span class="tag tag-green">SMS-first</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Tech defasada</span><span class="tag tag-red">Sem IA</span><span class="tag tag-red">App desatualizado</span><span class="tag tag-red">Possivel declinio</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">TAQE</div>
+      <div class="card-tagline">Recrutamento gamificado — ate 400% mais eficiente</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#5228DF"></div>
+        <div class="swatch-label">#5228DF</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#333333"></div>
+        <div class="swatch-label">#333333</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#D1ABFD"></div>
+        <div class="swatch-label">#D1ABFD</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>Gamificacao para vagas de entrada, operacionais e jovem aprendiz. Candidatos "jogam" para desbloquear vagas</div>
+    <div class="card-field"><strong>Visual</strong>Moderno, jovem, ludico. Roxo transmite inovacao. Montserrat como tipografia</div>
+    <div class="card-field"><strong>Publico</strong>Jovens, aprendizes, primeiro emprego. Clientes: Santander, Natura, Nestle, Coca-Cola</div>
+    <div class="card-field"><strong>Modelo</strong>Gratuito pro candidato. B2B subscription/servico</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">3M+ usuarios</span><span class="tag tag-green">730K triados</span><span class="tag tag-green">Gamificacao unica</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Foco em jovem aprendiz</span><span class="tag tag-red">Nao e ATS completo</span><span class="tag tag-red">Menos relevante pra operacional geral</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Trabalha Brasil</div>
+      <div class="card-tagline">"O maior site de empregos do Brasil" — gratuito</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FFCC26"></div>
+        <div class="swatch-label">#FFCC26</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#091A46"></div>
+        <div class="swatch-label">#091A46</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#ffffff; border-color: rgba(255,255,255,0.3)"></div>
+        <div class="swatch-label">#FFFFFF</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>Job board gratuito com 24M+ profissionais e 1M+ vagas. Barreira zero</div>
+    <div class="card-field"><strong>Visual</strong>Amarelo + azul marinho. Energetico, otimista, acessivel. Poppins + Noka</div>
+    <div class="card-field"><strong>Publico</strong>Todos os niveis, mas forte em operacional por ser gratuito</div>
+    <div class="card-field"><strong>Modelo</strong>Gratuito (basico) para empresas e candidatos. Features premium disponiveis</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">24M+ profissionais</span><span class="tag tag-green">Gratuito</span><span class="tag tag-green">Baixa barreira</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Generalista</span><span class="tag tag-red">Sem IA avancada</span><span class="tag tag-yellow">Nome proximo de "TrabalhaMais"</span></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- TIER 2 -->
+<h2><span class="tier-badge tier-2">Tier 2</span> Concorrentes Indiretos — Plataformas com Features Operacionais</h2>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Solides</div>
+      <div class="card-tagline">Maior HR Tech para PMEs no Brasil — 40.000+ clientes</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#3D194F"></div>
+        <div class="swatch-label">#3D194F</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#63D366"></div>
+        <div class="swatch-label">#63D366</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FFBA00"></div>
+        <div class="swatch-label">#FFBA00</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>RH + DP completo com IA comportamental. Candidatura via WhatsApp integrada</div>
+    <div class="card-field"><strong>Visual</strong>Roxo escuro + verde. Profissional mas acessivel. Poppins + Helvetica</div>
+    <div class="card-field"><strong>Publico</strong>PMEs de todos os setores. A partir de R$1,90/mes</div>
+    <div class="card-field"><strong>Modelo</strong>SaaS subscription. Recebeu R$530M de investimento (Warburg Pincus)</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">WhatsApp-native</span><span class="tag tag-green">40K clientes</span><span class="tag tag-green">All-in-one</span><span class="tag tag-green">Preco PME</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Generalista (nao e so operacional)</span><span class="tag tag-red">Suite completa pode ser overkill</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Gupy</div>
+      <div class="card-tagline">Lider de mercado ATS no Brasil — 4.000+ empresas</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#1771FF"></div>
+        <div class="swatch-label">#1771FF</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#00BCD4"></div>
+        <div class="swatch-label">Turquesa</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FF6F00"></div>
+        <div class="swatch-label">Laranja</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FFEB3B"></div>
+        <div class="swatch-label">Amarelo</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>Pioneira em IA para recrutamento no Brasil. Ecossistema completo de talentos</div>
+    <div class="card-field"><strong>Visual</strong>Azul + multicolor vibrante. Tech-forward, enterprise, energetico. Lato</div>
+    <div class="card-field"><strong>Publico</strong>Mid-to-large enterprise. Minimo R$900/mes. 36M+ perfis, 80K+ vagas/mes</div>
+    <div class="card-field"><strong>Modelo</strong>SaaS subscription tiers. R$500M investimento (SoftBank). 600+ funcionarios</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">Lider de mercado</span><span class="tag tag-green">36M perfis</span><span class="tag tag-green">IA avancada</span><span class="tag tag-green">Candidatura Rapida</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">R$900/mes minimo</span><span class="tag tag-red">Proibitivo pra PME</span><span class="tag tag-red">Nao e feito pra operacional</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">InfoJobs + Catho + Pandape</div>
+      <div class="card-tagline">Grupo Redarbor — maior grupo de emprego da America Latina</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#0C3877"></div>
+        <div class="swatch-label">#0C3877</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FF6F00"></div>
+        <div class="swatch-label">#FF6F00</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#DE0059"></div>
+        <div class="swatch-label">#DE0059</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#1250C4"></div>
+        <div class="swatch-label">#1250C4</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>InfoJobs: app mais baixado do BR. Catho: 26+ anos de mercado. Pandape: ATS com 10K+ clientes</div>
+    <div class="card-field"><strong>Visual</strong>InfoJobs: azul+laranja. Catho: magenta+azul. Profissional com calor. Nunito Sans / Breve Sans</div>
+    <div class="card-field"><strong>Publico</strong>Todos os niveis e tamanhos. 54M+ perfis InfoJobs. 400K+ vagas Catho</div>
+    <div class="card-field"><strong>Modelo</strong>Freemium (candidatos). Empresas pagam features premium e ATS</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">Escala absurda</span><span class="tag tag-green">54M+ perfis</span><span class="tag tag-green">Reconhecimento de marca</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Generalistas</span><span class="tag tag-red">Job boards tradicionais</span><span class="tag tag-red">Sem foco operacional</span></div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Vagas.com.br</div>
+      <div class="card-tagline">Pioneiro (1996) — "Vaga Inteligente" com IA + Humano</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#0F73BF"></div>
+        <div class="swatch-label">#0F73BF</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#08A878"></div>
+        <div class="swatch-label">#08A878</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#575555"></div>
+        <div class="swatch-label">#575555</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>Posicionamento</strong>Primeira plataforma de recrutamento do Brasil. "50% das vagas com finalistas em menos de 72h"</div>
+    <div class="card-field"><strong>Visual</strong>Azul + verde. Moderno, data-driven, limpo. IBM Plex Sans + Open Sans</div>
+    <div class="card-field"><strong>Publico</strong>Todos os niveis. Dezenas de milhoes de CVs. 26M visitas/mes</div>
+    <div class="card-field"><strong>Modelo</strong>Freemium. Empresas pagam features premium e vagas patrocinadas</div>
+    <div class="card-field"><strong>Ponto Forte</strong><span class="tag tag-green">Heritage (1996)</span><span class="tag tag-green">IA+Humano</span><span class="tag tag-green">Resultados rapidos</span></div>
+    <div class="card-field"><strong>Gap / Fraqueza</strong><span class="tag tag-red">Generalista</span><span class="tag tag-red">Marca pode parecer "legacy"</span></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- TIER 3 -->
+<h2><span class="tier-badge tier-3">Tier 3</span> Referencias Internacionais (Aspiracionais)</h2>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Wonolo <span class="tag tag-blue">EUA</span></div>
+      <div class="card-tagline">"Work Now Locally" — On-demand staffing</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FCE44C"></div>
+        <div class="swatch-label">#FCE44C</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#0C1523"></div>
+        <div class="swatch-label">#0C1523</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>O que faz</strong>1M+ trabalhadores, Sequoia-backed ($248M). Warehousing, manufacturing, events</div>
+    <div class="card-field"><strong>Licao pra TrabalhaMais</strong>Amarelo = energia + otimismo + acessibilidade. Imediatismo + proximidade como proposta core</div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Instawork <span class="tag tag-blue">EUA</span></div>
+      <div class="card-tagline">9M+ trabalhadores — Valuation $760M+</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#11243E"></div>
+        <div class="swatch-label">#11243E</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#294EB2"></div>
+        <div class="swatch-label">#294EB2</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#EC5A53"></div>
+        <div class="swatch-label">#EC5A53</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>O que faz</strong>Staffing flexivel. Taxa all-inclusive (~20%). Contratacao direta gratuita apos periodo</div>
+    <div class="card-field"><strong>Licao pra TrabalhaMais</strong>Transparencia de preco constroi confianca. Transicao gig para efetivo reduz risco do empregador</div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Fountain <span class="tag tag-blue">EUA</span></div>
+      <div class="card-tagline">Best-in-class brand design no setor — 1.2M+ empregados em 78 paises</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#1260FD"></div>
+        <div class="swatch-label">#1260FD</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#6400E6"></div>
+        <div class="swatch-label">#6400E6</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#F44848"></div>
+        <div class="swatch-label">#F44848</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>O que faz</strong>Rebrand pela agencia Matchstic. Fotografia autentica de trabalhadores reais. Gradiente azul-roxo ousado</div>
+    <div class="card-field"><strong>Licao pra TrabalhaMais</strong>REFERENCIA #1 de marca no setor. Humaniza trabalho operacional. "Humans working with other humans"</div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Workstream <span class="tag tag-blue">EUA</span></div>
+      <div class="card-tagline">HR + Hiring para equipes horistas — 46 dos top 50 QSR brands</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#1B66FF"></div>
+        <div class="swatch-label">#1B66FF</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#F7B950"></div>
+        <div class="swatch-label">#F7B950</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#091C5D"></div>
+        <div class="swatch-label">#091C5D</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>O que faz</strong>VoiceAI para triagem, text-to-apply, onboarding automatizado. Burger King, Taco Bell</div>
+    <div class="card-field"><strong>Licao pra TrabalhaMais</strong>SMS/WhatsApp-first e obrigatorio. VoiceAI para triagem e game-changer para vagas operacionais</div>
+  </div>
+</div>
+
+<div class="competitor-card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Computrabajo <span class="tag tag-purple">LatAm</span></div>
+      <div class="card-tagline">Lider em emprego na America Latina — 44M+ CVs, 18+ paises</div>
+    </div>
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#0C3877"></div>
+        <div class="swatch-label">Azul</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#FF6F00"></div>
+        <div class="swatch-label">#FF6F00</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card-field"><strong>O que faz</strong>Rebrand pela agencia Mucho. "C" como avatar que segura foto do candidato. Fotografia casual e humana</div>
+    <div class="card-field"><strong>Licao pra TrabalhaMais</strong>Referencia direta pra LatAm. Calor visual + fotografia humana ressoam na cultura latina</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- POSITIONING MAP -->
+<h2>Mapa de Posicionamento</h2>
+
+<div class="map-container">
+  <div class="map-visual">
+    <div class="map-axis-x"></div>
+    <div class="map-axis-y"></div>
+    <div class="map-label map-label-top">Enterprise / Caro</div>
+    <div class="map-label map-label-bottom">PME / Acessivel</div>
+    <div class="map-label map-label-left">Generalista</div>
+    <div class="map-label map-label-right">Especializado Operacional</div>
+
+    <!-- Opportunity zone -->
+    <div class="map-opportunity" style="right:5%; bottom:5%; width:38%; height:38%;">
+      <div class="map-opp-label">Oportunidade</div>
+    </div>
+
+    <!-- Dots -->
+    <div class="map-dot" style="background:#1771FF; left:30%; top:18%;">
+      <div class="map-dot-label" style="color:#1771FF;">Gupy</div>
+    </div>
+    <div class="map-dot" style="background:#F41C5A; left:72%; top:15%;">
+      <div class="map-dot-label" style="color:#F41C5A;">Recrut.ai</div>
+    </div>
+    <div class="map-dot" style="background:#5228DF; left:65%; top:30%;">
+      <div class="map-dot-label" style="color:#5228DF;">TAQE</div>
+    </div>
+    <div class="map-dot" style="background:#DE0059; left:25%; top:38%;">
+      <div class="map-dot-label" style="color:#DE0059;">Catho</div>
+    </div>
+    <div class="map-dot" style="background:#0C3877; left:28%; top:45%;">
+      <div class="map-dot-label" style="color:#6b9fff;">InfoJobs</div>
+    </div>
+    <div class="map-dot" style="background:#3D194F; left:42%; top:55%;">
+      <div class="map-dot-label" style="color:#a855f7;">Solides</div>
+    </div>
+    <div class="map-dot" style="background:#0F73BF; left:30%; top:62%;">
+      <div class="map-dot-label" style="color:#0F73BF;">Vagas.com</div>
+    </div>
+    <div class="map-dot" style="background:#FFCC26; left:38%; top:78%;">
+      <div class="map-dot-label" style="color:#FFCC26;">Trabalha Brasil</div>
+    </div>
+    <div class="map-dot" style="background:#2ecc71; left:78%; top:82%;">
+      <div class="map-dot-label" style="color:#2ecc71;">Emprego Ligado</div>
+    </div>
+
+    <!-- TrabalhaMais target -->
+    <div class="map-dot map-dot-target" style="left:72%; top:68%;">
+      <div class="map-dot-label" style="color:#f97316; font-size:0.75rem; font-weight:800;">TRABALHAMAIS</div>
+    </div>
+  </div>
+</div>
+
+<div class="insight-box">
+  <h3>Espaco Vazio Identificado</h3>
+  <p>O quadrante <strong>Especializado Operacional + Acessivel para PMEs</strong> esta vazio de solucoes modernas. Emprego Ligado ocupa o nicho mas com tech defasada. Recrut.ai tem a tech mas e enterprise. Solides tem WhatsApp mas e generalista. <strong>Ninguem combina os tres: foco 100% operacional + IA moderna + preco de PME.</strong></p>
+</div>
+
+<hr class="section-divider">
+
+<!-- PERSONAS -->
+<h2>Personas</h2>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <div class="persona-avatar" style="background: linear-gradient(135deg, #f97316, #fb923c); color: white;">M</div>
+    <div>
+      <div class="persona-name">Dona Marcia</div>
+      <div class="persona-subtitle">42 anos &bull; Dona de 2 lojas + 1 quiosque &bull; 12 funcionarios &bull; Vitoria-ES</div>
+    </div>
+  </div>
+  <div class="persona-quote">"Preciso de alguem pra ontem, nao pra daqui 3 semanas"</div>
+  <div class="persona-grid">
+    <div class="card-field"><strong>Dor principal</strong>Perde 2 semanas toda contratacao. Recebe 50 curriculos e nenhum presta. Ultima contratada nao apareceu no 2o dia</div>
+    <div class="card-field"><strong>Desejo</strong>Abrir o celular, ver quem esta disponivel perto da loja, chamar pra entrevista hoje</div>
+    <div class="card-field"><strong>Tech</strong>4/10 — WhatsApp, Instagram, app do banco</div>
+    <div class="card-field"><strong>Objecao</strong>"Nao vou pagar R$900/mes so pra contratar. Isso e pra empresa grande"</div>
+  </div>
+</div>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <div class="persona-avatar" style="background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white;">C</div>
+    <div>
+      <div class="persona-name">Carlos (RH)</div>
+      <div class="persona-subtitle">31 anos &bull; Analista de RH em construtora &bull; 180 funcionarios (60% operacionais) &bull; BH-MG</div>
+    </div>
+  </div>
+  <div class="persona-quote">"Preciso de VOLUME com QUALIDADE. Nao um nem outro — os dois"</div>
+  <div class="persona-grid">
+    <div class="card-field"><strong>Dor principal</strong>15 vagas de servente/pedreiro abertas agora. Turnover de 4 meses. 70% do tempo triando curriculo</div>
+    <div class="card-field"><strong>Desejo</strong>Base filtrada por regiao e disponibilidade. Clicar e ja ter gente boa pra chamar</div>
+    <div class="card-field"><strong>Tech</strong>7/10 — LinkedIn, ferramentas de RH, Excel avancado, ja testou Gupy</div>
+    <div class="card-field"><strong>Objecao</strong>"Ja testei varias plataformas e nenhuma funciona pra operacional"</div>
+  </div>
+</div>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <div class="persona-avatar" style="background: linear-gradient(135deg, #22c55e, #4ade80); color: white;">W</div>
+    <div>
+      <div class="persona-name">Wesley</div>
+      <div class="persona-subtitle">22 anos &bull; Periferia de Goiania-GO &bull; Ensino medio completo &bull; Busca 1o emprego formal</div>
+    </div>
+  </div>
+  <div class="persona-quote">"Se alguem me der uma chance, eu mostro que sei trabalhar"</div>
+  <div class="persona-grid">
+    <div class="card-field"><strong>Dor principal</strong>Anda a cidade deixando curriculo e ninguem liga. Nao sabe se o problema e ele ou se nem olham</div>
+    <div class="card-field"><strong>Desejo</strong>Emprego perto de casa, com carteira assinada, que chegue de onibus</div>
+    <div class="card-field"><strong>Tech</strong>5/10 — Android basico, WhatsApp, TikTok, YouTube. Nao sabe fazer curriculo digital</div>
+    <div class="card-field"><strong>Objecao</strong>"Esses sites pedem um monte de coisa que eu nao tenho"</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- COLOR ANALYSIS -->
+<h2>Analise Cromatica dos Concorrentes</h2>
+
+<table class="color-table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Cor Primaria</th>
+      <th>Accent / Secundaria</th>
+      <th>Estrategia de Cor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Recrut.ai</strong></td>
+      <td><span class="color-inline" style="background:#F41C5A"></span> Magenta <span class="hex-code">#F41C5A</span></td>
+      <td><span class="color-inline" style="background:#013088"></span> Azul escuro <span class="hex-code">#013088</span></td>
+      <td>Diferenciar no mar de azuis</td>
+    </tr>
+    <tr>
+      <td><strong>Emprego Ligado</strong></td>
+      <td><span class="color-inline" style="background:#2ecc71"></span> Verde</td>
+      <td><span class="color-inline" style="background:#ffffff; border: 1px solid #555"></span> Branco</td>
+      <td>Acessibilidade, frescor</td>
+    </tr>
+    <tr>
+      <td><strong>TAQE</strong></td>
+      <td><span class="color-inline" style="background:#5228DF"></span> Roxo <span class="hex-code">#5228DF</span></td>
+      <td><span class="color-inline" style="background:#D1ABFD"></span> Lilas <span class="hex-code">#D1ABFD</span></td>
+      <td>Inovacao, juventude</td>
+    </tr>
+    <tr>
+      <td><strong>Trabalha Brasil</strong></td>
+      <td><span class="color-inline" style="background:#FFCC26"></span> Amarelo <span class="hex-code">#FFCC26</span></td>
+      <td><span class="color-inline" style="background:#091A46"></span> Navy <span class="hex-code">#091A46</span></td>
+      <td>Otimismo + profissionalismo</td>
+    </tr>
+    <tr>
+      <td><strong>Solides</strong></td>
+      <td><span class="color-inline" style="background:#3D194F"></span> Roxo <span class="hex-code">#3D194F</span></td>
+      <td><span class="color-inline" style="background:#63D366"></span> Verde <span class="hex-code">#63D366</span></td>
+      <td>Sofisticacao + acao</td>
+    </tr>
+    <tr>
+      <td><strong>Gupy</strong></td>
+      <td><span class="color-inline" style="background:#1771FF"></span> Azul <span class="hex-code">#1771FF</span></td>
+      <td><span class="color-inline" style="background:#FF6F00"></span> Multicolor</td>
+      <td>Confianca + inovacao</td>
+    </tr>
+    <tr>
+      <td><strong>InfoJobs</strong></td>
+      <td><span class="color-inline" style="background:#0C3877"></span> Azul <span class="hex-code">#0C3877</span></td>
+      <td><span class="color-inline" style="background:#FF6F00"></span> Laranja <span class="hex-code">#FF6F00</span></td>
+      <td>Confianca + calor</td>
+    </tr>
+    <tr>
+      <td><strong>Catho</strong></td>
+      <td><span class="color-inline" style="background:#DE0059"></span> Magenta <span class="hex-code">#DE0059</span></td>
+      <td><span class="color-inline" style="background:#1250C4"></span> Azul <span class="hex-code">#1250C4</span></td>
+      <td>Energia + profissionalismo</td>
+    </tr>
+    <tr>
+      <td><strong>Vagas.com</strong></td>
+      <td><span class="color-inline" style="background:#0F73BF"></span> Azul <span class="hex-code">#0F73BF</span></td>
+      <td><span class="color-inline" style="background:#08A878"></span> Verde <span class="hex-code">#08A878</span></td>
+      <td>Confianca + crescimento</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.02)">
+      <td><strong>Wonolo</strong> <span class="tag tag-blue">EUA</span></td>
+      <td><span class="color-inline" style="background:#FCE44C"></span> Amarelo <span class="hex-code">#FCE44C</span></td>
+      <td><span class="color-inline" style="background:#0C1523"></span> Navy <span class="hex-code">#0C1523</span></td>
+      <td>Energia, otimismo, acessibilidade</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.02)">
+      <td><strong>Instawork</strong> <span class="tag tag-blue">EUA</span></td>
+      <td><span class="color-inline" style="background:#11243E"></span> Azul <span class="hex-code">#11243E</span></td>
+      <td><span class="color-inline" style="background:#EC5A53"></span> Coral <span class="hex-code">#EC5A53</span></td>
+      <td>Confianca + calor humano</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.02)">
+      <td><strong>Fountain</strong> <span class="tag tag-blue">EUA</span></td>
+      <td><span class="color-inline" style="background: linear-gradient(135deg, #1260FD, #6400E6)"></span> Azul→Roxo</td>
+      <td><span class="color-inline" style="background:#F44848"></span> Vermelho <span class="hex-code">#F44848</span></td>
+      <td>Sofisticacao + humanidade</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.02)">
+      <td><strong>Workstream</strong> <span class="tag tag-blue">EUA</span></td>
+      <td><span class="color-inline" style="background:#1B66FF"></span> Azul <span class="hex-code">#1B66FF</span></td>
+      <td><span class="color-inline" style="background:#F7B950"></span> Amarelo <span class="hex-code">#F7B950</span></td>
+      <td>Confianca + energia</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.02)">
+      <td><strong>Computrabajo</strong> <span class="tag tag-purple">LatAm</span></td>
+      <td><span class="color-inline" style="background:#0C3877"></span> Azul</td>
+      <td><span class="color-inline" style="background:#FF6F00"></span> Laranja <span class="hex-code">#FF6F00</span></td>
+      <td>Confianca + calor latino</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <h3>Conclusao Cromatica</h3>
+  <ul>
+    <li><strong>AZUL domina o setor</strong> — praticamente todos usam alguma variacao. E a cor "default" de emprego/confianca</li>
+    <li><strong>LARANJA e o accent mais popular</strong> para calor humano (InfoJobs, Computrabajo, Gupy, Instawork)</li>
+    <li><strong>ROXO</strong> aparece em plataformas tech/jovens (TAQE, Solides, Fountain) — mas tem <strong>alerta cultural no Brasil (associacao com luto)</strong></li>
+    <li><strong>AMARELO</strong> aparece em plataformas mais acessiveis (Wonolo, Trabalha Brasil, Workstream)</li>
+    <li><strong>VERDE e subutilizado</strong> no setor (apenas Emprego Ligado e Vagas.com como accent)</li>
+    <li><strong>Oportunidade:</strong> TrabalhaMais pode se diferenciar com <strong>LARANJA ou VERDE como primaria</strong> (nao apenas accent), saindo do mar de azuis. Laranja comunica energia + acessibilidade + calor humano. Verde comunica crescimento + esperanca + trabalho</li>
+  </ul>
+</div>
+
+<div class="insight-box">
+  <h3>Frase-Sintese da Oportunidade</h3>
+  <p style="font-size:1.15rem; font-weight:700; text-align:center; color: var(--accent); padding: 0.5rem 0;">"A Gupy do trabalhador operacional, pelo preco da PME"</p>
+</div>
+
+<div class="footer">
+  TrabalhaMais — Brand Studio &bull; Fase 1: Discovery &bull; Fevereiro 2026<br>
+  Compilado por Claude (Brand Strategist) para Maik Mello
+</div>
+
+</body>
+</html>

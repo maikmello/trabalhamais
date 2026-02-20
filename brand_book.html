@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Brand Book v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E8631A;--orange-dark:#C44F0E;--orange-light:#F28C4E;--orange-wash:#FFF0E6;--navy:#1A2744;--navy-mid:#2D3E5E;--navy-light:#4A5A78;--teal:#1A9E7A;--teal-wash:#E6F7F2;--cloud:#F5F6FA;--white:#FFFFFF;--gray-100:#E8EAF0;--gray-300:#A0A8B8;--error:#DC3545;--warning:#E8921A;--info:#3B7DD8;--bg:#0d1117;--bg-card:#161b22;--bg-card-alt:#1c2333;--border:rgba(255,255,255,0.08);--text:#e6edf3;--text-muted:#8b949e}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.section-inner{max-width:1200px;margin:0 auto;padding:clamp(48px,8vw,96px) clamp(16px,4vw,24px)}
+.badge{display:inline-block;background:var(--orange);color:#fff;border-radius:20px;font-size:13px;padding:4px 16px;font-weight:700;margin-bottom:16px;letter-spacing:0.02em}
+.section-title{font-weight:800;font-size:clamp(1.75rem,4vw,3rem);color:#fff;margin-bottom:48px;letter-spacing:-0.02em;line-height:1.15}
+h3.sub{font-weight:700;font-size:clamp(1.1rem,2.5vw,1.5rem);color:#fff;margin:64px 0 24px;letter-spacing:-0.01em}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:clamp(20px,3vw,32px)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px}
+.grid-6{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+.text-muted{color:var(--text-muted)}
+.text-orange{color:var(--orange)}
+.text-teal{color:var(--teal)}
+blockquote{border-left:3px solid var(--orange);padding:16px 24px;margin:24px 0;font-style:italic;color:var(--text);background:rgba(232,99,26,0.05);border-radius:0 8px 8px 0;max-width:65ch}
+table.spec{width:100%;border-collapse:collapse;margin:24px 0}
+table.spec th,table.spec td{padding:12px 16px;border:1px solid var(--border);text-align:left;font-size:14px}
+table.spec th{background:var(--bg-card-alt);color:var(--orange);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.03em}
+table.spec td{color:var(--text)}
+.wordmark{font-family:'Nunito',sans-serif;font-weight:800;letter-spacing:-0.02em}
+.wordmark .t{color:#fff}.wordmark .plus{color:var(--orange)}
+.swatch{border-radius:8px;height:80px;position:relative;margin-bottom:8px}
+.swatch-label{font-size:13px;font-weight:700;color:var(--text)}.swatch-hex{font-size:12px;color:var(--text-muted);font-family:'Inter',monospace}
+.dont-card{position:relative;overflow:hidden;border-radius:12px;background:var(--bg-card);border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.dont-card::after{content:"✕";position:absolute;top:8px;right:12px;color:var(--error);font-size:20px;font-weight:900}
+.dont-caption{font-size:13px;color:var(--error);font-weight:700;text-align:center}
+.lockup-h{display:inline-flex;align-items:center}
+.lockup-v{display:inline-flex;flex-direction:column;align-items:center}
+.spectrum-bar{height:8px;border-radius:4px;background:var(--bg-card-alt);position:relative;margin:8px 0 24px}
+.spectrum-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--navy-mid),var(--orange))}
+.spectrum-dot{width:16px;height:16px;border-radius:50%;background:var(--orange);border:3px solid #fff;position:absolute;top:50%;transform:translate(-50%,-50%)}
+.spectrum-labels{display:flex;justify-content:space-between;font-size:13px;color:var(--text-muted);margin-bottom:4px}
+.phone-mock{width:280px;min-height:520px;border-radius:32px;border:3px solid #333;background:#000;padding:12px;position:relative;overflow:hidden;flex-shrink:0}
+.phone-screen{border-radius:24px;overflow:hidden;background:var(--cloud);height:100%;display:flex;flex-direction:column}
+.browser-mock{border-radius:12px;border:1px solid var(--border);overflow:hidden;background:var(--bg-card)}
+.browser-tab-bar{background:var(--bg-card-alt);padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.browser-dot{width:10px;height:10px;border-radius:50%;background:#333;display:inline-block}
+.bcard{width:340px;min-height:200px;border-radius:8px;padding:28px;font-size:13px;flex-shrink:0}
+.badge-phys{width:200px;min-height:300px;border-radius:12px;padding:20px;text-align:center;flex-shrink:0;position:relative;overflow:hidden}
+.whatsapp-bubble{background:#005C4B;border-radius:12px;padding:16px;max-width:320px;position:relative}
+.back-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;transition:opacity .3s;text-decoration:none}
+.back-top.show{opacity:1}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.phone-mock{width:100%;max-width:300px;margin:0 auto}.bcard{width:100%}.badge-phys{width:100%;max-width:220px;margin:0 auto}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}
+.fade-in.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ============ 00. CAPA ============ -->
+<section id="capa" style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--navy) 0%,#0d1117 60%,rgba(232,99,26,0.15) 100%);position:relative">
+<div style="padding:24px">
+<svg viewBox="0 0 72 100" fill="none" style="height:200px;margin-bottom:32px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<div class="wordmark" style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:12px"><span class="t">Trabalha</span><span class="plus">+</span></div>
+<p style="color:var(--gray-300);font-style:italic;font-size:clamp(1rem,2vw,1.25rem);margin-bottom:48px">A vaga certa, na hora certa</p>
+<p style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:13px;color:var(--text-muted);white-space:nowrap">Brand Book v1.0 - Fevereiro 2026</p>
+</div>
+</section>
+
+<!-- ============ 01. INDICE ============ -->
+<section id="indice">
+<div class="section-inner">
+<span class="badge">01</span>
+<h2 class="section-title">Índice</h2>
+<div class="grid-3">
+<a href="#capa" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">00</span><p style="color:var(--text);font-weight:700;margin-top:8px">Capa</p></a>
+<a href="#indice" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">01</span><p style="color:var(--text);font-weight:700;margin-top:8px">Índice</p></a>
+<a href="#marca" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">02</span><p style="color:var(--text);font-weight:700;margin-top:8px">A Marca</p></a>
+<a href="#manifesto" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">03</span><p style="color:var(--text);font-weight:700;margin-top:8px">Manifesto</p></a>
+<a href="#logo" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">04</span><p style="color:var(--text);font-weight:700;margin-top:8px">Logo</p></a>
+<a href="#cores" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">05</span><p style="color:var(--text);font-weight:700;margin-top:8px">Cores</p></a>
+<a href="#tipografia" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">06</span><p style="color:var(--text);font-weight:700;margin-top:8px">Tipografia</p></a>
+<a href="#tom-de-voz" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">07</span><p style="color:var(--text);font-weight:700;margin-top:8px">Tom de Voz</p></a>
+<a href="#direcao-visual" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">08</span><p style="color:var(--text);font-weight:700;margin-top:8px">Direção Visual</p></a>
+<a href="#aplicacoes" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">09</span><p style="color:var(--text);font-weight:700;margin-top:8px">Aplicações</p></a>
+<a href="#encerramento" class="card" style="text-decoration:none;transition:border-color .2s"><span style="color:var(--orange);font-weight:800;font-size:28px">10</span><p style="color:var(--text);font-weight:700;margin-top:8px">Encerramento</p></a>
+</div>
+</div>
+</section>
+
+<!-- ============ 02. A MARCA ============ -->
+<section id="marca">
+<div class="section-inner">
+<span class="badge">02</span>
+<h2 class="section-title">A Marca</h2>
+
+<h3 class="sub">2.1 Propósito</h3>
+<blockquote>Acreditamos que encontrar trabalho não deveria ser humilhante, e contratar não deveria ser um desgaste.</blockquote>
+
+<h3 class="sub">2.2 Essência</h3>
+<div style="text-align:center;margin:40px 0">
+<div style="font-size:clamp(3rem,8vw,6rem);font-weight:900;color:var(--orange);letter-spacing:-0.03em;line-height:1">CONEXAO</div>
+<p class="text-muted" style="margin-top:12px;font-size:15px">A essência da marca em uma palavra</p>
+</div>
+
+<h3 class="sub">2.3 Promessa Bifocal</h3>
+<div class="grid-2">
+<div class="card" style="border-top:3px solid var(--orange)">
+<p style="font-size:13px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Para a empresa</p>
+<p style="font-size:18px;font-weight:600;color:#fff">Candidatos certos, na sua região, sem perder tempo.</p>
+</div>
+<div class="card" style="border-top:3px solid var(--teal)">
+<p style="font-size:13px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Para o trabalhador</p>
+<p style="font-size:18px;font-weight:600;color:#fff">Vaga perto de você, sem burocracia.</p>
+</div>
+</div>
+<div class="card" style="margin-top:20px;text-align:center;border:1px solid rgba(232,99,26,0.2)">
+<p style="font-size:16px;color:var(--text);max-width:60ch;margin:0 auto"><strong style="color:var(--orange)">Promessa unificada:</strong> Conectamos quem precisa de gente a quem precisa de uma chance. Rápido, simples e acessível.</p>
+</div>
+
+<h3 class="sub">2.4 Missão</h3>
+<blockquote>Facilitar e acelerar o processo de recrutamento, conectando candidatos a vagas de emprego de forma imediata, assertiva e personalizada, utilizando inteligência artificial para otimizar perfis, eliminar o tempo de busca e reduzir significativamente os custos de contratação.</blockquote>
+
+<h3 class="sub">2.5 Visão</h3>
+<blockquote>Ser a principal plataforma de recrutamento digital, reconhecida por revolucionar a forma como empresas e candidatos se conectam, proporcionando soluções inovadoras e eficientes que transformam o mercado de trabalho global.</blockquote>
+
+<h3 class="sub">2.6 Valores</h3>
+<div class="grid-3">
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Inovação</p><p class="text-muted" style="font-size:14px">Novas tecnologias para recrutamento rápido e eficiente</p></div>
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Agilidade</p><p class="text-muted" style="font-size:14px">Velocidade em todas as etapas do recrutamento</p></div>
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Personalização</p><p class="text-muted" style="font-size:14px">Soluções adaptadas para cada cliente e candidato</p></div>
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Acessibilidade</p><p class="text-muted" style="font-size:14px">Eliminando barreiras tradicionais</p></div>
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Eficiência</p><p class="text-muted" style="font-size:14px">Reduzindo custos, otimizando processos</p></div>
+<div class="card"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Transparência</p><p class="text-muted" style="font-size:14px">Clareza e ética em todas as interações</p></div>
+</div>
+
+<h3 class="sub">2.7 Arquetipos</h3>
+<div class="grid-2">
+<div class="card" style="border-left:4px solid var(--orange)">
+<p style="font-size:13px;color:var(--orange);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Primário - 70%</p>
+<p style="font-size:24px;font-weight:800;color:#fff;margin:8px 0">Cuidador</p>
+<p style="color:var(--text);font-size:15px;margin-bottom:12px">Servir, proteger, ajudar</p>
+<p class="text-muted" style="font-size:13px">Refs: Johnson &amp; Johnson, Volvo, UNICEF</p>
+</div>
+<div class="card" style="border-left:4px solid var(--navy-mid)">
+<p style="font-size:13px;color:var(--navy-light);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Secundário - 30%</p>
+<p style="font-size:24px;font-weight:800;color:#fff;margin:8px 0">Cara Comum</p>
+<p style="color:var(--text);font-size:15px;margin-bottom:12px">Pertencer, conectar, ser acessível</p>
+<p class="text-muted" style="font-size:13px">Refs: Havaianas, IKEA, Magazine Luiza</p>
+</div>
+</div>
+<div style="height:12px;border-radius:6px;overflow:hidden;margin-top:20px;display:flex">
+<div style="width:70%;background:var(--orange)"></div>
+<div style="width:30%;background:var(--navy-mid)"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-top:6px"><span>Cuidador 70%</span><span>Cara Comum 30%</span></div>
+
+<h3 class="sub">2.8 Posicionamento</h3>
+<div class="card">
+<p style="font-size:16px;color:var(--text);line-height:1.7;max-width:65ch">Para empresas brasileiras que contratam trabalhadores operacionais em alto volume, <strong style="color:#fff">TrabalhaMais</strong> é a plataforma de recrutamento digital que conecta empregadores a candidatos de base de forma rápida, inteligente e acessível, diferente de plataformas generalistas (Catho, Indeed) ou enterprise (Gupy, Recrut.ai), porque combina <strong style="color:var(--orange)">100% foco operacional + IA + WhatsApp-native + preço PME</strong>.</p>
+</div>
+
+<h3 class="sub">2.9 Tagline</h3>
+<div style="text-align:center;margin:48px 0">
+<p style="font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;color:var(--orange);letter-spacing:-0.02em">A vaga certa, na hora certa.</p>
+</div>
+</div>
+</section>
+
+<!-- ============ 03. MANIFESTO ============ -->
+<section id="manifesto" style="background:var(--navy)">
+<div class="section-inner" style="max-width:800px">
+<span class="badge">03</span>
+<h2 class="section-title">Manifesto</h2>
+
+<p style="font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:32px">Todo dia, milhões de brasileiros saem de casa procurando uma coisa simples: <strong style="color:var(--orange)">trabalho.</strong></p>
+
+<p style="font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:32px">Não pedem muito. Pedem uma <strong style="color:#fff">chance.</strong></p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:32px">Do outro lado, milhares de empresas acordam com o mesmo problema: precisam de gente. Gente que apareca, que se dedique, que esteja perto.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:40px">Mas entre quem procura e quem precisa, existe um abismo. Feito de burocracia, de distância, de sistemas que não foram feitos pra essa realidade.</p>
+
+<p style="font-size:clamp(1.4rem,3vw,2rem);color:var(--orange);font-weight:800;line-height:1.4;margin-bottom:40px;letter-spacing:-0.02em">O TrabalhaMais existe pra fechar esse abismo.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:32px">Pra empresa que não pode esperar 3 semanas pra contratar um vendedor.<br>Pra quem tá cansado de andar a cidade inteira deixando currículo de porta em porta.<br>Pra quem so quer uma chance de mostrar que sabe trabalhar.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:32px">A gente acredita que contratar não precisa ser um desgaste.<br>E que procurar emprego não precisa ser uma humilhação.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:40px">Tecnologia existe pra simplificar - então a gente usa ela pra isso.<br>IA que entende o perfil. WhatsApp que avisa na hora. Vaga perto de casa.</p>
+
+<p style="font-size:clamp(1.3rem,3vw,1.8rem);color:#fff;font-weight:800;line-height:1.4;margin-bottom:40px">Simples assim. Porque deveria sempre ter sido simples.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:32px">A gente não é pra todo tipo de vaga. A gente é pra vaga de quem faz o Brasil funcionar.<br>O vendedor, o servente, o repositor, o garçom, o motorista, o caixa.</p>
+
+<p style="font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:40px">Sem eles, nada acontece. E eles merecem um processo melhor.</p>
+
+<p style="font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--orange);font-weight:800;letter-spacing:-0.02em;line-height:1.3">TrabalhaMais.<br><span style="color:#fff">A vaga certa, na hora certa.</span></p>
+</div>
+</section>
+
+<!-- ============ 04. LOGO ============ -->
+<section id="logo">
+<div class="section-inner">
+<span class="badge">04</span>
+<h2 class="section-title">Logo</h2>
+
+<!-- 04.1 Conceito -->
+<h3 class="sub" id="logo-conceito">4.1 Conceito</h3>
+<p style="font-size:16px;color:var(--text);line-height:1.7;max-width:65ch;margin-bottom:32px">O logo do TrabalhaMais é um <strong style="color:#fff">crachá</strong> - o símbolo universal de identidade profissional. Representa o momento em que alguém deixa de ser "candidato" e passa a ser parte de uma equipe. O crachá é a materialização visual da conexão entre empresa e trabalhador.</p>
+
+<div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:32px 0">
+<div class="card" style="text-align:center;padding:16px 24px;flex:1;min-width:120px"><p style="font-size:13px;color:var(--text-muted)">Fase 1</p><p style="font-weight:700;color:var(--text);margin-top:4px">Conceito +</p></div>
+<div style="color:var(--orange);font-size:24px;padding:0 4px">→</div>
+<div class="card" style="text-align:center;padding:16px 24px;flex:1;min-width:120px"><p style="font-size:13px;color:var(--text-muted)">Fase 2</p><p style="font-weight:700;color:var(--text);margin-top:4px">Duas Bolhas</p></div>
+<div style="color:var(--orange);font-size:24px;padding:0 4px">→</div>
+<div class="card" style="text-align:center;padding:16px 24px;flex:1;min-width:120px"><p style="font-size:13px;color:var(--text-muted)">Fase 3</p><p style="font-weight:700;color:var(--text);margin-top:4px">Crachá v1</p></div>
+<div style="color:var(--orange);font-size:24px;padding:0 4px">→</div>
+<div class="card" style="text-align:center;padding:16px 24px;flex:1;min-width:120px;border-color:var(--orange)"><p style="font-size:13px;color:var(--orange)">Final</p><p style="font-weight:700;color:#fff;margin-top:4px">Crachá v6</p></div>
+</div>
+
+<!-- 04.2 Icone principal -->
+<h3 class="sub" id="logo-icone">4.2 Ícone Principal</h3>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+<div style="text-align:center">
+<div style="background:var(--bg-card);border-radius:16px;padding:40px;display:inline-block;border:1px solid var(--border)">
+<svg viewBox="0 0 72 100" fill="none" style="height:200px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+</div>
+</div>
+<div style="flex:1;min-width:260px">
+<table class="spec">
+<tr><th>Propriedade</th><th>Valor</th></tr>
+<tr><td>viewBox</td><td><code>0 0 72 100</code></td></tr>
+<tr><td>Proporção</td><td>72:100 (w = h × 0.72)</td></tr>
+<tr><td>Corpo</td><td>x=2 y=10 w=68 h=88 rx=8</td></tr>
+<tr><td>Grampo</td><td>x=21 y=4 w=30 h=12 rx=3</td></tr>
+<tr><td>Cabeca</td><td>cx=36 cy=38 r=11</td></tr>
+<tr><td>Ombros</td><td>Bezier M18,69 → M54,69</td></tr>
+<tr><td>Corpo fill</td><td><span style="display:inline-block;width:14px;height:14px;background:#E8631A;border-radius:3px;vertical-align:middle"></span> #E8631A</td></tr>
+<tr><td>Grampo fill</td><td>white/0.85 (escuro) | #D5D5D5 (claro)</td></tr>
+<tr><td>Pessoa fill</td><td>white/0.4 (cabeca) | white/0.22 (ombros)</td></tr>
+</table>
+</div>
+</div>
+
+<!-- 04.3 App Icon -->
+<h3 class="sub" id="logo-app">4.3 App Icon</h3>
+<div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap;margin-bottom:24px">
+<div style="text-align:center">
+<svg viewBox="0 0 72 72" fill="none" style="width:144px;height:144px"><rect width="72" height="72" rx="16" fill="#E8631A"/><rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/><rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/><circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/><path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/></svg>
+<p class="text-muted" style="font-size:12px;margin-top:8px">144 × 144</p>
+</div>
+<div style="text-align:center">
+<svg viewBox="0 0 72 72" fill="none" style="width:72px;height:72px"><rect width="72" height="72" rx="16" fill="#E8631A"/><rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/><rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/><circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/><path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/></svg>
+<p class="text-muted" style="font-size:12px;margin-top:8px">72 × 72</p>
+</div>
+</div>
+<p class="text-muted" style="font-size:14px">viewBox 72×72 | rx=16 | Otimizado para tamanhos pequenos</p>
+
+<!-- 04.4 Wordmark -->
+<h3 class="sub" id="logo-wordmark">4.4 Wordmark</h3>
+<div class="card" style="display:flex;flex-direction:column;gap:24px">
+<div><span class="wordmark" style="font-size:48px"><span class="t">Trabalha</span><span class="plus">+</span></span><span class="text-muted" style="margin-left:16px;font-size:13px">48px</span></div>
+<div><span class="wordmark" style="font-size:36px"><span class="t">Trabalha</span><span class="plus">+</span></span><span class="text-muted" style="margin-left:16px;font-size:13px">36px</span></div>
+<div><span class="wordmark" style="font-size:24px"><span class="t">Trabalha</span><span class="plus">+</span></span><span class="text-muted" style="margin-left:16px;font-size:13px">24px</span></div>
+<div><span class="wordmark" style="font-size:16px"><span class="t">Trabalha</span><span class="plus">+</span></span><span class="text-muted" style="margin-left:16px;font-size:13px">16px</span></div>
+</div>
+<p class="text-muted" style="font-size:14px;margin-top:12px">Nunito ExtraBold 800 | letter-spacing -0.02em</p>
+
+<!-- 04.5 Lockups -->
+<h3 class="sub" id="logo-lockups">4.5 Lockups</h3>
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Fundo escuro</p>
+<div class="card" style="display:flex;flex-direction:column;gap:32px;margin-bottom:24px">
+<div>
+<p class="text-muted" style="font-size:12px;margin-bottom:8px">Horizontal grande</p>
+<div class="lockup-h" style="gap:10px">
+<svg viewBox="0 0 72 100" fill="none" style="height:36px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:32px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+<div>
+<p class="text-muted" style="font-size:12px;margin-bottom:8px">Horizontal compacto</p>
+<div class="lockup-h" style="gap:6px">
+<svg viewBox="0 0 72 100" fill="none" style="height:23px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:20px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+<div>
+<p class="text-muted" style="font-size:12px;margin-bottom:8px">Vertical</p>
+<div class="lockup-v" style="gap:8px">
+<svg viewBox="0 0 72 100" fill="none" style="height:44px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:22px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+</div>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Fundo claro</p>
+<div style="background:var(--cloud);border-radius:12px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:32px;margin-bottom:24px">
+<div>
+<p style="font-size:12px;color:var(--navy-light);margin-bottom:8px">Horizontal grande</p>
+<div class="lockup-h" style="gap:10px">
+<svg viewBox="0 0 72 100" fill="none" style="height:36px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:32px"><span style="color:var(--navy)">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+<div>
+<p style="font-size:12px;color:var(--navy-light);margin-bottom:8px">Horizontal compacto</p>
+<div class="lockup-h" style="gap:6px">
+<svg viewBox="0 0 72 100" fill="none" style="height:23px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:20px"><span style="color:var(--navy)">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+<div>
+<p style="font-size:12px;color:var(--navy-light);margin-bottom:8px">Vertical</p>
+<div class="lockup-v" style="gap:8px">
+<svg viewBox="0 0 72 100" fill="none" style="height:44px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:22px"><span style="color:var(--navy)">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+</div>
+
+<!-- 04.6 Variacoes de cor -->
+<h3 class="sub" id="logo-cores">4.6 Variações de Cor</h3>
+<div class="grid-4">
+<div style="text-align:center">
+<div style="background:#0d1117;border-radius:12px;padding:24px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:12px">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:14px"><span style="color:#fff">Trabalha</span><span class="plus">+</span></span>
+</div>
+<p style="font-size:12px;font-weight:700;color:var(--text);margin-top:8px">Escuro</p>
+</div>
+<div style="text-align:center">
+<div style="background:var(--navy);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:14px"><span style="color:#fff">Trabalha</span><span class="plus">+</span></span>
+</div>
+<p style="font-size:12px;font-weight:700;color:var(--text);margin-top:8px">Navy</p>
+</div>
+<div style="text-align:center">
+<div style="background:var(--cloud);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:14px"><span style="color:var(--navy)">Trabalha</span><span class="plus">+</span></span>
+</div>
+<p style="font-size:12px;font-weight:700;color:var(--text);margin-top:8px">Claro</p>
+</div>
+<div style="text-align:center">
+<div style="background:var(--orange);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="white" opacity="0.2"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/></svg>
+<span class="wordmark" style="font-size:14px"><span style="color:#fff">Trabalha</span><span style="color:rgba(255,255,255,0.8)">+</span></span>
+</div>
+<p style="font-size:12px;font-weight:700;color:var(--text);margin-top:8px">Monocromático</p>
+</div>
+</div>
+
+<!-- 04.7 Espaco de protecao -->
+<h3 class="sub" id="logo-protecao">4.7 Espaço de Proteção + Tamanho Mínimo</h3>
+<div style="display:flex;justify-content:center;margin:32px 0">
+<div style="border:2px dashed var(--orange);border-radius:8px;padding:24px;display:inline-block;position:relative">
+<svg viewBox="0 0 72 100" fill="none" style="height:100px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<div style="position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--orange);white-space:nowrap">↕ altura do grampo</div>
+</div>
+</div>
+<p class="text-muted" style="font-size:14px;text-align:center;margin-bottom:32px">Zona de proteção = altura do grampo em todas as direções</p>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Tamanhos mínimos</p>
+<div style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap">
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:150px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">150px</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:100px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">100px</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">60px</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:40px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">40px</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:24px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">24px</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 100" fill="none" style="height:16px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg><p class="text-muted" style="font-size:11px;margin-top:4px">16px</p></div>
+</div>
+
+<!-- 04.8 Usos incorretos -->
+<h3 class="sub" id="logo-incorretos">4.8 Usos Incorretos</h3>
+<div class="grid-3">
+<div class="dont-card">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px;transform:scaleX(0.6)"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<p class="dont-caption">Não distorcer</p>
+</div>
+<div class="dont-card">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px;transform:rotate(15deg)"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<p class="dont-caption">Não rotacionar</p>
+</div>
+<div class="dont-card">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#22A85F"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<p class="dont-caption">Não alterar cores</p>
+</div>
+<div class="dont-card">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px;filter:drop-shadow(0 0 12px #E8631A) blur(0.5px)"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<p class="dont-caption">Não adicionar efeitos</p>
+</div>
+<div class="dont-card">
+<svg viewBox="0 0 72 100" fill="none" style="height:60px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<p class="dont-caption">Não usar sem grampo</p>
+</div>
+<div class="dont-card">
+<div style="position:relative;display:inline-block">
+<div style="width:72px;height:60px;background:linear-gradient(45deg,#E8631A,#3B7DD8,#22A85F,#DC3545);border-radius:8px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+<svg viewBox="0 0 72 100" fill="none" style="height:60px;position:relative"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+</div>
+<p class="dont-caption">Não usar sobre fundo complexo</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ============ 05. CORES ============ -->
+<section id="cores">
+<div class="section-inner">
+<span class="badge">05</span>
+<h2 class="section-title">Cores</h2>
+
+<h3 class="sub">5.1 Paleta Primária</h3>
+<div class="grid-4">
+<div><div class="swatch" style="background:#E8631A"></div><p class="swatch-label">TrabalhaMais Orange</p><p class="swatch-hex">#E8631A · rgb(232, 99, 26)</p></div>
+<div><div class="swatch" style="background:#C44F0E"></div><p class="swatch-label">Orange Dark</p><p class="swatch-hex">#C44F0E · rgb(196, 79, 14)</p></div>
+<div><div class="swatch" style="background:#F28C4E"></div><p class="swatch-label">Orange Light</p><p class="swatch-hex">#F28C4E · rgb(242, 140, 78)</p></div>
+<div><div class="swatch" style="background:#FFF0E6"></div><p class="swatch-label">Orange Wash</p><p class="swatch-hex">#FFF0E6 · rgb(255, 240, 230)</p></div>
+</div>
+
+<h3 class="sub">5.2 Paleta Secundária</h3>
+<div class="grid-3">
+<div><div class="swatch" style="background:#1A2744"></div><p class="swatch-label">TrabalhaMais Navy</p><p class="swatch-hex">#1A2744 · rgb(26, 39, 68)</p></div>
+<div><div class="swatch" style="background:#2D3E5E"></div><p class="swatch-label">Navy Mid</p><p class="swatch-hex">#2D3E5E · rgb(45, 62, 94)</p></div>
+<div><div class="swatch" style="background:#4A5A78"></div><p class="swatch-label">Navy Light</p><p class="swatch-hex">#4A5A78 · rgb(74, 90, 120)</p></div>
+</div>
+
+<h3 class="sub">5.3 Funcional + Neutras</h3>
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Funcional</p>
+<div class="grid-4" style="margin-bottom:24px">
+<div><div class="swatch" style="background:#1A9E7A"></div><p class="swatch-label">TrabalhaMais Teal</p><p class="swatch-hex">#1A9E7A · rgb(26, 158, 122)</p></div>
+<div><div class="swatch" style="background:#E6F7F2;border:1px solid var(--border)"></div><p class="swatch-label">Teal Wash</p><p class="swatch-hex">#E6F7F2</p></div>
+</div>
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Neutras</p>
+<div class="grid-4">
+<div><div class="swatch" style="background:#F5F6FA;border:1px solid var(--border)"></div><p class="swatch-label">Cloud</p><p class="swatch-hex">#F5F6FA</p></div>
+<div><div class="swatch" style="background:#FFFFFF;border:1px solid var(--border)"></div><p class="swatch-label">White</p><p class="swatch-hex">#FFFFFF</p></div>
+<div><div class="swatch" style="background:#E8EAF0;border:1px solid var(--border)"></div><p class="swatch-label">Gray 100</p><p class="swatch-hex">#E8EAF0</p></div>
+<div><div class="swatch" style="background:#A0A8B8"></div><p class="swatch-label">Gray 300</p><p class="swatch-hex">#A0A8B8</p></div>
+</div>
+
+<h3 class="sub">5.4 Semânticas</h3>
+<div class="grid-4">
+<div><div class="swatch" style="background:#1A9E7A"></div><p class="swatch-label">Success</p><p class="swatch-hex">#1A9E7A</p></div>
+<div><div class="swatch" style="background:#DC3545"></div><p class="swatch-label">Error</p><p class="swatch-hex">#DC3545</p></div>
+<div><div class="swatch" style="background:#E8921A"></div><p class="swatch-label">Warning</p><p class="swatch-hex">#E8921A</p></div>
+<div><div class="swatch" style="background:#3B7DD8"></div><p class="swatch-label">Info</p><p class="swatch-hex">#3B7DD8</p></div>
+</div>
+
+<h3 class="sub">5.5 Regra 60-30-10</h3>
+<div style="display:flex;border-radius:8px;overflow:hidden;height:48px;margin-bottom:8px">
+<div style="width:60%;background:var(--navy);display:flex;align-items:center;justify-content:center"><span style="font-size:13px;font-weight:700;color:#fff">60% Estrutura</span></div>
+<div style="width:30%;background:var(--orange);display:flex;align-items:center;justify-content:center"><span style="font-size:13px;font-weight:700;color:#fff">30% Identidade</span></div>
+<div style="width:10%;background:var(--teal);display:flex;align-items:center;justify-content:center"><span style="font-size:11px;font-weight:700;color:#fff">10%</span></div>
+</div>
+<p class="text-muted" style="font-size:13px">Navy + Neutras (estrutura) | Orange + variantes (identidade) | Teal (sucesso/acao)</p>
+
+<h3 class="sub">5.6 Acessibilidade WCAG</h3>
+<table class="spec">
+<tr><th>Combinação</th><th>Preview</th><th>Contraste</th><th>Nível</th></tr>
+<tr><td>Navy sobre White</td><td><span style="background:#fff;color:#1A2744;padding:4px 8px;border-radius:4px;font-weight:700;font-size:13px">Texto</span></td><td>14.85:1</td><td style="color:var(--teal);font-weight:700">AAA</td></tr>
+<tr><td>Orange Dark sobre White</td><td><span style="background:#fff;color:#C44F0E;padding:4px 8px;border-radius:4px;font-weight:700;font-size:13px">Texto</span></td><td>5.03:1</td><td style="color:var(--teal);font-weight:700">AA</td></tr>
+<tr><td>Navy sobre Orange</td><td><span style="background:#E8631A;color:#1A2744;padding:4px 8px;border-radius:4px;font-weight:700;font-size:13px">Texto</span></td><td>4.83:1</td><td style="color:var(--warning);font-weight:700">AA lg</td></tr>
+<tr><td>White sobre Teal</td><td><span style="background:#1A9E7A;color:#fff;padding:4px 8px;border-radius:4px;font-weight:700;font-size:13px">Texto</span></td><td>3.72:1</td><td style="color:var(--warning);font-weight:700">AA lg</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ============ 06. TIPOGRAFIA ============ -->
+<section id="tipografia">
+<div class="section-inner">
+<span class="badge">06</span>
+<h2 class="section-title">Tipografia</h2>
+
+<h3 class="sub">6.1 Nunito - Fonte Principal</h3>
+<div class="card" style="margin-bottom:16px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">ExtraLight 200</span><span style="font-family:Nunito;font-weight:200;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Light 300</span><span style="font-family:Nunito;font-weight:300;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Regular 400</span><span style="font-family:Nunito;font-weight:400;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">SemiBold 600</span><span style="font-family:Nunito;font-weight:600;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Bold 700</span><span style="font-family:Nunito;font-weight:700;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">ExtraBold 800</span><span style="font-family:Nunito;font-weight:800;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Black 900</span><span style="font-family:Nunito;font-weight:900;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+</div>
+</div>
+<p class="text-muted" style="font-size:14px">Sans-serif geométrica arredondada. Transmite acolhimento e acessibilidade.</p>
+
+<h3 class="sub">6.2 Inter - Fonte Auxiliar</h3>
+<div class="card" style="margin-bottom:16px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Regular 400</span><span style="font-family:Inter;font-weight:400;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Medium 500</span><span style="font-family:Inter;font-weight:500;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">SemiBold 600</span><span style="font-family:Inter;font-weight:600;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-size:13px;color:var(--text-muted);width:120px;flex-shrink:0">Bold 700</span><span style="font-family:Inter;font-weight:700;font-size:24px;color:var(--text)">Aa Bb Cc Dd 0123456789</span></div>
+</div>
+</div>
+<p class="text-muted" style="font-size:14px">Uso restrito a dashboards B2B, tabelas e métricas.</p>
+
+<h3 class="sub">6.3 Hierarquia Tipográfica</h3>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div class="card"><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">H1 - Nunito 800 · 48px · lh 1.15 · ls -0.02em</p><p style="font-family:Nunito;font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.15;letter-spacing:-0.02em;color:#fff">Encontre seu próximo trabalho</p></div>
+<div class="card"><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">H2 - Nunito 700 · 36px · lh 1.2 · ls -0.02em</p><p style="font-family:Nunito;font-weight:700;font-size:clamp(22px,3vw,36px);line-height:1.2;letter-spacing:-0.02em;color:#fff">Vagas perto de você</p></div>
+<div class="card"><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">H3 - Nunito 700 · 24px · lh 1.3</p><p style="font-family:Nunito;font-weight:700;font-size:clamp(18px,2.5vw,24px);line-height:1.3;color:#fff">Como funciona</p></div>
+<div class="card"><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">Body - Nunito 400 · 16px · lh 1.6</p><p style="font-family:Nunito;font-weight:400;font-size:16px;line-height:1.6;color:var(--text);max-width:65ch">O TrabalhaMais conecta empresas a trabalhadores operacionais de forma rápida e inteligente, usando IA para encontrar o candidato ideal.</p></div>
+<div class="card"><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">Body Strong - Nunito 600 · 16px · lh 1.6</p><p style="font-family:Nunito;font-weight:600;font-size:16px;line-height:1.6;color:var(--text)">Texto em destaque dentro do corpo.</p></div>
+<div class="card" style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+<div><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">Caption - 14px</p><p style="font-family:Nunito;font-weight:400;font-size:14px;color:var(--navy-light)">Texto auxiliar e metadados</p></div>
+<div><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">CTA - 700 · 16px</p><p style="font-family:Nunito;font-weight:700;font-size:16px;color:var(--orange)">Ver vagas agora →</p></div>
+<div><p style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:8px">Tag - 700 · 12px · uppercase</p><p style="font-family:Nunito;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:var(--teal);background:rgba(26,158,122,0.15);display:inline-block;padding:4px 12px;border-radius:4px">Nova vaga</p></div>
+</div>
+</div>
+
+<h3 class="sub">6.4 Regras</h3>
+<div class="card">
+<ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
+<li style="color:var(--text);font-size:15px"><span style="color:var(--orange);margin-right:8px">•</span>Tamanho mínimo de corpo: <strong>16px</strong> (inegociável)</li>
+<li style="color:var(--text);font-size:15px"><span style="color:var(--orange);margin-right:8px">•</span>Line-height do corpo: <strong>1.6</strong></li>
+<li style="color:var(--text);font-size:15px"><span style="color:var(--orange);margin-right:8px">•</span>Largura máxima de parágrafo: <strong>65-75 caracteres</strong></li>
+<li style="color:var(--text);font-size:15px"><span style="color:var(--orange);margin-right:8px">•</span>Nunca usar peso abaixo de <strong>400</strong> para texto corrido</li>
+<li style="color:var(--text);font-size:15px"><span style="color:var(--orange);margin-right:8px">•</span>Headlines sempre com letter-spacing negativo (<strong>-0.02em</strong>)</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============ 07. TOM DE VOZ ============ -->
+<section id="tom-de-voz">
+<div class="section-inner">
+<span class="badge">07</span>
+<h2 class="section-title">Tom de Voz</h2>
+
+<h3 class="sub">7.1 Espectro</h3>
+<div class="card" style="display:flex;flex-direction:column;gap:20px">
+<div>
+<div class="spectrum-labels"><span>Formal</span><span>Informal</span></div>
+<div class="spectrum-bar"><div class="spectrum-fill" style="width:60%"></div><div class="spectrum-dot" style="left:60%"></div></div>
+</div>
+<div>
+<div class="spectrum-labels"><span>Sério</span><span>Leve</span></div>
+<div class="spectrum-bar"><div class="spectrum-fill" style="width:55%"></div><div class="spectrum-dot" style="left:55%"></div></div>
+</div>
+<div>
+<div class="spectrum-labels"><span>Complexo</span><span>Simples</span></div>
+<div class="spectrum-bar"><div class="spectrum-fill" style="width:80%"></div><div class="spectrum-dot" style="left:80%"></div></div>
+</div>
+<div>
+<div class="spectrum-labels"><span>Distante</span><span>Próximo</span></div>
+<div class="spectrum-bar"><div class="spectrum-fill" style="width:75%"></div><div class="spectrum-dot" style="left:75%"></div></div>
+</div>
+<div>
+<div class="spectrum-labels"><span>Autoritário</span><span>Colaborativo</span></div>
+<div class="spectrum-bar"><div class="spectrum-fill" style="width:70%"></div><div class="spectrum-dot" style="left:70%"></div></div>
+</div>
+</div>
+
+<h3 class="sub">7.2 Pilares</h3>
+<div class="grid-2">
+<div class="card" style="border-left:4px solid var(--orange)"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Acolhedor</p><p style="color:var(--text);font-size:15px">Mas não infantil. Recebemos com calor, sem parecer um desenho animado.</p></div>
+<div class="card" style="border-left:4px solid var(--orange)"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Direto</p><p style="color:var(--text);font-size:15px">Mas não frio. Vamos ao ponto, sem perder a gentileza.</p></div>
+<div class="card" style="border-left:4px solid var(--orange)"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Profissional</p><p style="color:var(--text);font-size:15px">Mas não corporativo. Sério quando precisa, sem jargão.</p></div>
+<div class="card" style="border-left:4px solid var(--orange)"><p style="font-size:20px;font-weight:800;color:var(--orange);margin-bottom:8px">Esperançoso</p><p style="color:var(--text);font-size:15px">Mas não ilusório. Oferecemos perspectiva real, sem promessas vazias.</p></div>
+</div>
+
+<h3 class="sub">7.3 Vocabulario</h3>
+<table class="spec">
+<tr><th style="color:var(--teal)">Usar</th><th style="color:var(--error)">Evitar</th></tr>
+<tr><td style="color:var(--teal)">vaga</td><td style="color:var(--text-muted)">oportunidade de carreira</td></tr>
+<tr><td style="color:var(--teal)">trabalho</td><td style="color:var(--text-muted)">posição</td></tr>
+<tr><td style="color:var(--teal)">você</td><td style="color:var(--text-muted)">senhor(a)</td></tr>
+<tr><td style="color:var(--teal)">a gente</td><td style="color:var(--text-muted)">nos, a empresa</td></tr>
+<tr><td style="color:var(--teal)">perto de você</td><td style="color:var(--text-muted)">na sua localidade</td></tr>
+<tr><td style="color:var(--teal)">rápido</td><td style="color:var(--text-muted)">com agilidade</td></tr>
+<tr><td style="color:var(--teal)">encontrar</td><td style="color:var(--text-muted)">se candidatar a</td></tr>
+<tr><td style="color:var(--teal)">combina com você</td><td style="color:var(--text-muted)">compativel com seu perfil</td></tr>
+</table>
+
+<h3 class="sub">7.4 Exemplos Práticos</h3>
+<div class="grid-2">
+<div class="card"><p style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">WhatsApp</p><p style="font-size:15px;color:var(--text);line-height:1.6">Oi, Wesley! Tem 3 vagas novas perto de você em Vila Velha. Uma delas é de vendedor no Shopping - começa semana que vem. Ver vagas agora →</p></div>
+<div class="card"><p style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Email marketing</p><p style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px">Assunto: 5 vagas novas perto de você</p><p style="font-size:15px;color:var(--text);line-height:1.6">Oi Wesley, achamos vagas que combinam com você. Da uma olhada - uma delas pode ser a sua.</p></div>
+<div class="card"><p style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Mensagem de erro</p><p style="font-size:15px;color:var(--text);line-height:1.6">Ih, deu ruim. A gente não conseguiu carregar as vagas agora. Tenta de novo em alguns segundos?</p></div>
+<div class="card"><p style="font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">Pós-contratação</p><p style="font-size:15px;color:var(--text);line-height:1.6">Parabéns, Wesley! Você foi contratado pela Construtora Horizonte. Seu primeiro dia é segunda-feira. Boa sorte - a gente torce por você!</p></div>
+</div>
+
+<h3 class="sub">7.5 Adaptação Bifocal</h3>
+<div class="grid-2">
+<div class="card" style="border-top:3px solid var(--orange)">
+<p style="font-size:16px;font-weight:800;color:var(--orange);margin-bottom:12px">B2C - Trabalhador</p>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--orange);margin-right:8px">•</span>Mais informal</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--orange);margin-right:8px">•</span>Emoji ok (pouco)</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--orange);margin-right:8px">•</span>Primeira pessoa ("a gente")</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--orange);margin-right:8px">•</span>Foco emocional</li>
+</ul>
+</div>
+<div class="card" style="border-top:3px solid var(--navy-mid)">
+<p style="font-size:16px;font-weight:800;color:var(--navy-light);margin-bottom:12px">B2B - Empresa</p>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--navy-light);margin-right:8px">•</span>Mais profissional</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--navy-light);margin-right:8px">•</span>Dados e métricas</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--navy-light);margin-right:8px">•</span>Foco em ROI</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--navy-light);margin-right:8px">•</span>Sem emoji</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ 08. DIRECAO VISUAL ============ -->
+<section id="direcao-visual">
+<div class="section-inner">
+<span class="badge">08</span>
+<h2 class="section-title">Direção Visual</h2>
+
+<h3 class="sub">8.1 Fotografia</h3>
+<div class="grid-2">
+<div class="card" style="border-top:3px solid var(--teal)">
+<p style="font-size:16px;font-weight:800;color:var(--teal);margin-bottom:16px">Fazer</p>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Pessoas reais trabalhando</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Ambientes brasileiros autênticos</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Diversidade étnica e de gênero</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Iluminação natural e quente</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Enquadramentos próximos e humanos</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--teal);margin-right:8px">&#10003;</span>Expressoes genuinas (sorrisos reais)</li>
+</ul>
+</div>
+<div class="card" style="border-top:3px solid var(--error)">
+<p style="font-size:16px;font-weight:800;color:var(--error);margin-bottom:16px">Não fazer</p>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Fotos stock genericas</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Apertos de mao corporativos</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Modelos em estudio</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Cenários americanos/europeus</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Tons frios e artificiais</li>
+<li style="font-size:14px;color:var(--text)"><span style="color:var(--error);margin-right:8px">&#10007;</span>Pessoas de terno em escritórios</li>
+</ul>
+</div>
+</div>
+
+<h3 class="sub">8.2 Iconografia</h3>
+<p class="text-muted" style="font-size:14px;margin-bottom:16px">Estilo rounded | 24×24px grid | stroke 2px | rounded caps/joins</p>
+<div class="grid-4">
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Localização</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Busca</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Perfil</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 21V9h6v12"/><path d="M3 9h18"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Empresa</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Sucesso</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">WhatsApp</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="18" y2="18"/><circle cx="18" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="16" cy="18" r="2"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Filtro</p>
+</div>
+<div class="card" style="text-align:center;padding:20px">
+<svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:8px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+<p style="font-size:12px;color:var(--text-muted)">Raio</p>
+</div>
+</div>
+
+<h3 class="sub">8.3 Componentes</h3>
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Botões</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px">
+<button style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-family:Nunito;font-weight:700;font-size:16px;cursor:pointer">Primary</button>
+<button style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-family:Nunito;font-weight:700;font-size:16px;cursor:pointer">Navy</button>
+<button style="background:transparent;color:var(--orange);border:2px solid var(--orange);border-radius:8px;padding:12px 26px;font-family:Nunito;font-weight:700;font-size:16px;cursor:pointer">Secondary</button>
+<button style="background:transparent;color:var(--orange);border:none;border-radius:8px;padding:14px 28px;font-family:Nunito;font-weight:700;font-size:16px;cursor:pointer">Ghost</button>
+<button style="background:var(--teal);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-family:Nunito;font-weight:700;font-size:16px;cursor:pointer">Match</button>
+</div>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Card de vaga (exemplo)</p>
+<div style="max-width:360px">
+<div class="card" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:40px;height:40px;border-radius:8px;background:var(--orange-wash);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" style="width:20px;height:20px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 21V9h6v12"/><path d="M3 9h18"/></svg></div>
+<div><p style="font-size:16px;font-weight:700;color:#fff">Vendedor</p><p style="font-size:13px;color:var(--text-muted)">Loja Centro</p></div>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<span style="font-size:11px;font-weight:700;color:var(--teal);background:rgba(26,158,122,0.15);padding:3px 10px;border-radius:4px;text-transform:uppercase">Nova</span>
+<span style="font-size:11px;font-weight:600;color:var(--text-muted);background:var(--bg-card-alt);padding:3px 10px;border-radius:4px">2.1 km</span>
+<span style="font-size:11px;font-weight:600;color:var(--text-muted);background:var(--bg-card-alt);padding:3px 10px;border-radius:4px">CLT</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<p style="font-size:18px;font-weight:800;color:#fff">R$ 1.800<span style="font-size:13px;font-weight:400;color:var(--text-muted)">/mês</span></p>
+<button style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:Nunito;font-weight:700;font-size:14px;cursor:pointer">Ver vaga</button>
+</div>
+</div>
+</div>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin:32px 0 16px">Espaçamento - Grid 8px</p>
+<div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+<div style="text-align:center"><div style="width:32px;height:8px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">8</p></div>
+<div style="text-align:center"><div style="width:32px;height:16px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">16</p></div>
+<div style="text-align:center"><div style="width:32px;height:24px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">24</p></div>
+<div style="text-align:center"><div style="width:32px;height:32px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">32</p></div>
+<div style="text-align:center"><div style="width:32px;height:48px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">48</p></div>
+<div style="text-align:center"><div style="width:32px;height:64px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">64</p></div>
+<div style="text-align:center"><div style="width:32px;height:96px;background:var(--orange);border-radius:2px"></div><p style="font-size:11px;color:var(--text-muted);margin-top:4px">96</p></div>
+</div>
+
+<h3 class="sub">8.4 Motion</h3>
+<div class="card">
+<table class="spec" style="margin:0">
+<tr><th>Propriedade</th><th>Valor</th></tr>
+<tr><td>Transições gerais</td><td>200-300ms</td></tr>
+<tr><td>Animações de entrada</td><td>400-600ms</td></tr>
+<tr><td>Curva (entradas)</td><td>ease-out</td></tr>
+<tr><td>Curva (hover)</td><td>ease-in-out</td></tr>
+<tr><td>Scroll reveals</td><td>fade-up, 20px offset, 150ms stagger</td></tr>
+</table>
+</div>
+
+<h3 class="sub">8.5 Adaptação Bifocal</h3>
+<table class="spec">
+<tr><th>Aspecto</th><th style="color:var(--orange)">B2C (Trabalhador)</th><th style="color:var(--navy-light)">B2B (Empresa)</th></tr>
+<tr><td>Header</td><td>Laranja</td><td>Navy</td></tr>
+<tr><td>Tom</td><td>Acolhedor, simples</td><td>Profissional, dados</td></tr>
+<tr><td>Cards</td><td>Vagas com salario visivel</td><td>Candidatos com % match</td></tr>
+<tr><td>CTA</td><td>"Ver vaga", "Me candidatar"</td><td>"Ver perfil", "Filtrar"</td></tr>
+<tr><td>Icones</td><td>Maiores, coloridos</td><td>Menores, monocromáticos</td></tr>
+<tr><td>Tipografia</td><td>Maior, mais espacada</td><td>Mais densa, Inter para dados</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ============ 09. APLICACOES ============ -->
+<section id="aplicacoes">
+<div class="section-inner">
+<span class="badge">09</span>
+<h2 class="section-title">Aplicações</h2>
+
+<!-- 9.1 App Mobile -->
+<h3 class="sub">9.1 App Mobile</h3>
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+<div class="phone-mock">
+<div class="phone-screen">
+<div style="background:var(--orange);padding:16px;display:flex;align-items:center;gap:8px">
+<svg viewBox="0 0 72 100" fill="none" style="height:20px"><rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.25)"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/></svg>
+<span style="font-family:Nunito;font-weight:800;font-size:14px;color:#fff">Trabalha<span style="opacity:0.8">+</span></span>
+</div>
+<div style="padding:16px;flex:1;overflow-y:auto">
+<p style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:4px">Oi, Wesley!</p>
+<p style="font-size:13px;color:var(--navy-light);margin-bottom:16px">3 vagas novas perto de você</p>
+<!-- Job card 1 -->
+<div style="background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,39,68,0.08)">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+<div><p style="font-size:14px;font-weight:700;color:var(--navy)">Vendedor</p><p style="font-size:11px;color:var(--navy-light)">Loja Centro</p></div>
+<span style="font-size:10px;font-weight:700;color:var(--teal);background:var(--teal-wash);padding:2px 8px;border-radius:4px;text-transform:uppercase">Nova</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:14px;font-weight:800;color:var(--navy)">R$ 1.800<span style="font-weight:400;font-size:11px;color:var(--navy-light)">/mês</span></span>
+<span style="font-size:11px;color:var(--navy-light)">2.1 km</span>
+</div>
+</div>
+<!-- Job card 2 -->
+<div style="background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,39,68,0.08)">
+<div style="margin-bottom:6px"><p style="font-size:14px;font-weight:700;color:var(--navy)">Repositor</p><p style="font-size:11px;color:var(--navy-light)">Supermercado BH</p></div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:14px;font-weight:800;color:var(--navy)">R$ 1.500<span style="font-weight:400;font-size:11px;color:var(--navy-light)">/mês</span></span>
+<span style="font-size:11px;color:var(--navy-light)">3.4 km</span>
+</div>
+</div>
+<!-- Job card 3 -->
+<div style="background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,39,68,0.08)">
+<div style="margin-bottom:6px"><p style="font-size:14px;font-weight:700;color:var(--navy)">Aux. de cozinha</p><p style="font-size:11px;color:var(--navy-light)">Restaurante Sabor</p></div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:14px;font-weight:800;color:var(--navy)">R$ 1.412<span style="font-weight:400;font-size:11px;color:var(--navy-light)">/mês</span></span>
+<span style="font-size:11px;color:var(--navy-light)">1.8 km</span>
+</div>
+</div>
+</div>
+<!-- Bottom nav -->
+<div style="background:#fff;border-top:1px solid var(--gray-100);padding:10px;display:flex;justify-content:space-around">
+<div style="text-align:center"><svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" style="width:20px;height:20px"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><p style="font-size:10px;color:var(--orange);font-weight:700">Vagas</p></div>
+<div style="text-align:center"><svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B8" stroke-width="2" style="width:20px;height:20px"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><p style="font-size:10px;color:var(--gray-300)">Busca</p></div>
+<div style="text-align:center"><svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B8" stroke-width="2" style="width:20px;height:20px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8"/></svg><p style="font-size:10px;color:var(--gray-300)">Perfil</p></div>
+<div style="text-align:center"><svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B8" stroke-width="2" style="width:20px;height:20px"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg><p style="font-size:10px;color:var(--gray-300)">Menu</p></div>
+</div>
+</div>
+</div>
+<!-- App icon on home screen -->
+<div class="card" style="padding:24px">
+<p class="text-muted" style="font-size:12px;margin-bottom:16px">App icon na home screen</p>
+<div style="display:grid;grid-template-columns:repeat(4,56px);gap:16px">
+<div style="text-align:center"><div style="width:56px;height:56px;border-radius:14px;background:#25D366;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="white" style="width:28px"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><p style="font-size:10px;color:var(--text-muted);margin-top:4px">WhatsApp</p></div>
+<div style="text-align:center"><div style="width:56px;height:56px;border-radius:14px;background:#1877F2;display:flex;align-items:center;justify-content:center"><span style="color:#fff;font-weight:900;font-size:28px">f</span></div><p style="font-size:10px;color:var(--text-muted);margin-top:4px">Facebook</p></div>
+<div style="text-align:center"><div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:24px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="1.5" fill="white" stroke="none"/></svg></div><p style="font-size:10px;color:var(--text-muted);margin-top:4px">Instagram</p></div>
+<div style="text-align:center"><svg viewBox="0 0 72 72" fill="none" style="width:56px;height:56px"><rect width="72" height="72" rx="16" fill="#E8631A"/><rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/><rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/><circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/><path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/></svg><p style="font-size:10px;color:var(--orange);margin-top:4px;font-weight:700">Trabalha+</p></div>
+</div>
+</div>
+</div>
+
+<!-- 9.2 Browser -->
+<h3 class="sub">9.2 Browser / Favicon</h3>
+<div class="browser-mock">
+<div class="browser-tab-bar">
+<span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+<div style="background:var(--bg-card);border-radius:6px 6px 0 0;padding:6px 16px;margin-left:12px;display:flex;align-items:center;gap:6px;border:1px solid var(--border);border-bottom:none">
+<svg viewBox="0 0 72 100" fill="none" style="height:14px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span style="font-size:12px;color:var(--text)">TrabalhaMais - A vaga certa</span>
+</div>
+</div>
+<div style="padding:24px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+<div class="lockup-h" style="gap:8px">
+<svg viewBox="0 0 72 100" fill="none" style="height:28px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:20px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+<div style="display:flex;gap:24px;font-size:14px;font-weight:600;color:var(--text-muted)">
+<span>Vagas</span><span>Para Empresas</span><span>Sobre</span>
+</div>
+</div>
+<p style="font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#fff;letter-spacing:-0.02em">Encontre seu próximo trabalho</p>
+<p style="font-size:14px;color:var(--text-muted);margin-top:8px">Vagas operacionais perto de você, sem burocracia.</p>
+</div>
+</div>
+
+<!-- 9.3 Cartao de visita -->
+<h3 class="sub">9.3 Cartao de Visita</h3>
+<div style="display:flex;flex-wrap:wrap;gap:24px">
+<div class="bcard" style="background:#fff">
+<div class="lockup-h" style="gap:6px;margin-bottom:28px">
+<svg viewBox="0 0 72 100" fill="none" style="height:22px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span style="font-family:Nunito;font-weight:800;font-size:16px;letter-spacing:-0.02em"><span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">+</span></span>
+</div>
+<p style="font-size:16px;font-weight:800;color:var(--navy)">Gabriel Cecco</p>
+<p style="font-size:13px;color:var(--navy-light);margin-bottom:16px">Diretor Comercial</p>
+<p style="font-size:12px;color:var(--navy-light);line-height:1.8">+55 27 99999-0000<br>gabriel@trabalhamais.com.br<br>trabalhamais.com.br</p>
+</div>
+<div class="bcard" style="background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+<div class="lockup-v" style="gap:8px;margin-bottom:16px">
+<svg viewBox="0 0 72 100" fill="none" style="height:40px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:18px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+<p style="font-size:12px;color:var(--navy-light);font-style:italic">A vaga certa, na hora certa</p>
+</div>
+</div>
+
+<!-- 9.4 Assinatura de email -->
+<h3 class="sub">9.4 Assinatura de Email</h3>
+<div class="card" style="max-width:480px">
+<div style="display:flex;gap:16px;align-items:flex-start">
+<svg viewBox="0 0 72 100" fill="none" style="height:48px;flex-shrink:0"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<div>
+<p style="font-size:15px;font-weight:800;color:#fff">Gabriel Cecco</p>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Diretor Comercial</p>
+<div style="height:1px;background:var(--border);margin-bottom:8px"></div>
+<p style="font-size:12px;color:var(--text-muted);line-height:1.7">gabriel@trabalhamais.com.br<br>+55 27 99999-0000<br><span style="color:var(--orange)">trabalhamais.com.br</span></p>
+</div>
+</div>
+</div>
+
+<!-- 9.5 Redes sociais -->
+<h3 class="sub">9.5 Redes Sociais</h3>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<!-- Circular avatar -->
+<div style="text-align:center">
+<div style="width:128px;height:128px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;overflow:hidden">
+<svg viewBox="0 0 72 100" fill="none" style="height:72px"><rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.15)"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/></svg>
+</div>
+<p class="text-muted" style="font-size:11px;margin-top:8px">Avatar circular</p>
+</div>
+<!-- Square avatar -->
+<div style="text-align:center">
+<svg viewBox="0 0 72 72" fill="none" style="width:128px;height:128px;border-radius:16px"><rect width="72" height="72" rx="16" fill="#E8631A"/><rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/><rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/><circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/><path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/></svg>
+<p class="text-muted" style="font-size:11px;margin-top:8px">Avatar quadrado</p>
+</div>
+<!-- Profile mock -->
+<div class="card" style="width:280px;padding:0;overflow:hidden">
+<div style="background:var(--navy);padding:24px;text-align:center">
+<span class="wordmark" style="font-size:18px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+<div style="padding:16px;display:flex;gap:12px;align-items:center">
+<div style="width:48px;height:48px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:-32px;border:3px solid var(--bg-card)">
+<svg viewBox="0 0 72 100" fill="none" style="height:24px"><rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.15)"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/></svg>
+</div>
+<div>
+<p style="font-size:15px;font-weight:800;color:#fff">TrabalhaMais</p>
+<p style="font-size:12px;color:var(--text-muted)">A vaga certa, na hora certa</p>
+<p style="font-size:12px;color:var(--orange)">trabalhamais.com.br</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 9.6 Cracha fisico -->
+<h3 class="sub">9.6 Crachá Físico</h3>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<!-- Trabalhador -->
+<div class="badge-phys" style="background:#fff">
+<div style="background:var(--orange);margin:-20px -20px 16px;padding:12px;border-radius:12px 12px 0 0">
+<span style="font-family:Nunito;font-weight:800;font-size:11px;color:#fff;letter-spacing:-0.02em">Trabalha<span style="opacity:0.8">+</span></span>
+</div>
+<div style="width:64px;height:64px;border-radius:50%;background:var(--gray-100);margin:0 auto 12px;display:flex;align-items:center;justify-content:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B8" stroke-width="1.5" style="width:28px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8"/></svg>
+</div>
+<p style="font-size:16px;font-weight:800;color:var(--navy)">Wesley Silva</p>
+<p style="font-size:12px;color:var(--navy-light);margin-bottom:4px">Repositor</p>
+<p style="font-size:11px;color:var(--navy-light);margin-bottom:12px">Supermercado BH</p>
+<div style="height:1px;background:var(--gray-100);margin:8px 0"></div>
+<p style="font-size:11px;color:var(--gray-300)">#00247</p>
+<div style="position:absolute;bottom:8px;right:8px;opacity:0.08">
+<svg viewBox="0 0 72 100" fill="none" style="height:40px"><rect x="2" y="10" width="68" height="88" rx="8" fill="var(--navy)"/><rect x="21" y="4" width="30" height="12" rx="3" fill="var(--navy)"/><circle cx="36" cy="38" r="11" fill="var(--navy)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="var(--navy)"/></svg>
+</div>
+</div>
+<!-- Corporativo -->
+<div class="badge-phys" style="background:var(--navy)">
+<svg viewBox="0 0 72 100" fill="none" style="height:40px;margin-bottom:16px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<div style="width:64px;height:64px;border-radius:50%;background:var(--navy-mid);margin:0 auto 12px;display:flex;align-items:center;justify-content:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="width:28px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8"/></svg>
+</div>
+<p style="font-size:16px;font-weight:800;color:#fff">Gabriel Cecco</p>
+<p style="font-size:12px;color:var(--navy-light);margin-bottom:4px">Diretor Comercial</p>
+<p style="font-size:11px;color:var(--navy-light)">TrabalhaMais</p>
+<div style="width:32px;height:2px;background:var(--orange);margin:12px auto 0;border-radius:1px"></div>
+</div>
+</div>
+
+<!-- 9.7 WhatsApp -->
+<h3 class="sub">9.7 WhatsApp</h3>
+<div style="background:#0b141a;border-radius:16px;padding:24px;max-width:400px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+<div style="width:32px;height:32px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center">
+<svg viewBox="0 0 72 100" fill="none" style="height:16px"><rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.2)"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/></svg>
+</div>
+<span style="font-size:14px;font-weight:700;color:#fff">TrabalhaMais</span>
+</div>
+<div class="whatsapp-bubble">
+<p style="font-size:14px;color:#fff;line-height:1.6">Oi, Wesley! 👋 Tem 3 vagas novas perto de você em Vila Velha. Uma delas é de vendedor no Shopping - começa semana que vem. Ver vagas agora →</p>
+<p style="font-size:10px;color:rgba(255,255,255,0.5);text-align:right;margin-top:6px">14:32 ✓✓</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ============ 10. ENCERRAMENTO ============ -->
+<section id="encerramento">
+<div class="section-inner" style="text-align:center;max-width:700px">
+<span class="badge">10</span>
+<h2 class="section-title">Encerramento</h2>
+
+<p style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:8px">Brand Book v1.0</p>
+<p style="font-size:16px;color:var(--text-muted);margin-bottom:8px">Fevereiro 2026</p>
+<p style="font-size:16px;color:var(--orange);font-weight:600;margin-bottom:48px">TrabalhaMais - A vaga certa, na hora certa</p>
+
+<div style="height:1px;background:var(--border);margin:32px auto;max-width:200px"></div>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Creditos</p>
+<p style="font-size:15px;color:var(--text);margin-bottom:6px">Brand Strategy &amp; Design: Claude AI + Maik Mello</p>
+<p style="font-size:15px;color:var(--text);margin-bottom:32px">Tipografia: Nunito (Google Fonts), Inter (Google Fonts)</p>
+
+<div style="height:1px;background:var(--border);margin:32px auto;max-width:200px"></div>
+
+<p style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px">Nota de uso</p>
+<p style="font-size:14px;color:var(--text-muted);max-width:50ch;margin:0 auto 48px;line-height:1.7">Este documento serve como referencia oficial para a aplicacao da marca TrabalhaMais. Qualquer uso fora das diretrizes aqui estabelecidas deve ser aprovado pela equipe de marca.</p>
+
+<div style="margin:48px auto">
+<div class="lockup-v" style="gap:8px">
+<svg viewBox="0 0 72 100" fill="none" style="height:40px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+<span class="wordmark" style="font-size:20px"><span class="t">Trabalha</span><span class="plus">+</span></span>
+</div>
+</div>
+
+<p style="font-size:13px;color:var(--text-muted);margin-top:32px">© 2026 TrabalhaMais. Todos os direitos reservados.</p>
+</div>
+</section>
+
+<!-- Back to top button -->
+<a href="#capa" class="back-top" id="backTop" aria-label="Voltar ao topo">↑</a>
+
+<script>
+// Back to top visibility
+const btn = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('show', window.scrollY > 400);
+});
+
+// Index card hover
+document.querySelectorAll('#indice .card').forEach(c => {
+  c.addEventListener('mouseenter', () => c.style.borderColor = '#E8631A');
+  c.addEventListener('mouseleave', () => c.style.borderColor = '');
+});
+
+// Fade-in on scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('section > div > .card, section > div > .grid-2 > .card, section > div > .grid-3 > .card, section > div > .grid-4 > .card').forEach(el => {
+  el.classList.add('fade-in');
+  obs.observe(el);
+});
+</script>
+
+</body>
+</html>

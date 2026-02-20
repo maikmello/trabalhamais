@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Template Carrossel Instagram — TrabalhaMais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #E8631A;
+      --orange-dark: #C44F0E;
+      --navy: #1A2744;
+      --teal: #1A9E7A;
+      --cloud: #F5F6FA;
+      --white: #FFFFFF;
+      --orange-wash: #FFF0E6;
+      --page-bg: #0d1117;
+    }
+
+    body {
+      background: var(--page-bg);
+      font-family: 'Nunito', sans-serif;
+      color: var(--white);
+      padding: 48px 40px 80px;
+      min-height: 100vh;
+    }
+
+    /* ===== Page Title ===== */
+    .page-title {
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .page-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 56px;
+    }
+
+    /* ===== Section ===== */
+    .section { margin-bottom: 56px; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      margin-bottom: 20px;
+      padding-left: 4px;
+    }
+    .section-label.dark  { color: #8b949e; }
+    .section-label.light { color: #8b949e; }
+    .section-label span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .section-label.dark span  { background: var(--navy); }
+    .section-label.light span { background: var(--cloud); border: 1px solid #d0d7de; }
+
+    /* ===== Carousel Row ===== */
+    .carousel-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scroll-snap-type: x mandatory;
+    }
+    .carousel-row::-webkit-scrollbar { height: 6px; }
+    .carousel-row::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 3px; }
+    .carousel-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+
+    /* ===== Slide Wrapper ===== */
+    .slide-wrapper {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+    .slide-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== Slide (1080x1080 at ~280px) ===== */
+    .slide {
+      width: 280px;
+      height: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+    }
+
+    /* ===== Logo Inline ===== */
+    .logo-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo-inline svg { flex-shrink: 0; }
+    .logo-inline .brand-name {
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: -0.2px;
+    }
+
+    /* ===== DARK MODE SLIDES ===== */
+
+    /* -- Slide 1: Capa (Dark) -- */
+    .dark-s1 {
+      background: linear-gradient(145deg, var(--orange) 0%, var(--orange-dark) 100%);
+      padding: 28px 24px 20px;
+      justify-content: space-between;
+    }
+    .dark-s1 .top-logo .brand-name { color: var(--white); }
+    .dark-s1 .main-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.25;
+      max-width: 230px;
+    }
+    .dark-s1 .swipe-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.5px;
+    }
+    .dark-s1 .swipe-hint .arrow { margin-left: 4px; }
+    .dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .dots .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+    }
+    .dots .dot.active {
+      background: var(--white);
+      width: 18px;
+      border-radius: 4px;
+    }
+    .dark-s1 .bottom-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    /* decorative circles */
+    .dark-s1::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      top: -40px;
+      right: -50px;
+    }
+    .dark-s1::after {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: -20px;
+      left: -30px;
+    }
+
+    /* -- Slides 2-4: Dicas (Dark) -- */
+    .dark-tip {
+      background: var(--navy);
+      padding: 24px 22px;
+      justify-content: center;
+      gap: 12px;
+    }
+    .dark-tip .icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(232,99,26,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2px;
+    }
+    .dark-tip .icon-circle svg { width: 26px; height: 26px; }
+    .dark-tip .tip-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .dark-tip .tip-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.25;
+    }
+    .dark-tip .tip-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      line-height: 1.55;
+      max-width: 210px;
+    }
+    .dark-tip .slide-indicator {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.25);
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+    }
+    /* accent bar top */
+    .dark-tip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+    }
+
+    /* -- Slide 5: CTA (Dark) -- */
+    .dark-cta {
+      background: var(--navy);
+      padding: 28px 24px;
+      justify-content: center;
+      gap: 14px;
+    }
+    .dark-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--teal));
+    }
+    .dark-cta .cta-question {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+    }
+    .dark-cta .cta-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange);
+      text-align: center;
+      background: rgba(232,99,26,0.12);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .dark-cta .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+    .dark-cta .cta-logo .brand-name { color: var(--white); }
+
+    /* ===== LIGHT MODE SLIDES ===== */
+
+    /* -- Slide 1: Capa (Light) -- */
+    .light-s1 {
+      background: linear-gradient(145deg, var(--orange) 0%, var(--orange-dark) 100%);
+      padding: 28px 24px 20px;
+      justify-content: space-between;
+    }
+    .light-s1 .top-logo .brand-name { color: var(--white); }
+    .light-s1 .main-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.25;
+      max-width: 230px;
+    }
+    .light-s1 .swipe-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.5px;
+    }
+    .light-s1 .swipe-hint .arrow { margin-left: 4px; }
+    .light-s1 .bottom-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .light-s1::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      top: -40px;
+      right: -50px;
+    }
+    .light-s1::after {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: -20px;
+      left: -30px;
+    }
+
+    /* -- Slides 2-4: Dicas (Light) -- */
+    .light-tip {
+      background: var(--white);
+      padding: 24px 22px;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid #e1e4e8;
+    }
+    .light-tip .icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--orange-wash);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2px;
+    }
+    .light-tip .icon-circle svg { width: 26px; height: 26px; }
+    .light-tip .tip-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .light-tip .tip-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.25;
+    }
+    .light-tip .tip-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: rgba(26,39,68,0.55);
+      text-align: center;
+      line-height: 1.55;
+      max-width: 210px;
+    }
+    .light-tip .slide-indicator {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(26,39,68,0.25);
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+    }
+    .light-tip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+      border-radius: 12px 12px 0 0;
+    }
+
+    /* -- Slide 5: CTA (Light) -- */
+    .light-cta {
+      background: var(--cloud);
+      padding: 28px 24px;
+      justify-content: center;
+      gap: 14px;
+      border: 1px solid #e1e4e8;
+    }
+    .light-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--teal));
+      border-radius: 12px 12px 0 0;
+    }
+    .light-cta .cta-question {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+    }
+    .light-cta .cta-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      text-align: center;
+      background: var(--orange);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .light-cta .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(26,39,68,0.4);
+      text-align: center;
+    }
+    .light-cta .cta-logo .brand-name { color: var(--navy); }
+
+    /* -- Light mode dots override -- */
+    .light-dots .dot {
+      background: rgba(255,255,255,0.4);
+    }
+    .light-dots .dot.active {
+      background: var(--white);
+    }
+
+    /* ===== Meta Footer ===== */
+    .meta-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+    }
+    .meta-item {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+    .meta-item strong {
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <h1 class="page-title">Template Carrossel Instagram</h1>
+  <p class="page-subtitle">5 dicas pra se destacar na entrevista &mdash; 1080 &times; 1080 px &mdash; 5 slides</p>
+
+  <!-- ============================================================ -->
+  <!--  DARK MODE                                                    -->
+  <!-- ============================================================ -->
+  <section class="section">
+    <div class="section-label dark"><span></span>Dark Mode</div>
+    <div class="carousel-row">
+
+      <!-- DARK Slide 1 — Capa -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 1 &mdash; Capa</div>
+        <div class="slide dark-s1">
+          <div class="logo-inline top-logo">
+            <svg width="22" height="30" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#FFFFFF"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="#E8631A" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(232,99,26,0.18)"/>
+            </svg>
+            <span class="brand-name">TrabalhaMais</span>
+          </div>
+          <div class="main-title">5 dicas pra se destacar na entrevista</div>
+          <div class="bottom-area">
+            <div class="swipe-hint">Arraste <span class="arrow">&rarr;</span></div>
+            <div class="dots">
+              <div class="dot active"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DARK Slide 2 — Dica 1 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 2 &mdash; Dica 1</div>
+        <div class="slide dark-tip">
+          <div class="tip-number">Dica 1</div>
+          <div class="icon-circle">
+            <!-- Clock icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="tip-title">Chegue 10 minutos antes</div>
+          <div class="tip-text">Pontualidade mostra respeito e comprometimento. Use o tempo extra pra se acalmar e revisar seus pontos.</div>
+          <div class="slide-indicator">1/5</div>
+        </div>
+      </div>
+
+      <!-- DARK Slide 3 — Dica 2 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 3 &mdash; Dica 2</div>
+        <div class="slide dark-tip">
+          <div class="tip-number">Dica 2</div>
+          <div class="icon-circle">
+            <!-- Shirt icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2 13.5 4.5a3.12 3.12 0 01-3 0L8 2 3.62 3.46a2 2 0 00-1.34 1.6L2 7l3 2v12h14V9l3-2-.28-1.94a2 2 0 00-1.34-1.6z"/>
+            </svg>
+          </div>
+          <div class="tip-title">Vista-se adequado pro cargo</div>
+          <div class="tip-text">A roupa certa passa confianca. Pesquise o dresscode da empresa e escolha algo limpo e bem cuidado.</div>
+          <div class="slide-indicator">2/5</div>
+        </div>
+      </div>
+
+      <!-- DARK Slide 4 — Dica 3 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 4 &mdash; Dica 3</div>
+        <div class="slide dark-tip">
+          <div class="tip-number">Dica 3</div>
+          <div class="icon-circle">
+            <!-- Search icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <div class="tip-title">Pesquise sobre a empresa</div>
+          <div class="tip-text">Saber o que a empresa faz mostra interesse real. Veja o site, redes sociais e entenda o negocio.</div>
+          <div class="slide-indicator">3/5</div>
+        </div>
+      </div>
+
+      <!-- DARK Slide 5 — CTA -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 5 &mdash; CTA</div>
+        <div class="slide dark-cta">
+          <div class="cta-question">Quer mais dicas?</div>
+          <div class="logo-inline cta-logo">
+            <svg width="28" height="38" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+            <span class="brand-name" style="font-size:16px;">TrabalhaMais</span>
+          </div>
+          <div class="cta-handle">Siga @trabalhamais</div>
+          <div class="cta-sub">Vagas novas todo dia</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  LIGHT MODE                                                   -->
+  <!-- ============================================================ -->
+  <section class="section">
+    <div class="section-label light"><span></span>Light Mode</div>
+    <div class="carousel-row">
+
+      <!-- LIGHT Slide 1 — Capa -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 1 &mdash; Capa</div>
+        <div class="slide light-s1">
+          <div class="logo-inline top-logo">
+            <svg width="22" height="30" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#FFFFFF"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="#E8631A" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(232,99,26,0.18)"/>
+            </svg>
+            <span class="brand-name">TrabalhaMais</span>
+          </div>
+          <div class="main-title">5 dicas pra se destacar na entrevista</div>
+          <div class="bottom-area">
+            <div class="swipe-hint">Arraste <span class="arrow">&rarr;</span></div>
+            <div class="dots light-dots">
+              <div class="dot active"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIGHT Slide 2 — Dica 1 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 2 &mdash; Dica 1</div>
+        <div class="slide light-tip">
+          <div class="tip-number">Dica 1</div>
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="tip-title">Chegue 10 minutos antes</div>
+          <div class="tip-text">Pontualidade mostra respeito e comprometimento. Use o tempo extra pra se acalmar e revisar seus pontos.</div>
+          <div class="slide-indicator">1/5</div>
+        </div>
+      </div>
+
+      <!-- LIGHT Slide 3 — Dica 2 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 3 &mdash; Dica 2</div>
+        <div class="slide light-tip">
+          <div class="tip-number">Dica 2</div>
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2 13.5 4.5a3.12 3.12 0 01-3 0L8 2 3.62 3.46a2 2 0 00-1.34 1.6L2 7l3 2v12h14V9l3-2-.28-1.94a2 2 0 00-1.34-1.6z"/>
+            </svg>
+          </div>
+          <div class="tip-title">Vista-se adequado pro cargo</div>
+          <div class="tip-text">A roupa certa passa confianca. Pesquise o dresscode da empresa e escolha algo limpo e bem cuidado.</div>
+          <div class="slide-indicator">2/5</div>
+        </div>
+      </div>
+
+      <!-- LIGHT Slide 4 — Dica 3 -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 4 &mdash; Dica 3</div>
+        <div class="slide light-tip">
+          <div class="tip-number">Dica 3</div>
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <div class="tip-title">Pesquise sobre a empresa</div>
+          <div class="tip-text">Saber o que a empresa faz mostra interesse real. Veja o site, redes sociais e entenda o negocio.</div>
+          <div class="slide-indicator">3/5</div>
+        </div>
+      </div>
+
+      <!-- LIGHT Slide 5 — CTA -->
+      <div class="slide-wrapper">
+        <div class="slide-number">Slide 5 &mdash; CTA</div>
+        <div class="slide light-cta">
+          <div class="cta-question">Quer mais dicas?</div>
+          <div class="logo-inline cta-logo">
+            <svg width="28" height="38" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+            <span class="brand-name" style="font-size:16px;">TrabalhaMais</span>
+          </div>
+          <div class="cta-handle">Siga @trabalhamais</div>
+          <div class="cta-sub">Vagas novas todo dia</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Meta Footer -->
+  <div class="meta-footer">
+    <div class="meta-item"><strong>Formato:</strong> 1080 &times; 1080 px</div>
+    <div class="meta-item"><strong>Slides:</strong> 5</div>
+    <div class="meta-item"><strong>Fonte:</strong> Nunito 400 / 600 / 700 / 800</div>
+    <div class="meta-item"><strong>Plataforma:</strong> Instagram Carrossel</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates Assinatura de Email | TrabalhaMais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #E8631A;
+            --navy: #1A2744;
+            --navy-light: #4A5A78;
+            --teal: #1A9E7A;
+            --cloud: #F5F6FA;
+            --white: #FFFFFF;
+            --gray-300: #A0A8B8;
+            --page-bg: #0d1117;
+            --card-dark-bg: #161b22;
+            --card-light-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--white);
+            min-height: 100vh;
+            padding: 48px 24px 80px;
+        }
+
+        /* ========== PAGE HEADER ========== */
+        .page-header {
+            max-width: 1120px;
+            margin: 0 auto 56px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 32px;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .page-header h1 span {
+            color: var(--orange);
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--gray-300);
+            font-weight: 400;
+        }
+
+        /* ========== SECTION ========== */
+        .section {
+            max-width: 1120px;
+            margin: 0 auto 64px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(232, 99, 26, 0.1);
+            border: 1px solid rgba(232, 99, 26, 0.25);
+            border-radius: 6px;
+            padding: 5px 14px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 24px;
+        }
+
+        .section-label .num {
+            background: var(--orange);
+            color: var(--white);
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* ========== PAIR GRID ========== */
+        .pair-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .pair-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== EMAIL CLIENT CARD ========== */
+        .email-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .email-card--dark {
+            background: var(--card-dark-bg);
+        }
+
+        .email-card--light {
+            background: var(--card-light-bg);
+        }
+
+        .email-card__toolbar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .email-card--light .email-card__toolbar {
+            border-bottom-color: rgba(0,0,0,0.07);
+        }
+
+        .email-card__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .email-card--dark .email-card__dot {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .email-card--light .email-card__dot {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .email-card__toolbar-label {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .email-card--dark .email-card__toolbar-label {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .email-card--light .email-card__toolbar-label {
+            color: rgba(0,0,0,0.25);
+        }
+
+        .email-card__body {
+            padding: 28px 24px 24px;
+        }
+
+        /* ========== SIGNATURE: COMPLETA ========== */
+        .sig-completa {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            max-width: 480px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sig-completa__logo {
+            flex-shrink: 0;
+            width: auto;
+            height: 48px;
+        }
+
+        .sig-completa__divider-v {
+            flex-shrink: 0;
+            width: 2px;
+            align-self: stretch;
+            border-radius: 1px;
+            background: var(--orange);
+            opacity: 0.35;
+        }
+
+        .sig-completa__info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sig-completa__name {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 1.2;
+            margin-bottom: 1px;
+        }
+
+        .sig-completa__title {
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .sig-completa__sep {
+            width: 36px;
+            height: 2px;
+            background: var(--orange);
+            border-radius: 1px;
+            margin-bottom: 10px;
+        }
+
+        .sig-completa__contact {
+            font-size: 12px;
+            line-height: 1.75;
+            font-weight: 400;
+        }
+
+        .sig-completa__contact a {
+            text-decoration: none;
+        }
+
+        /* dark variant */
+        .sig-completa--dark .sig-completa__name {
+            color: var(--white);
+        }
+
+        .sig-completa--dark .sig-completa__title {
+            color: var(--gray-300);
+        }
+
+        .sig-completa--dark .sig-completa__contact {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .sig-completa--dark .sig-completa__contact a {
+            color: var(--orange);
+        }
+
+        /* light variant */
+        .sig-completa--light .sig-completa__name {
+            color: var(--navy);
+        }
+
+        .sig-completa--light .sig-completa__title {
+            color: var(--navy-light);
+        }
+
+        .sig-completa--light .sig-completa__contact {
+            color: var(--navy-light);
+        }
+
+        .sig-completa--light .sig-completa__contact a {
+            color: var(--orange);
+        }
+
+        /* ========== SIGNATURE: COMPACTA ========== */
+        .sig-compacta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 500px;
+            font-family: 'Inter', sans-serif;
+            flex-wrap: wrap;
+        }
+
+        .sig-compacta__logo {
+            flex-shrink: 0;
+            height: 24px;
+            width: auto;
+        }
+
+        .sig-compacta__pipe {
+            flex-shrink: 0;
+            width: 1px;
+            height: 18px;
+            opacity: 0.2;
+        }
+
+        .sig-compacta--dark .sig-compacta__pipe {
+            background: var(--white);
+        }
+
+        .sig-compacta--light .sig-compacta__pipe {
+            background: var(--navy);
+        }
+
+        .sig-compacta__identity {
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .sig-compacta__identity strong {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+
+        .sig-compacta__dot {
+            flex-shrink: 0;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--orange);
+        }
+
+        .sig-compacta__detail {
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .sig-compacta__detail a {
+            text-decoration: none;
+        }
+
+        /* dark */
+        .sig-compacta--dark .sig-compacta__identity {
+            color: var(--white);
+        }
+
+        .sig-compacta--dark .sig-compacta__detail {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .sig-compacta--dark .sig-compacta__detail a {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* light */
+        .sig-compacta--light .sig-compacta__identity {
+            color: var(--navy);
+        }
+
+        .sig-compacta--light .sig-compacta__detail {
+            color: var(--navy-light);
+        }
+
+        .sig-compacta--light .sig-compacta__detail a {
+            color: var(--navy-light);
+        }
+
+        /* ========== SIGNATURE: COM BANNER ========== */
+        .sig-banner-wrap {
+            max-width: 480px;
+        }
+
+        .sig-banner {
+            display: block;
+            max-width: 400px;
+            margin-top: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--navy) 0%, #243354 50%, var(--orange) 100%);
+            padding: 0 20px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .sig-banner__text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 12.5px;
+            color: var(--white);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .sig-banner__text span {
+            opacity: 0.75;
+            font-weight: 600;
+        }
+
+        .sig-banner__cta {
+            flex-shrink: 0;
+            background: var(--teal);
+            color: var(--white);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+        }
+
+        /* ========== LOGO SVG INLINE ========== */
+        .logo-svg-dark,
+        .logo-svg-light {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PAGE HEADER ==================== -->
+    <header class="page-header">
+        <h1>Templates <span>Assinatura de Email</span></h1>
+        <p>TrabalhaMais -- 3 variantes em dark mode e light mode</p>
+    </header>
+
+    <!-- ==================== 1. COMPLETA ==================== -->
+    <section class="section">
+        <div class="section-label">
+            <span class="num">1</span> Completa
+        </div>
+
+        <div class="pair-grid">
+            <!-- DARK -->
+            <div class="email-card email-card--dark">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Dark mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-completa sig-completa--dark">
+                        <!-- Logo -->
+                        <svg class="sig-completa__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="48">
+                            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                        </svg>
+                        <div class="sig-completa__divider-v"></div>
+                        <!-- Info -->
+                        <div class="sig-completa__info">
+                            <div class="sig-completa__name">Gabriel Cecco</div>
+                            <div class="sig-completa__title">Diretor Comercial</div>
+                            <div class="sig-completa__sep"></div>
+                            <div class="sig-completa__contact">
+                                +55 27 99999-0000<br>
+                                gabriel@trabalhamais.com.br<br>
+                                <a href="https://trabalhamais.com.br" target="_blank">trabalhamais.com.br</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIGHT -->
+            <div class="email-card email-card--light">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Light mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-completa sig-completa--light">
+                        <!-- Logo -->
+                        <svg class="sig-completa__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="48">
+                            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                        </svg>
+                        <div class="sig-completa__divider-v"></div>
+                        <!-- Info -->
+                        <div class="sig-completa__info">
+                            <div class="sig-completa__name">Gabriel Cecco</div>
+                            <div class="sig-completa__title">Diretor Comercial</div>
+                            <div class="sig-completa__sep"></div>
+                            <div class="sig-completa__contact">
+                                +55 27 99999-0000<br>
+                                gabriel@trabalhamais.com.br<br>
+                                <a href="https://trabalhamais.com.br" target="_blank">trabalhamais.com.br</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 2. COMPACTA ==================== -->
+    <section class="section">
+        <div class="section-label">
+            <span class="num">2</span> Compacta
+        </div>
+
+        <div class="pair-grid">
+            <!-- DARK -->
+            <div class="email-card email-card--dark">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Dark mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-compacta sig-compacta--dark">
+                        <!-- Logo small -->
+                        <svg class="sig-compacta__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="24">
+                            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                        </svg>
+                        <div class="sig-compacta__pipe"></div>
+                        <span class="sig-compacta__identity"><strong>Gabriel Cecco</strong> &ndash; Diretor Comercial</span>
+                        <span class="sig-compacta__dot"></span>
+                        <span class="sig-compacta__detail">+55 27 99999-0000</span>
+                        <span class="sig-compacta__dot"></span>
+                        <span class="sig-compacta__detail"><a href="mailto:gabriel@trabalhamais.com.br">gabriel@trabalhamais.com.br</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIGHT -->
+            <div class="email-card email-card--light">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Light mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-compacta sig-compacta--light">
+                        <!-- Logo small -->
+                        <svg class="sig-compacta__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="24">
+                            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                        </svg>
+                        <div class="sig-compacta__pipe"></div>
+                        <span class="sig-compacta__identity"><strong>Gabriel Cecco</strong> &ndash; Diretor Comercial</span>
+                        <span class="sig-compacta__dot"></span>
+                        <span class="sig-compacta__detail">+55 27 99999-0000</span>
+                        <span class="sig-compacta__dot"></span>
+                        <span class="sig-compacta__detail"><a href="mailto:gabriel@trabalhamais.com.br">gabriel@trabalhamais.com.br</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. COM BANNER ==================== -->
+    <section class="section">
+        <div class="section-label">
+            <span class="num">3</span> Com Banner
+        </div>
+
+        <div class="pair-grid">
+            <!-- DARK -->
+            <div class="email-card email-card--dark">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Dark mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-banner-wrap">
+                        <div class="sig-completa sig-completa--dark">
+                            <!-- Logo -->
+                            <svg class="sig-completa__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="48">
+                                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                            </svg>
+                            <div class="sig-completa__divider-v"></div>
+                            <!-- Info -->
+                            <div class="sig-completa__info">
+                                <div class="sig-completa__name">Gabriel Cecco</div>
+                                <div class="sig-completa__title">Diretor Comercial</div>
+                                <div class="sig-completa__sep"></div>
+                                <div class="sig-completa__contact">
+                                    +55 27 99999-0000<br>
+                                    gabriel@trabalhamais.com.br<br>
+                                    <a href="https://trabalhamais.com.br" target="_blank">trabalhamais.com.br</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Banner -->
+                        <a href="https://trabalhamais.com.br" target="_blank" class="sig-banner">
+                            <span class="sig-banner__text">Contratando? <span>Publique sua vaga gratis &rarr;</span></span>
+                            <span class="sig-banner__cta">Publicar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIGHT -->
+            <div class="email-card email-card--light">
+                <div class="email-card__toolbar">
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__dot"></span>
+                    <span class="email-card__toolbar-label">Light mode</span>
+                </div>
+                <div class="email-card__body">
+                    <div class="sig-banner-wrap">
+                        <div class="sig-completa sig-completa--light">
+                            <!-- Logo -->
+                            <svg class="sig-completa__logo" viewBox="0 0 72 100" fill="none" xmlns="http://www.w3.org/2000/svg" height="48">
+                                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+                            </svg>
+                            <div class="sig-completa__divider-v"></div>
+                            <!-- Info -->
+                            <div class="sig-completa__info">
+                                <div class="sig-completa__name">Gabriel Cecco</div>
+                                <div class="sig-completa__title">Diretor Comercial</div>
+                                <div class="sig-completa__sep"></div>
+                                <div class="sig-completa__contact">
+                                    +55 27 99999-0000<br>
+                                    gabriel@trabalhamais.com.br<br>
+                                    <a href="https://trabalhamais.com.br" target="_blank">trabalhamais.com.br</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Banner -->
+                        <a href="https://trabalhamais.com.br" target="_blank" class="sig-banner">
+                            <span class="sig-banner__text">Contratando? <span>Publique sua vaga gratis &rarr;</span></span>
+                            <span class="sig-banner__cta">Publicar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

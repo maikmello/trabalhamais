@@ -1,0 +1,12 @@
+<svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rounded square background -->
+  <rect width="72" height="72" rx="16" fill="#E8631A"/>
+  <!-- Clip at top -->
+  <rect x="23" y="2" width="26" height="9" rx="3" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Inner badge area -->
+  <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+  <!-- Head -->
+  <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+  <!-- Body -->
+  <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+</svg>

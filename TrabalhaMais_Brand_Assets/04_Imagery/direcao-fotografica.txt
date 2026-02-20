@@ -1,0 +1,58 @@
+TrabalhaMais - Direcao Fotografica e Iconografia
+===================================================
+
+FOTOGRAFIA - FAZER
+------------------
+- Pessoas reais trabalhando (nao modelos)
+- Ambientes brasileiros autenticos
+- Diversidade etnica e de genero
+- Iluminacao natural e quente
+- Enquadramentos proximos e humanos
+- Expressoes genuinas (sorrisos reais)
+- Contextos operacionais: lojas, obras, restaurantes, supermercados
+- Dignidade no trabalho - mostrar orgulho e competencia
+
+FOTOGRAFIA - NAO FAZER
+-----------------------
+- Fotos stock genericas
+- Apertos de mao corporativos
+- Modelos em estudio
+- Cenarios americanos/europeus
+- Tons frios e artificiais
+- Pessoas de terno em escritorios
+- Imagens que transmitam precariedade ou piedade
+
+ICONOGRAFIA
+-----------
+Estilo: Rounded (Lucide-compatible)
+Grid: 24x24px
+Stroke: 2px
+Caps/Joins: Rounded
+Cor padrao: Orange #E8631A (pode usar Navy ou Teal conforme contexto)
+
+Icones principais da marca:
+- Localizacao (pin)
+- Busca (lupa)
+- Perfil (pessoa)
+- Empresa (predio)
+- Sucesso (check circle)
+- WhatsApp (chat bubble)
+- Filtro (sliders)
+- Raio (lightning)
+
+TRATAMENTO DE IMAGEM
+---------------------
+- Overlay sutil laranja (10-15% opacidade) para fotos em contexto da marca
+- Nunca usar filtros P&B
+- Contraste medio-alto
+- Temperatura de cor: quente (5500-6500K)
+- Crop: prefira 4:5 (portrait) para mobile, 16:9 para web/video
+
+BANCOS DE IMAGEM RECOMENDADOS
+------------------------------
+- Pexels (gratuito)
+- Unsplash (gratuito)
+- iStock (pago, maior variedade brasileira)
+- Shutterstock (pago)
+Buscar por: "trabalhador brasileiro", "vendedor loja", "construcao civil brasil",
+"supermercado funcionario", "restaurante cozinha equipe"

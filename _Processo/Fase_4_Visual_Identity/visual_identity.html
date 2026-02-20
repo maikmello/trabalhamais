@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais — Visual Identity (Fase 4)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8631A;
+    --orange-dark: #C44F0E;
+    --orange-light: #F28C4E;
+    --orange-wash: #FFF0E6;
+    --navy: #1A2744;
+    --navy-mid: #2D3E5E;
+    --navy-light: #4A5A78;
+    --teal: #1A9E7A;
+    --teal-wash: #E6F7F2;
+    --cloud: #F5F6FA;
+    --white: #FFFFFF;
+    --gray-100: #E8EAF0;
+    --gray-300: #A0A8B8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cloud); color: var(--navy); }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,99,26,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,99,26,0.2);
+    color: var(--orange-light);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 16px; letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto; }
+
+  /* Sections */
+  .section { padding: 80px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-dark { background: var(--navy); color: white; max-width: 100%; padding: 80px 32px; }
+  .section-dark .inner { max-width: 1200px; margin: 0 auto; }
+  .section-orange { background: var(--orange); color: white; max-width: 100%; padding: 80px 32px; }
+  .section-orange .inner { max-width: 1200px; margin: 0 auto; }
+  .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange); margin-bottom: 8px; }
+  .section-dark .label { color: var(--orange-light); }
+  .title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .subtitle { font-size: 16px; color: var(--navy-light); max-width: 640px; margin-bottom: 48px; }
+  .section-dark .subtitle { color: rgba(255,255,255,0.5); }
+
+  /* Logo Concepts Grid */
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .concept-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.08);
+    transition: all 0.3s ease-out;
+    border: 2px solid transparent;
+  }
+  .concept-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(26,39,68,0.12);
+  }
+  .concept-card.recommended {
+    border-color: var(--orange);
+  }
+  .concept-card.recommended::before {
+    content: '⭐ RECOMENDADO';
+    display: block;
+    background: var(--orange);
+    color: white;
+    font-size: 11px; font-weight: 700;
+    text-align: center; padding: 6px;
+    letter-spacing: 0.05em;
+  }
+  .concept-preview {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .concept-info { padding: 24px; }
+  .concept-info h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+  .concept-info .concept-desc { font-size: 13px; color: var(--navy-light); margin-bottom: 12px; line-height: 1.5; }
+  .concept-score {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .score-bar { flex: 1; height: 6px; background: var(--gray-100); border-radius: 3px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 3px; }
+  .score-val { font-size: 16px; font-weight: 800; font-family: 'Inter', sans-serif; }
+
+  /* SVG Logo Styles */
+  .logo-icon-orange {
+    width: 80px; height: 80px;
+  }
+
+  /* Logo Showcase */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .showcase-item {
+    border-radius: 16px;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 200px;
+    transition: all 0.2s;
+  }
+  .showcase-item:hover { transform: scale(1.02); }
+  .showcase-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    opacity: 0.5;
+  }
+
+  /* Lockup styles */
+  .lockup-h {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .lockup-v {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .wordmark {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .wordmark-sm { font-size: 20px; }
+  .wordmark-lg { font-size: 36px; }
+
+  /* Mockup containers */
+  .mockup-phone {
+    width: 280px;
+    background: var(--navy);
+    border-radius: 32px;
+    padding: 12px;
+    box-shadow: 0 8px 32px rgba(26,39,68,0.3);
+    margin: 0 auto;
+  }
+  .mockup-phone-screen {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .mockup-phone-notch {
+    height: 28px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mockup-phone-notch::after {
+    content: '';
+    width: 60px; height: 6px;
+    background: var(--gray-100);
+    border-radius: 3px;
+  }
+
+  /* Navbar mockup */
+  .mockup-navbar {
+    background: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .mockup-navbar-right {
+    display: flex; gap: 8px;
+  }
+  .mockup-navbar-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--cloud);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* App icon grid */
+  .app-icon-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .app-icon-item { text-align: center; }
+  .app-icon-item span {
+    display: block;
+    font-size: 11px; color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Favicon test */
+  .favicon-row {
+    display: flex; gap: 16px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .favicon-box {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .favicon-box span {
+    font-size: 10px; color: var(--gray-300);
+    font-family: 'Inter', monospace;
+  }
+
+  /* Business card */
+  .bcard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  @media (max-width: 600px) { .bcard-grid { grid-template-columns: 1fr; } }
+  .bcard {
+    border-radius: 12px;
+    padding: 32px;
+    aspect-ratio: 1.75;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.12);
+  }
+
+  /* Social mockup */
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .social-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(26,39,68,0.06);
+  }
+  .social-header {
+    padding: 12px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .social-avatar {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .social-body { padding: 16px; }
+
+  /* Incorrect uses */
+  .incorrect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .incorrect-item {
+    background: white;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    border: 1px solid var(--gray-100);
+    position: relative;
+  }
+  .incorrect-item::after {
+    content: '✕';
+    position: absolute; top: 8px; right: 8px;
+    width: 22px; height: 22px;
+    background: #DC3545; color: white;
+    border-radius: 50%; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .incorrect-item span {
+    display: block; font-size: 11px; color: var(--navy-light); margin-top: 8px;
+  }
+
+  /* Tests */
+  .tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+  .test-item {
+    text-align: center;
+    padding: 24px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+  }
+  .test-item .test-icon { font-size: 28px; margin-bottom: 8px; }
+  .test-item .test-name { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .test-item .test-result { font-size: 11px; color: var(--teal); font-weight: 700; }
+
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center; padding: 32px; font-size: 13px;
+  }
+  .footer strong { color: var(--orange); }
+
+  @media (max-width: 768px) {
+    .section, .section-dark, .section-orange { padding: 48px 20px; }
+    .concepts-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .app-icon-grid { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Fase 4 — Visual Identity</div>
+  <h1>Logo & <span>Identidade</span></h1>
+  <p>Conceitos de logo, sistema visual, lockups, testes e aplicacoes da marca TrabalhaMais.</p>
+</div>
+
+<!-- ===== LOGO CONCEPTS ===== -->
+<div class="section">
+  <div class="label">4.2 Conceitos de Logo</div>
+  <div class="title">4 Exploracoes</div>
+  <div class="subtitle">Cada conceito traduz a estrategia de uma forma diferente. O "+" (Mais) e o insight central.</div>
+
+  <div class="concepts-grid">
+    <!-- C1: Mais Connect -->
+    <div class="concept-card recommended">
+      <div class="concept-preview" style="background: var(--cloud);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+      </div>
+      <div class="concept-info">
+        <h3>Mais Connect</h3>
+        <div class="concept-desc">"+" arredondado em superelipse laranja. O "+" e o "Mais" do nome e a conexao empresa + trabalhador.</div>
+        <div class="concept-score">
+          <div class="score-bar"><div class="score-fill" style="width:96%; background: var(--orange)"></div></div>
+          <div class="score-val" style="color: var(--orange)">9.6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C2: T-Plus -->
+    <div class="concept-card">
+      <div class="concept-preview" style="background: var(--cloud);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#1A2744"/>
+          <rect x="38" y="18" width="24" height="64" rx="12" fill="#E8631A"/>
+          <rect x="22" y="18" width="56" height="22" rx="11" fill="#E8631A"/>
+        </svg>
+      </div>
+      <div class="concept-info">
+        <h3>T-Plus</h3>
+        <div class="concept-desc">Letra "T" que se funde com "+". A barra do T se estende, formando o simbolo positivo.</div>
+        <div class="concept-score">
+          <div class="score-bar"><div class="score-fill" style="width:79%; background: var(--navy)"></div></div>
+          <div class="score-val" style="color: var(--navy)">7.9</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C3: Pin Plus -->
+    <div class="concept-card">
+      <div class="concept-preview" style="background: var(--cloud);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <path d="M50 78L50 78C50 78 28 56 28 40C28 27.85 37.85 18 50 18C62.15 18 72 27.85 72 40C72 56 50 78 50 78Z" fill="white"/>
+          <rect x="44" y="30" width="12" height="22" rx="6" fill="#E8631A"/>
+          <rect x="39" y="35" width="22" height="12" rx="6" fill="#E8631A"/>
+        </svg>
+      </div>
+      <div class="concept-info">
+        <h3>Pin Plus</h3>
+        <div class="concept-desc">Marcador de localizacao com "+" no centro. Combina proximidade geografica com conexao.</div>
+        <div class="concept-score">
+          <div class="score-bar"><div class="score-fill" style="width:73%; background: var(--teal)"></div></div>
+          <div class="score-val" style="color: var(--teal)">7.3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C4: Wordmark -->
+    <div class="concept-card">
+      <div class="concept-preview" style="background: var(--cloud);">
+        <div style="font-family:'Nunito'; font-weight:800; font-size:24px; letter-spacing:-0.02em;">
+          <span style="color: var(--navy)">Trabalha</span><span style="color: var(--orange)">Mais</span>
+        </div>
+      </div>
+      <div class="concept-info">
+        <h3>Wordmark Puro</h3>
+        <div class="concept-desc">Apenas tipografia. "Trabalha" em Navy + "Mais" em Orange. Sem simbolo — depende do nome.</div>
+        <div class="concept-score">
+          <div class="score-bar"><div class="score-fill" style="width:64%; background: var(--gray-300)"></div></div>
+          <div class="score-val" style="color: var(--gray-300)">6.4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGO FINAL: SHOWCASE ===== -->
+<div class="section-dark">
+  <div class="inner">
+    <div class="label">4.3 Logo Final</div>
+    <div class="title" style="color:white">Mais Connect — Sistema Completo</div>
+    <div class="subtitle">Todas as versoes do logo nos seus contextos de uso.</div>
+
+    <!-- Icon Versions -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-light); margin-bottom:24px;">Icone — Versoes de cor</p>
+    <div class="showcase-grid" style="margin-bottom:48px;">
+      <!-- Primary on light -->
+      <div class="showcase-item" style="background: var(--cloud);">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <div class="showcase-label" style="color: var(--navy-light)">Primaria (fundo claro)</div>
+      </div>
+      <!-- Primary on dark -->
+      <div class="showcase-item" style="background: var(--navy);">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <div class="showcase-label" style="color: rgba(255,255,255,0.4)">Primaria (fundo escuro)</div>
+      </div>
+      <!-- Navy formal -->
+      <div class="showcase-item" style="background: white;">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#1A2744"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <div class="showcase-label" style="color: var(--navy-light)">Navy formal</div>
+      </div>
+      <!-- Inverted -->
+      <div class="showcase-item" style="background: var(--orange);">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="white"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="#E8631A"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="#E8631A"/>
+        </svg>
+        <div class="showcase-label" style="color: rgba(255,255,255,0.5)">Invertida</div>
+      </div>
+      <!-- Mono dark -->
+      <div class="showcase-item" style="background: white;">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect x="2" y="2" width="96" height="96" rx="21" stroke="#1A2744" stroke-width="4" fill="none"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="#1A2744"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="#1A2744"/>
+        </svg>
+        <div class="showcase-label" style="color: var(--navy-light)">Mono escura (P&B)</div>
+      </div>
+      <!-- Mono light -->
+      <div class="showcase-item" style="background: linear-gradient(135deg, #2D3E5E, #1A2744);">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <rect x="2" y="2" width="96" height="96" rx="21" stroke="white" stroke-width="4" fill="none"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <div class="showcase-label" style="color: rgba(255,255,255,0.4)">Mono clara (sobre foto)</div>
+      </div>
+    </div>
+
+    <!-- Lockups -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-light); margin-bottom:24px;">Lockups — Icone + Wordmark</p>
+    <div class="showcase-grid" style="margin-bottom:48px;">
+      <!-- Horizontal on white -->
+      <div class="showcase-item" style="background: white;">
+        <div class="lockup-h">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#E8631A"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div class="wordmark"><span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">Mais</span></div>
+        </div>
+        <div class="showcase-label" style="color: var(--navy-light)">Horizontal — fundo claro</div>
+      </div>
+      <!-- Horizontal on dark -->
+      <div class="showcase-item" style="background: var(--navy);">
+        <div class="lockup-h">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#E8631A"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div class="wordmark"><span style="color:white">Trabalha</span><span style="color:var(--orange)">Mais</span></div>
+        </div>
+        <div class="showcase-label" style="color: rgba(255,255,255,0.4)">Horizontal — fundo escuro</div>
+      </div>
+      <!-- Vertical -->
+      <div class="showcase-item" style="background: var(--cloud);">
+        <div class="lockup-v">
+          <svg width="56" height="56" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#E8631A"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div class="wordmark wordmark-sm"><span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">Mais</span></div>
+        </div>
+        <div class="showcase-label" style="color: var(--navy-light)">Vertical / Stacked</div>
+      </div>
+      <!-- Wordmark solo -->
+      <div class="showcase-item" style="background: white;">
+        <div class="wordmark wordmark-lg"><span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">Mais</span></div>
+        <div class="showcase-label" style="color: var(--navy-light)">Wordmark solo</div>
+      </div>
+      <!-- Navy mono -->
+      <div class="showcase-item" style="background: white;">
+        <div class="lockup-h">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#1A2744"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div class="wordmark wordmark-sm" style="color:var(--navy)">TrabalhaMais</div>
+        </div>
+        <div class="showcase-label" style="color: var(--navy-light)">Mono Navy (formal)</div>
+      </div>
+      <!-- White mono on photo -->
+      <div class="showcase-item" style="background: linear-gradient(135deg, rgba(26,39,68,0.9), rgba(45,62,94,0.9)), url('') center/cover;">
+        <div class="lockup-h">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
+            <rect x="2" y="2" width="96" height="96" rx="21" stroke="white" stroke-width="4" fill="none"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div class="wordmark wordmark-sm" style="color:white">TrabalhaMais</div>
+        </div>
+        <div class="showcase-label" style="color: rgba(255,255,255,0.4)">Mono White (sobre foto)</div>
+      </div>
+    </div>
+
+    <!-- App Icon Sizes -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-light); margin-bottom:24px;">App Icon — Escalas</p>
+    <div class="app-icon-grid" style="margin-bottom:48px;">
+      <div class="app-icon-item">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>16px</span>
+      </div>
+      <div class="app-icon-item">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>32px</span>
+      </div>
+      <div class="app-icon-item">
+        <svg width="48" height="48" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>48px</span>
+      </div>
+      <div class="app-icon-item">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>64px</span>
+      </div>
+      <div class="app-icon-item">
+        <svg width="96" height="96" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>96px</span>
+      </div>
+      <div class="app-icon-item">
+        <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>128px</span>
+      </div>
+    </div>
+
+    <!-- Tests -->
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-light); margin-bottom:24px;">7 Testes do Logo</p>
+    <div class="tests-grid">
+      <div class="test-item">
+        <div class="test-icon">🔍</div>
+        <div class="test-name" style="color:white">Thumbnail</div>
+        <div class="test-result">✓ 16px OK</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">◐</div>
+        <div class="test-name" style="color:white">P&B</div>
+        <div class="test-result">✓ Forma clara</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">◑</div>
+        <div class="test-name" style="color:white">Inversao</div>
+        <div class="test-result">✓ Claro + escuro</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">📐</div>
+        <div class="test-name" style="color:white">Reducao</div>
+        <div class="test-result">✓ 24px legivel</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">📠</div>
+        <div class="test-name" style="color:white">Fotocopia</div>
+        <div class="test-result">✓ Reconhecivel</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">📱</div>
+        <div class="test-name" style="color:white">Contexto</div>
+        <div class="test-result">✓ Profissional</div>
+      </div>
+      <div class="test-item">
+        <div class="test-icon">🧠</div>
+        <div class="test-name" style="color:white">Memoria</div>
+        <div class="test-result">✓ 5s recall</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOCKUPS ===== -->
+<div class="section">
+  <div class="label">4.5 Aplicacoes</div>
+  <div class="title">Como a marca vive no mundo real</div>
+  <div class="subtitle">Mockups de contextos reais onde a marca aparece.</div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+
+    <!-- Phone Mockup: Splash -->
+    <div>
+      <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:16px;">Splash Screen (App)</p>
+      <div class="mockup-phone" style="background: linear-gradient(145deg, #E8631A, #C44F0E);">
+        <div class="mockup-phone-screen" style="background: linear-gradient(145deg, #E8631A, #C44F0E); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 460px;">
+          <svg width="72" height="72" viewBox="0 0 100 100" fill="none" style="margin-bottom: 16px;">
+            <rect width="100" height="100" rx="22" fill="rgba(255,255,255,0.2)"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div style="font-family:'Nunito'; font-weight:800; font-size:24px; color:white; letter-spacing:-0.02em;">TrabalhaMais</div>
+          <div style="font-family:'Nunito'; font-size:13px; color:rgba(255,255,255,0.6); margin-top:4px;">A vaga certa, na hora certa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Mockup: App Home -->
+    <div>
+      <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:16px;">Tela Inicial (Trabalhador)</p>
+      <div class="mockup-phone">
+        <div class="mockup-phone-screen">
+          <div class="mockup-phone-notch"></div>
+          <!-- Navbar -->
+          <div class="mockup-navbar">
+            <div class="lockup-h" style="gap:8px;">
+              <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+                <rect width="100" height="100" rx="22" fill="#E8631A"/>
+                <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+                <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+              </svg>
+              <div style="font-family:'Nunito'; font-weight:800; font-size:16px; letter-spacing:-0.02em;">
+                <span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">Mais</span>
+              </div>
+            </div>
+            <div class="mockup-navbar-right">
+              <div class="mockup-navbar-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+              <div class="mockup-navbar-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+            </div>
+          </div>
+          <!-- Content -->
+          <div style="padding: 16px;">
+            <div style="font-size:20px; font-weight:800; margin-bottom:4px; color:var(--navy)">Oi, Wesley! 👋</div>
+            <div style="font-size:13px; color:var(--navy-light); margin-bottom:16px;">3 vagas novas perto de voce</div>
+            <!-- Vaga card -->
+            <div style="background:white; border-radius:12px; padding:16px; border:1px solid var(--gray-100); margin-bottom:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="width:32px;height:32px;border-radius:8px;background:var(--orange-wash);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--orange);">M</div>
+                  <div>
+                    <div style="font-size:14px; font-weight:700;">Vendedor(a)</div>
+                    <div style="font-size:11px; color:var(--navy-light);">Moda Center</div>
+                  </div>
+                </div>
+                <span style="font-size:10px;font-weight:700;text-transform:uppercase;background:var(--orange-wash);color:var(--orange-dark);padding:3px 8px;border-radius:4px;">NOVA</span>
+              </div>
+              <div style="display:flex; gap:8px; margin-bottom:10px;">
+                <span style="font-size:11px; color:var(--teal); background:var(--teal-wash); padding:2px 8px; border-radius:4px; font-weight:600;">📍 1.2 km</span>
+                <span style="font-size:11px; color:var(--navy-mid); background:var(--cloud); padding:2px 8px; border-radius:4px;">CLT</span>
+                <span style="font-size:11px; color:var(--navy-mid); background:var(--cloud); padding:2px 8px; border-radius:4px;">R$ 1.680</span>
+              </div>
+              <div style="background:var(--orange); color:white; text-align:center; padding:10px; border-radius:8px; font-size:14px; font-weight:700;">Ver vaga</div>
+            </div>
+            <!-- Second card -->
+            <div style="background:white; border-radius:12px; padding:16px; border:1px solid var(--gray-100);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-wash);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--teal);">C</div>
+                <div>
+                  <div style="font-size:14px; font-weight:700;">Repositor</div>
+                  <div style="font-size:11px; color:var(--navy-light);">Carone · 2.8 km</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tab bar -->
+          <div style="border-top:1px solid var(--gray-100); padding:10px 16px; display:flex; justify-content:space-around;">
+            <div style="text-align:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <div style="font-size:10px; font-weight:700; color:var(--orange); margin-top:2px;">Inicio</div>
+            </div>
+            <div style="text-align:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <div style="font-size:10px; color:var(--gray-300); margin-top:2px;">Buscar</div>
+            </div>
+            <div style="text-align:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              <div style="font-size:10px; color:var(--gray-300); margin-top:2px;">Salvos</div>
+            </div>
+            <div style="text-align:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div style="font-size:10px; color:var(--gray-300); margin-top:2px;">Perfil</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BUSINESS CARD ===== -->
+<div class="section" style="background: white; max-width:100%; padding: 80px 32px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="label">Cartao de Visita</div>
+    <div class="title">Frente & Verso</div>
+    <div class="subtitle">Aplicacao impressa da marca.</div>
+
+    <div class="bcard-grid">
+      <!-- Front -->
+      <div class="bcard" style="background: white; border: 1px solid var(--gray-100);">
+        <div class="lockup-h" style="gap:10px;">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#E8631A"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+          <div style="font-family:'Nunito'; font-weight:800; font-size:18px; letter-spacing:-0.02em;">
+            <span style="color:var(--navy)">Trabalha</span><span style="color:var(--orange)">Mais</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:16px; font-weight:700; color:var(--navy);">Maik Mello</div>
+          <div style="font-size:12px; color:var(--navy-light); margin-bottom:12px;">Fundador & CEO</div>
+          <div style="font-size:11px; color:var(--navy-light); line-height:1.8;">
+            maik@trabalhamais.com.br<br>
+            (27) 99999-0000<br>
+            trabalhamais.com.br
+          </div>
+        </div>
+        <div style="height:3px; background:var(--orange); border-radius:2px; margin-top:auto;"></div>
+      </div>
+      <!-- Back -->
+      <div class="bcard" style="background: var(--orange); align-items:center; justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="rgba(255,255,255,0.2)"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <div style="font-family:'Nunito'; font-size:11px; color:rgba(255,255,255,0.7); margin-top:12px; text-align:center;">trabalhamais.com.br</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SOCIAL MEDIA ===== -->
+<div class="section">
+  <div class="label">Redes Sociais</div>
+  <div class="title">Perfis e Posts</div>
+  <div class="subtitle">Como a marca aparece nas plataformas sociais.</div>
+
+  <div class="social-grid">
+    <!-- Instagram -->
+    <div class="social-card">
+      <div class="social-header">
+        <div class="social-avatar" style="background:var(--orange);">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700;">trabalhamais</div>
+          <div style="font-size:10px; color:var(--gray-300);">Instagram</div>
+        </div>
+      </div>
+      <div class="social-body" style="background:var(--navy); padding:32px 16px; text-align:center;">
+        <div style="font-family:'Nunito'; font-weight:800; font-size:18px; color:white; margin-bottom:4px;">3 vagas novas<br>perto de voce</div>
+        <div style="font-size:12px; color:var(--orange);">trabalhamais.com.br</div>
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="social-card">
+      <div class="social-header">
+        <div class="social-avatar" style="background:var(--orange);">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700;">TrabalhaMais</div>
+          <div style="font-size:10px; color:var(--gray-300);">LinkedIn</div>
+        </div>
+      </div>
+      <div class="social-body" style="background:linear-gradient(135deg, var(--navy), var(--navy-mid)); padding:32px 16px; text-align:center;">
+        <div style="font-family:'Nunito'; font-weight:700; font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:8px;">Sua empresa contrata operacional?</div>
+        <div style="font-family:'Nunito'; font-weight:800; font-size:18px; color:white;">Candidatos filtrados<br>por IA na sua regiao</div>
+      </div>
+    </div>
+
+    <!-- TikTok -->
+    <div class="social-card">
+      <div class="social-header">
+        <div class="social-avatar" style="background:var(--orange);">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700;">@trabalhamais</div>
+          <div style="font-size:10px; color:var(--gray-300);">TikTok</div>
+        </div>
+      </div>
+      <div class="social-body" style="background:var(--orange); padding:32px 16px; text-align:center;">
+        <div style="font-family:'Nunito'; font-weight:800; font-size:22px; color:white;">Seu proximo<br>trampo ta aqui 💼</div>
+      </div>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="social-card">
+      <div class="social-header">
+        <div class="social-avatar" style="background:var(--orange);">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700;">TrabalhaMais</div>
+          <div style="font-size:10px; color:var(--gray-300);">WhatsApp Business</div>
+        </div>
+      </div>
+      <div class="social-body" style="background:#E5DDD5; padding:16px;">
+        <div style="background:white; border-radius:0 12px 12px 12px; padding:10px 14px; font-size:13px; line-height:1.5; max-width:220px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+          Oi! 👋 Tem <strong>vaga nova</strong> perto de voce. Quer ver?
+          <div style="text-align:right; font-size:10px; color:#999; margin-top:4px;">14:32 ✓✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INCORRECT USES ===== -->
+<div class="section" style="background:white; max-width:100%; padding:80px 32px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="label" style="color:var(--navy-light)">4.3 Usos Incorretos</div>
+    <div class="title">O que NAO fazer com o logo</div>
+    <div class="subtitle">Regras para proteger a consistencia da marca.</div>
+
+    <div class="incorrect-grid">
+      <div class="incorrect-item">
+        <svg width="60" height="60" viewBox="0 0 100 100" fill="none" style="transform: rotate(30deg);">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>Nao rotacionar</span>
+      </div>
+      <div class="incorrect-item">
+        <svg width="80" height="50" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>Nao distorcer</span>
+      </div>
+      <div class="incorrect-item">
+        <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="22" fill="#FF69B4"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>Nao alterar cores</span>
+      </div>
+      <div class="incorrect-item">
+        <svg width="60" height="60" viewBox="0 0 100 100" fill="none" style="filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.5));">
+          <rect width="100" height="100" rx="22" fill="#E8631A"/>
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+        </svg>
+        <span>Nao adicionar sombra</span>
+      </div>
+      <div class="incorrect-item">
+        <div style="background:#F2B705; padding:12px; border-radius:8px; display:inline-block;">
+          <svg width="48" height="48" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" rx="22" fill="#E8631A"/>
+            <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+            <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+          </svg>
+        </div>
+        <span>Nao usar sem contraste</span>
+      </div>
+      <div class="incorrect-item">
+        <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+          <rect x="38" y="20" width="24" height="60" rx="12" fill="#E8631A"/>
+          <rect x="20" y="38" width="60" height="24" rx="12" fill="#E8631A"/>
+        </svg>
+        <span>Nao usar "+" sem container</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EMAIL SIGNATURE ===== -->
+<div class="section">
+  <div class="label">Assinatura de Email</div>
+  <div class="title">Comunicacao profissional</div>
+  <div class="subtitle">Template de assinatura para toda a equipe.</div>
+
+  <div style="max-width:480px; background:white; border-radius:16px; padding:32px; box-shadow:0 4px 16px rgba(26,39,68,0.08);">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+      <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+        <rect width="100" height="100" rx="22" fill="#E8631A"/>
+        <rect x="38" y="20" width="24" height="60" rx="12" fill="white"/>
+        <rect x="20" y="38" width="60" height="24" rx="12" fill="white"/>
+      </svg>
+      <div>
+        <div style="font-size:16px; font-weight:700; color:var(--navy);">Maik Mello</div>
+        <div style="font-size:13px; color:var(--navy-light);">Fundador & CEO</div>
+      </div>
+    </div>
+    <div style="height:2px; background:var(--orange); border-radius:1px; margin-bottom:12px;"></div>
+    <div style="font-size:12px; color:var(--navy-light); line-height:1.8;">
+      <strong style="color:var(--navy);">TrabalhaMais</strong> — A vaga certa, na hora certa<br>
+      maik@trabalhamais.com.br · (27) 99999-0000<br>
+      trabalhamais.com.br
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <strong>TrabalhaMais</strong> — Brand Studio, Fase 4: Visual Identity<br>
+  Documento de trabalho · Fevereiro 2026 · Logo e aplicacoes sujeitos a refinamento com designer
+</div>
+
+</body>
+</html>

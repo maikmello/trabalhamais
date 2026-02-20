@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais — Aplicacoes da Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8631A; --orange-dark: #C44F0E; --orange-light: #F28C4E; --orange-wash: #FFF0E6;
+    --navy: #1A2744; --navy-mid: #2D3E5E; --navy-light: #4A5A78;
+    --teal: #1A9E7A; --teal-wash: #E6F7F2;
+    --cloud: #F5F6FA; --white: #FFFFFF; --gray-100: #E8EAF0; --gray-300: #A0A8B8;
+    --bg: #0d1117;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: white; }
+
+  .header {
+    padding: 48px 32px 24px; text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .header h1 span { color: var(--orange); }
+  .header p { font-size: 14px; color: rgba(255,255,255,0.4); max-width: 600px; margin: 0 auto; }
+
+  .board { padding: 32px; max-width: 1200px; margin: 0 auto; }
+
+  .section {
+    margin-bottom: 48px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 20px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .section-header h2 { font-size: 18px; font-weight: 800; }
+  .section-header .tag {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 4px 12px; border-radius: 20px;
+    background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4);
+  }
+  .section-desc {
+    padding: 12px 28px 16px; font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .label {
+    padding: 14px 28px 6px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .grid {
+    display: grid; gap: 1px;
+    background: rgba(255,255,255,0.03);
+  }
+  .grid-cell {
+    background: var(--bg); padding: 32px 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    min-height: 200px;
+  }
+  .grid-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: rgba(255,255,255,0.2); text-align: center;
+  }
+
+  /* Helpers */
+  .lh { display: flex; align-items: center; gap: 10px; }
+  .lv { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .wm { font-family: 'Nunito'; font-weight: 800; letter-spacing: -0.02em; }
+
+  /* Phone mockup */
+  .phone {
+    width: 180px; background: #1a1a2e; border-radius: 22px; padding: 6px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .phone-screen { background: white; border-radius: 18px; overflow: hidden; }
+  .phone-status {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 12px; font-size: 7px; font-weight: 600; color: var(--navy);
+  }
+  .phone-nav {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--gray-100);
+  }
+  .phone-body { padding: 12px 14px; }
+
+  /* Browser tab */
+  .browser {
+    width: 420px; background: #2b2b3d; border-radius: 12px 12px 0 0; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .browser-tabs {
+    display: flex; align-items: center; gap: 0; padding: 8px 12px 0; background: #1e1e2e;
+  }
+  .browser-tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; background: #2b2b3d; border-radius: 8px 8px 0 0;
+    font-size: 10px; color: rgba(255,255,255,0.7); font-family: Inter, sans-serif;
+  }
+  .browser-tab-inactive {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; background: transparent; border-radius: 8px 8px 0 0;
+    font-size: 10px; color: rgba(255,255,255,0.3); font-family: Inter, sans-serif;
+  }
+  .browser-url {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px; margin: 8px 12px;
+    background: rgba(255,255,255,0.06); border-radius: 8px;
+    font-size: 10px; color: rgba(255,255,255,0.4); font-family: Inter, sans-serif;
+  }
+  .browser-body { background: white; min-height: 120px; padding: 16px; }
+
+  /* Business card */
+  .card {
+    width: 240px; height: 140px; border-radius: 10px; padding: 18px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Email signature */
+  .email-sig {
+    background: white; border-radius: 10px; padding: 20px; width: 380px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .email-sig-divider {
+    width: 100%; height: 1px; background: var(--gray-100); margin: 12px 0;
+  }
+
+  /* Social avatar */
+  .avatar-circle {
+    border-radius: 50%; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Light row helper */
+  .light-area {
+    background: white; padding: 40px 28px;
+    display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap;
+  }
+
+  .footer {
+    text-align: center; padding: 32px; font-size: 12px; color: rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+</style>
+</head>
+<body>
+
+<!--
+  ===============================================================
+  PADRAO VETORIAL DO ICONE — NAO ALTERAR
+  ===============================================================
+
+  ICONE PRINCIPAL (viewBox="0 0 72 100"):
+    <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+    <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+    <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+    <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+
+  ICONE FUNDO CLARO (mesmo, mas grampo com stroke):
+    <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+
+  REGRAS DE LOCKUP (icone + wordmark):
+    Horizontal: icon height ≈ 1.15x font-size | gap ≈ 0.25x font-size
+    Vertical:   icon height ≈ 2.0x font-size  | gap ≈ 0.3x font-size
+    viewBox ratio: 72:100 → width = height × 0.72
+    CENTRALIZACAO: margin-top negativo (-2px grande, -1px pequeno) para
+    compensar o grampo e alinhar pelo bloco laranja.
+    FUNDO CLARO: grampo usa fill="#D5D5D5" (cinza visivel) em vez de branco.
+
+  APP ICON (viewBox="0 0 72 72"):
+    <rect width="72" height="72" rx="16" fill="#E8631A"/>
+    <rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/>
+    <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+    <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+    <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+
+  ===============================================================
+-->
+
+<div class="header">
+  <h1>Aplicacoes da <span>Logo</span></h1>
+  <p>Validacao do icone do cracha em contextos reais. Lockups, mockups e aplicacoes em diferentes tamanhos e superficies.</p>
+</div>
+
+<div class="board">
+
+<!-- ===== 1. REFERENCIA DO ICONE ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Icone de referencia</h2>
+    <span class="tag">Padrao fixo</span>
+  </div>
+  <div class="section-desc">Icone finalizado do cracha. Nao alterar proporcoes internas. Escalar apenas via width/height, mantendo o viewBox.</div>
+  <div style="display:flex; justify-content:center; align-items:center; padding:48px; gap:48px;">
+    <svg width="108" height="150" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <div style="font-size:11px; color:rgba(255,255,255,0.3); line-height:2; font-family:Inter,monospace;">
+      viewBox: 0 0 72 100<br>
+      Body: x=2 y=10 w=68 h=88 rx=8<br>
+      Grampo: x=21 y=4 w=30 h=12 rx=3<br>
+      Head: cx=36 cy=38 r=11<br>
+      Shoulders: M18 69 ... 79Z
+    </div>
+  </div>
+</div>
+
+<!-- ===== 2. LOCKUPS ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Lockups</h2>
+    <span class="tag">Composicoes</span>
+  </div>
+  <div class="section-desc">Combinacoes do icone com o wordmark "Trabalha+" em diferentes arranjos e tamanhos.</div>
+
+  <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+    <!-- Horizontal grande: 32px text → icon h=36 w=26, margin-top compensa grampo -->
+    <div class="grid-cell">
+      <div class="lh" style="gap:8px;">
+        <svg width="26" height="36" viewBox="0 0 72 100" fill="none" style="margin-top:-2px">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <div class="wm" style="font-size:32px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="grid-label">Horizontal — grande</div>
+    </div>
+
+    <!-- Horizontal compacto: 20px text → icon h=23 w=17 -->
+    <div class="grid-cell">
+      <div class="lh" style="gap:6px;">
+        <svg width="17" height="23" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <div class="wm" style="font-size:20px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="grid-label">Horizontal — compacto</div>
+    </div>
+
+    <!-- Vertical: 22px text → icon h=44 w=32 -->
+    <div class="grid-cell">
+      <div class="lv" style="gap:6px;">
+        <svg width="32" height="44" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <div class="wm" style="font-size:22px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="grid-label">Vertical</div>
+    </div>
+  </div>
+
+  <!-- Lockups fundo claro -->
+  <div class="label">Lockups — fundo claro</div>
+  <div class="light-area">
+    <!-- Horizontal: 28px text → icon h=32 w=23 -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="lh" style="gap:7px;">
+        <svg width="23" height="32" viewBox="0 0 72 100" fill="none" style="margin-top:-2px">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <div class="wm" style="font-size:28px; color:var(--navy);">Trabalha<span style="color:var(--orange)">+</span></div>
+      </div>
+      <div style="font-size:10px; color:rgba(0,0,0,0.25); font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Horizontal</div>
+    </div>
+
+    <!-- Vertical: 20px text → icon h=40 w=29 -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="lv" style="gap:5px;">
+        <svg width="29" height="40" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <div class="wm" style="font-size:20px; color:var(--navy);">Trabalha<span style="color:var(--orange)">+</span></div>
+      </div>
+      <div style="font-size:10px; color:rgba(0,0,0,0.25); font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Vertical</div>
+    </div>
+
+    <!-- Icon only -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <div style="font-size:10px; color:rgba(0,0,0,0.25); font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Solo</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 3. VARIACOES DE COR ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Variacoes de cor</h2>
+    <span class="tag">Flexibilidade</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+    <!-- Sobre fundo escuro (padrao) -->
+    <div class="grid-cell">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <div class="grid-label">Fundo escuro</div>
+    </div>
+
+    <!-- Sobre fundo navy -->
+    <div class="grid-cell" style="background:var(--navy);">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <div class="grid-label">Fundo navy</div>
+    </div>
+
+    <!-- Sobre fundo claro -->
+    <div class="grid-cell" style="background:white;">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <div class="grid-label" style="color:rgba(0,0,0,0.25);">Fundo claro</div>
+    </div>
+
+    <!-- Sobre fundo orange -->
+    <div class="grid-cell" style="background:var(--orange);">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="white" opacity="0.2"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/>
+      </svg>
+      <div class="grid-label" style="color:rgba(255,255,255,0.5);">Monocromatico branco</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 4. APP MOBILE ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>App mobile</h2>
+    <span class="tag">Contexto real</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <!-- Phone mockup -->
+    <div class="grid-cell" style="min-height:420px;">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-status">
+            <span>9:41</span>
+            <span style="letter-spacing:2px;">...</span>
+          </div>
+          <!-- Nav: 11px text → icon h=13 w=9 -->
+          <div class="phone-nav">
+            <svg width="9" height="13" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+            <div style="font-size:11px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></div>
+          </div>
+          <div class="phone-body">
+            <div style="font-size:10px; font-weight:700; color:var(--navy); margin-bottom:8px;">Oi, Wesley!</div>
+            <div style="font-size:8px; color:var(--gray-300); margin-bottom:10px;">3 vagas novas perto de voce</div>
+
+            <div style="background:var(--cloud); border-radius:8px; padding:10px; margin-bottom:6px;">
+              <div style="font-size:9px; font-weight:700; color:var(--navy);">Vendedor(a)</div>
+              <div style="font-size:7px; color:var(--navy-light); margin-top:2px;">Moda Center · Caruaru</div>
+              <div style="font-size:8px; font-weight:700; color:var(--orange); margin-top:4px;">R$ 1.800/mes</div>
+            </div>
+            <div style="background:var(--orange-wash); border-radius:8px; padding:10px; margin-bottom:6px;">
+              <div style="font-size:9px; font-weight:700; color:var(--orange-dark);">Repositor</div>
+              <div style="font-size:7px; color:var(--navy-light); margin-top:2px;">Atacadao · Recife</div>
+              <div style="font-size:8px; font-weight:700; color:var(--orange); margin-top:4px;">R$ 1.500/mes</div>
+            </div>
+            <div style="background:var(--teal-wash); border-radius:8px; padding:10px;">
+              <div style="font-size:9px; font-weight:700; color:var(--teal);">Auxiliar de cozinha</div>
+              <div style="font-size:7px; color:var(--navy-light); margin-top:2px;">Habib's · Recife</div>
+              <div style="font-size:8px; font-weight:700; color:var(--teal); margin-top:4px;">R$ 1.412/mes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-label">Tela do app — trabalhador</div>
+    </div>
+
+    <!-- App icon + home screen -->
+    <div class="grid-cell" style="min-height:420px; gap:24px;">
+      <!-- App icon grande -->
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect width="72" height="72" rx="16" fill="#E8631A"/>
+        <rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/>
+        <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+        <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+        <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+      </svg>
+
+      <!-- Simulacao home screen -->
+      <div style="display:flex; gap:16px; align-items:flex-end;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="width:48px;height:48px;background:#25D366;border-radius:12px;"></div>
+          <span style="font-size:7px;color:rgba(255,255,255,0.25);">WhatsApp</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
+            <rect width="72" height="72" rx="16" fill="#E8631A"/>
+            <rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/>
+            <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+            <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+            <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+          <span style="font-size:7px;color:rgba(255,255,255,0.25);">Trabalha+</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="width:48px;height:48px;background:#1877F2;border-radius:12px;"></div>
+          <span style="font-size:7px;color:rgba(255,255,255,0.25);">Facebook</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="width:48px;height:48px;background:linear-gradient(45deg,#405DE6,#C13584,#F77737);border-radius:12px;"></div>
+          <span style="font-size:7px;color:rgba(255,255,255,0.25);">Instagram</span>
+        </div>
+      </div>
+      <div class="grid-label">App icon entre outros apps</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 5. BROWSER / FAVICON ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Browser & Favicon</h2>
+    <span class="tag">Web</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div class="grid-cell" style="min-height:240px;">
+      <div class="browser">
+        <div class="browser-tabs">
+          <div class="browser-tab">
+            <svg width="11" height="16" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+            Trabalha+ — Vagas perto de voce
+          </div>
+          <div class="browser-tab-inactive">
+            <div style="width:12px;height:12px;background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+            Google
+          </div>
+        </div>
+        <div class="browser-url">
+          <svg width="10px" height="10px" viewBox="0 0 16 16" fill="rgba(255,255,255,0.3)"><path d="M8 1a3.5 3.5 0 0 0-3.5 3.5v3h7V4.5A3.5 3.5 0 0 0 8 1zM3 7.5V4.5a5 5 0 1 1 10 0v3h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1h1z"/></svg>
+          trabalhamais.com.br
+        </div>
+        <div class="browser-body">
+          <!-- Header: 18px text → icon h=21 w=15 -->
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+            <svg width="15" height="21" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+            <span style="font-size:18px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></span>
+            <span style="font-size:10px; color:var(--gray-300); margin-left:auto; font-family:Inter;">Entrar</span>
+            <span style="font-size:10px; color:white; background:var(--orange); padding:4px 12px; border-radius:6px; font-weight:600; font-family:Inter;">Cadastrar</span>
+          </div>
+          <div style="font-size:14px; font-weight:800; color:var(--navy); font-family:'Nunito';">Encontre seu proximo trabalho</div>
+          <div style="font-size:9px; color:var(--gray-300); margin-top:4px;">Milhares de vagas operacionais perto de voce.</div>
+        </div>
+      </div>
+      <div class="grid-label">Favicon na aba + header do site</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 6. CARTAO DE VISITA ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Cartao de visita</h2>
+    <span class="tag">Impresso</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <!-- Frente: fundo branco -->
+    <div class="grid-cell" style="min-height:240px;">
+      <div class="card" style="background:white;">
+        <!-- Card: 13px text → icon h=15 w=11 -->
+        <div class="lh" style="gap:5px;">
+          <svg width="11" height="15" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <span style="font-size:13px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></span>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; color:var(--navy);">Gabriel Cecco</div>
+          <div style="font-size:8px; color:var(--navy-light); margin-top:1px;">CEO & Founder</div>
+          <div style="font-size:7px; color:var(--gray-300); margin-top:4px;">gabriel@trabalhamais.com.br</div>
+          <div style="font-size:7px; color:var(--gray-300);">trabalhamais.com.br</div>
+        </div>
+      </div>
+      <div class="grid-label">Frente — fundo branco</div>
+    </div>
+
+    <!-- Verso: fundo navy -->
+    <div class="grid-cell" style="min-height:240px;">
+      <div class="card" style="background:var(--navy); justify-content:center; align-items:center;">
+        <!-- Verso vertical: 16px text → icon h=32 w=23 -->
+        <div class="lv" style="gap:6px;">
+          <svg width="23" height="32" viewBox="0 0 72 100" fill="none">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <div class="wm" style="font-size:16px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+        </div>
+      </div>
+      <div class="grid-label">Verso — fundo navy</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 7. REDES SOCIAIS ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Redes sociais</h2>
+    <span class="tag">Digital</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+    <!-- Avatar circular -->
+    <div class="grid-cell">
+      <div class="avatar-circle" style="width:72px; height:72px; background:var(--orange);">
+        <svg width="43" height="60" viewBox="0 0 72 100" fill="none" style="margin-top:4px;">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+      </div>
+      <div class="grid-label">Avatar — circular</div>
+    </div>
+
+    <!-- Avatar quadrado (app icon) -->
+    <div class="grid-cell">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect width="72" height="72" rx="16" fill="#E8631A"/>
+        <rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/>
+        <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+        <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+        <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+      </svg>
+      <div class="grid-label">Avatar — quadrado</div>
+    </div>
+
+    <!-- Mini perfil -->
+    <div class="grid-cell">
+      <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:12px 16px; border-radius:12px;">
+        <div class="avatar-circle" style="width:36px; height:36px; background:var(--orange); flex-shrink:0;">
+          <svg width="22" height="30" viewBox="0 0 72 100" fill="none" style="margin-top:2px;">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.15)"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:800; color:white; font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></div>
+          <div style="font-size:8px; color:rgba(255,255,255,0.3);">@trabalhamais</div>
+        </div>
+      </div>
+      <div class="grid-label">Perfil em rede social</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 8. ASSINATURA DE E-MAIL ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Assinatura de e-mail</h2>
+    <span class="tag">Corporativo</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div class="grid-cell" style="min-height:200px;">
+      <div class="email-sig">
+        <div style="font-size:10px; color:var(--navy-light); line-height:1.6; font-family:Inter,sans-serif;">
+          Obrigado pelo contato.<br>Fico a disposicao.
+        </div>
+        <div class="email-sig-divider"></div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <svg width="22" height="30" viewBox="0 0 72 100" fill="none" style="margin-top:-2px">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="#D5D5D5"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <div>
+            <div style="font-size:11px; font-weight:700; color:var(--navy);">Gabriel Cecco</div>
+            <div style="font-size:9px; color:var(--navy-light);">CEO & Founder</div>
+            <div style="font-size:9px; font-weight:800; color:var(--navy); margin-top:4px; font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></div>
+            <div style="font-size:8px; color:var(--gray-300); margin-top:2px;">trabalhamais.com.br</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-label">Assinatura de e-mail</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 9. CRACHA FISICO ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Cracha fisico</h2>
+    <span class="tag">Meta-uso</span>
+  </div>
+  <div class="section-desc">O icone da marca aplicado em um cracha real — o meta-uso perfeito.</div>
+
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <!-- Crachá do trabalhador -->
+    <div class="grid-cell" style="min-height:300px;">
+      <div style="width:160px; background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+        <!-- Header orange -->
+        <!-- Badge header: 10px text → icon h=12 w=9 -->
+        <div style="background:var(--orange); padding:12px 16px; display:flex; align-items:center; gap:5px;">
+          <svg width="9" height="12" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="rgba(255,255,255,0.2)"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.7"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.5)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+          <span style="font-size:10px; font-weight:800; color:white; font-family:'Nunito';">Trabalha<span style="opacity:0.7">+</span></span>
+        </div>
+        <!-- Body -->
+        <div style="padding:16px; text-align:center;">
+          <!-- Avatar placeholder -->
+          <div style="width:56px; height:56px; background:var(--cloud); border-radius:50%; margin:0 auto 10px; display:flex;align-items:center;justify-content:center;">
+            <div style="width:24px;height:24px;background:var(--gray-100);border-radius:50%;"></div>
+          </div>
+          <div style="font-size:11px; font-weight:700; color:var(--navy);">Wesley Santos</div>
+          <div style="font-size:9px; color:var(--navy-light); margin-top:2px;">Vendedor</div>
+          <div style="font-size:8px; color:var(--orange); font-weight:700; margin-top:6px;">Moda Center</div>
+          <div style="margin-top:10px; padding-top:8px; border-top:1px solid var(--gray-100);">
+            <div style="font-size:7px; color:var(--gray-300);">ID: TM-2026-0847</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-label">Cracha fisico — trabalhador</div>
+    </div>
+
+    <!-- Crachá corporativo -->
+    <div class="grid-cell" style="min-height:300px;">
+      <div style="width:160px; background:var(--navy); border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+        <!-- Header -->
+        <!-- Corp badge header: 10px text → icon h=12 w=9 -->
+        <div style="padding:12px 16px; display:flex; align-items:center; gap:5px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <svg width="9" height="12" viewBox="0 0 72 100" fill="none" style="margin-top:-1px">
+            <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+            <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+            <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+            <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <span style="font-size:10px; font-weight:800; color:white; font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></span>
+        </div>
+        <!-- Body -->
+        <div style="padding:16px; text-align:center;">
+          <div style="width:56px; height:56px; background:rgba(255,255,255,0.06); border-radius:50%; margin:0 auto 10px; display:flex;align-items:center;justify-content:center;">
+            <div style="width:24px;height:24px;background:rgba(255,255,255,0.08);border-radius:50%;"></div>
+          </div>
+          <div style="font-size:11px; font-weight:700; color:white;">Gabriel Cecco</div>
+          <div style="font-size:9px; color:rgba(255,255,255,0.4); margin-top:2px;">CEO & Founder</div>
+          <div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:7px; color:rgba(255,255,255,0.2);">EQUIPE TRABALHA+</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-label">Cracha fisico — corporativo</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 10. PROPORCIONALIDADE FINAL ===== -->
+<div class="section">
+  <div class="section-header">
+    <h2>Proporcionalidade final</h2>
+    <span class="tag">Validacao</span>
+  </div>
+  <div class="section-desc">Icone mantendo proporcoes perfeitas em todos os tamanhos de renderizacao.</div>
+
+  <div style="display:flex; align-items:flex-end; gap:28px; padding:32px 28px; justify-content:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="72" height="100" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">100px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">60px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="29" height="40" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">40px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="22" height="30" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">30px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="14" height="20" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">20px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <svg width="11" height="16" viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span style="font-size:9px;color:rgba(255,255,255,0.2);">16px</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <strong style="color:var(--orange)">Trabalha+</strong> — Aplicacoes da Logo · Fevereiro 2026<br>
+  Icone do cracha validado em contextos reais de uso.
+</div>
+
+</body>
+</html>

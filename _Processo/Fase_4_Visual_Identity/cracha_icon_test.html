@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crachá Icon — v6</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, sans-serif; background: #0d1117; color: white; padding: 32px; }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 32px; }
+  .section-title {
+    font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5);
+    margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .hero {
+    display: flex; justify-content: center; align-items: center;
+    padding: 48px; margin-bottom: 40px;
+    background: rgba(255,255,255,0.03); border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .size-row {
+    display: flex; align-items: flex-end; gap: 32px;
+    margin-bottom: 40px; padding: 24px;
+    background: rgba(255,255,255,0.02); border-radius: 12px;
+  }
+  .size-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size-item span { font-size: 10px; color: rgba(255,255,255,0.25); }
+  .light-bg {
+    background: white; border-radius: 12px; padding: 40px;
+    display: flex; align-items: center; gap: 48px; justify-content: center; margin-bottom: 40px;
+  }
+  .light-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .light-item span { font-size: 10px; color: rgba(0,0,0,0.3); }
+  .app-row { display: flex; gap: 24px; margin-bottom: 40px; }
+  .app-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .app-item span { font-size: 10px; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<h1>Cracha Icon — v6 (V1 only)</h1>
+<p class="subtitle">Grampo sem furo, centralizado na borda superior do corpo. Pessoa centralizada no corpo.</p>
+
+<!--
+  viewBox 0 0 72 100
+  Body: x=2 y=10 w=68 h=88 rx=8 (top edge at y=10)
+  Grampo: centered on body top edge (y=10). h=12, so y=4 to y=16. w=30 x=21 rx=3
+  No hole in grampo.
+
+  Content zone: y=16 to y=98 = 82px. Center = y=57.
+  Person total ~56px (head 22 + gap 2 + shoulders 31).
+  Top margin: (82-56)/2 = 13px. Start at y=27 (16+13-2 for optical).
+  Head: cy = 27+11 = 38. r=11. (27 to 49)
+  Shoulders: 52 to 83.
+-->
+
+<div class="section-title">Icone principal — tamanho grande</div>
+<div class="hero">
+  <svg width="144" height="200" viewBox="0 0 72 100" fill="none">
+    <!-- Corpo do crachá -->
+    <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+    <!-- Grampo: centrado na borda superior (y=10), sem furo -->
+    <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+    <!-- Pessoa: centralizada no corpo -->
+    <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+    <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+  </svg>
+</div>
+
+<!-- TAMANHOS -->
+<div class="section-title">Proporcionalidade</div>
+<div class="size-row">
+  <div class="size-item">
+    <svg width="108" height="150" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>150px</span>
+  </div>
+  <div class="size-item">
+    <svg width="72" height="100" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>100px</span>
+  </div>
+  <div class="size-item">
+    <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>60px</span>
+  </div>
+  <div class="size-item">
+    <svg width="29" height="40" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>40px</span>
+  </div>
+  <div class="size-item">
+    <svg width="22" height="30" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>30px</span>
+  </div>
+  <div class="size-item">
+    <svg width="14" height="20" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>20px</span>
+  </div>
+  <div class="size-item">
+    <svg width="11" height="16" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>16px</span>
+  </div>
+</div>
+
+<!-- FUNDO CLARO -->
+<div class="section-title">Fundo claro</div>
+<div class="light-bg">
+  <div class="light-item">
+    <svg width="108" height="150" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>Grande</span>
+  </div>
+  <div class="light-item">
+    <svg width="43" height="60" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>60px</span>
+  </div>
+  <div class="light-item">
+    <svg width="22" height="30" viewBox="0 0 72 100" fill="none">
+      <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+      <rect x="21" y="4" width="30" height="12" rx="3" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+      <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+      <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+    </svg>
+    <span>30px</span>
+  </div>
+</div>
+
+<!-- APP ICON -->
+<div class="section-title">App Icon (72x72)</div>
+<div class="app-row">
+  <div class="app-item">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+      <rect width="72" height="72" rx="16" fill="#E8631A"/>
+      <rect x="23" y="2" width="26" height="9" rx="3" fill="white" opacity="0.8"/>
+      <rect x="12" y="7" width="48" height="61" rx="6" fill="rgba(255,255,255,0.18)"/>
+      <circle cx="36" cy="26" r="8" fill="rgba(255,255,255,0.4)"/>
+      <path d="M20 48 C20 40, 27 36, 36 36 C45 36, 52 40, 52 48 L52 60 C52 62, 51 64, 49 64 L23 64 C21 64, 20 62, 20 60Z" fill="rgba(255,255,255,0.25)"/>
+    </svg>
+    <span>App icon</span>
+  </div>
+</div>
+
+</body>
+</html>

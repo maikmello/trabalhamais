@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Templates Instagram Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #E8631A;
+    --navy: #1A2744;
+    --teal: #1A9E7A;
+    --cloud: #F5F6FA;
+    --white: #FFFFFF;
+    --orange-wash: #FFF0E6;
+    --page-bg: #0d1117;
+  }
+
+  body {
+    background: var(--page-bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--cloud);
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Page Header ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .page-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .page-header .subtitle {
+    font-size: 14px;
+    color: #8b949e;
+    font-weight: 400;
+  }
+  .page-header .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .page-header .brand-mark svg { width: 28px; height: auto; }
+  .page-header .brand-mark span {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--orange);
+  }
+
+  /* ── Section Titles ── */
+  .mode-section { margin-bottom: 56px; }
+  .mode-section:last-child { margin-bottom: 0; }
+  .mode-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mode-label .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .mode-label .dot.dark { background: #58a6ff; }
+  .mode-label .dot.light { background: #f0c040; }
+
+  /* ── Stories Grid ── */
+  .stories-row {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── Phone Frame ── */
+  .story-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .phone-frame {
+    width: 216px;
+    height: 432px;
+    background: #1c1c1e;
+    border-radius: 28px;
+    padding: 6px;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 16px;
+    background: #1c1c1e;
+    border-radius: 0 0 12px 12px;
+    z-index: 20;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .story-caption {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #8b949e;
+    text-align: center;
+  }
+  .story-caption strong {
+    color: var(--cloud);
+    font-weight: 700;
+  }
+
+  /* ── Story Canvas (scaled 1080x1920 → 204x362.67) ── */
+  .story-canvas {
+    width: 1080px;
+    height: 1920px;
+    transform: scale(0.18889);
+    transform-origin: top left;
+    position: absolute;
+    top: 0; left: 0;
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── Shared Story Elements ── */
+  .story-progress {
+    position: absolute;
+    top: 40px; left: 48px; right: 48px;
+    display: flex; gap: 10px; z-index: 10;
+  }
+  .story-progress .bar {
+    flex: 1; height: 6px; border-radius: 3px;
+    background: rgba(255,255,255,0.25);
+  }
+  .story-progress .bar.active { background: rgba(255,255,255,0.85); }
+
+  .story-logo {
+    position: absolute; z-index: 10;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .story-logo svg { width: 56px; height: auto; }
+  .story-logo .logo-text {
+    font-weight: 800; font-size: 38px;
+  }
+
+  .swipe-cta {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+  .swipe-cta .arrow {
+    display: block;
+    margin: 0 auto 14px;
+    width: 52px; height: 52px;
+    animation: bounce 1.6s infinite;
+  }
+  .swipe-cta .label {
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ═══════════════════════════════════════════
+     STORY 1 — NOVA VAGA
+     ═══════════════════════════════════════════ */
+
+  /* Dark */
+  .s1-dark {
+    background: linear-gradient(175deg, #0f1a2e 0%, var(--navy) 40%, #162238 100%);
+    color: var(--white);
+  }
+  .s1-dark .story-logo { top: 80px; left: 60px; }
+  .s1-dark .story-logo .logo-text { color: var(--white); }
+
+  .s1-dark .tag {
+    position: absolute; top: 340px; left: 60px;
+    background: var(--teal);
+    color: var(--white);
+    font-weight: 800; font-size: 32px;
+    padding: 14px 36px; border-radius: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .s1-dark .job-title {
+    position: absolute; top: 480px; left: 60px; right: 60px;
+    font-weight: 800; font-size: 108px;
+    line-height: 1.05;
+    color: var(--white);
+  }
+  .s1-dark .job-company {
+    position: absolute; top: 740px; left: 60px;
+    font-weight: 600; font-size: 42px;
+    color: rgba(255,255,255,0.6);
+  }
+  .s1-dark .job-details {
+    position: absolute; top: 860px; left: 60px; right: 60px;
+  }
+  .s1-dark .job-details .detail-row {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 28px;
+    font-size: 36px; font-weight: 600;
+    color: rgba(255,255,255,0.75);
+  }
+  .s1-dark .job-details .detail-icon {
+    width: 48px; height: 48px;
+    background: rgba(26,158,122,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal); font-size: 26px;
+  }
+  .s1-dark .salary-highlight {
+    position: absolute; top: 1150px; left: 60px; right: 60px;
+    background: rgba(26,158,122,0.12);
+    border: 2px solid rgba(26,158,122,0.3);
+    border-radius: 20px;
+    padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .s1-dark .salary-highlight .sal-label {
+    font-weight: 600; font-size: 32px;
+    color: rgba(255,255,255,0.5);
+  }
+  .s1-dark .salary-highlight .sal-value {
+    font-weight: 800; font-size: 56px;
+    color: var(--teal);
+  }
+  .s1-dark .swipe-cta .arrow svg { stroke: var(--teal); }
+  .s1-dark .swipe-cta .label { color: var(--teal); }
+
+  .s1-dark .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.06;
+    background: var(--teal);
+  }
+  .s1-dark .deco-circle.c1 { width: 500px; height: 500px; top: -120px; right: -180px; }
+  .s1-dark .deco-circle.c2 { width: 300px; height: 300px; bottom: 200px; left: -100px; }
+
+  /* Light */
+  .s1-light {
+    background: var(--cloud);
+    color: var(--navy);
+  }
+  .s1-light .story-progress .bar { background: rgba(26,39,68,0.15); }
+  .s1-light .story-progress .bar.active { background: var(--navy); }
+  .s1-light .story-logo { top: 80px; left: 60px; }
+  .s1-light .story-logo .logo-text { color: var(--navy); }
+
+  .s1-light .tag {
+    position: absolute; top: 340px; left: 60px;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800; font-size: 32px;
+    padding: 14px 36px; border-radius: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .s1-light .job-title {
+    position: absolute; top: 480px; left: 60px; right: 60px;
+    font-weight: 800; font-size: 108px;
+    line-height: 1.05;
+    color: var(--navy);
+  }
+  .s1-light .job-company {
+    position: absolute; top: 740px; left: 60px;
+    font-weight: 600; font-size: 42px;
+    color: rgba(26,39,68,0.5);
+  }
+  .s1-light .job-details {
+    position: absolute; top: 860px; left: 60px; right: 60px;
+  }
+  .s1-light .job-details .detail-row {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 28px;
+    font-size: 36px; font-weight: 600;
+    color: rgba(26,39,68,0.65);
+  }
+  .s1-light .job-details .detail-icon {
+    width: 48px; height: 48px;
+    background: var(--orange-wash);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 26px;
+  }
+  .s1-light .salary-highlight {
+    position: absolute; top: 1150px; left: 60px; right: 60px;
+    background: var(--orange-wash);
+    border: 2px solid rgba(232,99,26,0.25);
+    border-radius: 20px;
+    padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .s1-light .salary-highlight .sal-label {
+    font-weight: 600; font-size: 32px;
+    color: rgba(26,39,68,0.45);
+  }
+  .s1-light .salary-highlight .sal-value {
+    font-weight: 800; font-size: 56px;
+    color: var(--orange);
+  }
+  .s1-light .swipe-cta .arrow svg { stroke: var(--orange); }
+  .s1-light .swipe-cta .label { color: var(--orange); }
+
+  .s1-light .deco-circle {
+    position: absolute; border-radius: 50%; opacity: 0.06;
+  }
+  .s1-light .deco-circle.c1 { width: 500px; height: 500px; top: -120px; right: -180px; background: var(--orange); }
+  .s1-light .deco-circle.c2 { width: 300px; height: 300px; bottom: 200px; left: -100px; background: var(--teal); }
+
+
+  /* ═══════════════════════════════════════════
+     STORY 2 — COUNTDOWN / URGENCIA
+     ═══════════════════════════════════════════ */
+
+  /* Dark */
+  .s2-dark {
+    background: linear-gradient(165deg, #e8631a 0%, #c44d0e 50%, #a33e0a 100%);
+    color: var(--white);
+  }
+  .s2-dark .story-logo { top: 80px; left: 60px; }
+  .s2-dark .story-logo .logo-text { color: var(--white); }
+
+  .s2-dark .urgency-badge {
+    position: absolute; top: 340px; left: 60px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .s2-dark .urgency-badge .pulse {
+    width: 24px; height: 24px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(255,255,255,0.25);
+  }
+  .s2-dark .urgency-badge .text {
+    font-weight: 700; font-size: 30px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .s2-dark .main-text {
+    position: absolute; top: 440px; left: 60px; right: 60px;
+  }
+  .s2-dark .main-text h2 {
+    font-weight: 800; font-size: 96px;
+    line-height: 1.05;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .s2-dark .main-text p {
+    font-weight: 600; font-size: 44px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+
+  .s2-dark .countdown {
+    position: absolute; top: 1000px; left: 60px; right: 60px;
+    display: flex; gap: 28px; justify-content: center;
+  }
+  .s2-dark .countdown .unit {
+    width: 200px; height: 220px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .s2-dark .countdown .unit .num {
+    font-weight: 800; font-size: 80px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .s2-dark .countdown .unit .lbl {
+    font-weight: 600; font-size: 26px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px; text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .s2-dark .location-tag {
+    position: absolute; top: 1300px;
+    left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 16px 40px;
+    font-weight: 600; font-size: 30px;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+  }
+
+  .s2-dark .swipe-cta .arrow svg { stroke: var(--white); }
+  .s2-dark .swipe-cta .label { color: var(--white); }
+
+  .s2-dark .deco-ring {
+    position: absolute; border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.08);
+  }
+  .s2-dark .deco-ring.r1 { width: 600px; height: 600px; top: -200px; right: -250px; }
+  .s2-dark .deco-ring.r2 { width: 400px; height: 400px; bottom: -100px; left: -150px; }
+
+  /* Light */
+  .s2-light {
+    background: var(--white);
+    color: var(--navy);
+  }
+  .s2-light .story-progress .bar { background: rgba(26,39,68,0.12); }
+  .s2-light .story-progress .bar.active { background: var(--orange); }
+  .s2-light .story-logo { top: 80px; left: 60px; }
+  .s2-light .story-logo .logo-text { color: var(--navy); }
+
+  .s2-light .urgency-badge {
+    position: absolute; top: 340px; left: 60px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .s2-light .urgency-badge .pulse {
+    width: 24px; height: 24px;
+    background: #e53e3e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(229,62,62,0.2);
+  }
+  .s2-light .urgency-badge .text {
+    font-weight: 700; font-size: 30px;
+    color: #e53e3e;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .s2-light .main-text {
+    position: absolute; top: 440px; left: 60px; right: 60px;
+  }
+  .s2-light .main-text h2 {
+    font-weight: 800; font-size: 96px;
+    line-height: 1.05;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .s2-light .main-text p {
+    font-weight: 600; font-size: 44px;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  .s2-light .countdown {
+    position: absolute; top: 1000px; left: 60px; right: 60px;
+    display: flex; gap: 28px; justify-content: center;
+  }
+  .s2-light .countdown .unit {
+    width: 200px; height: 220px;
+    background: var(--orange-wash);
+    border-radius: 24px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2px solid rgba(232,99,26,0.15);
+  }
+  .s2-light .countdown .unit .num {
+    font-weight: 800; font-size: 80px;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .s2-light .countdown .unit .lbl {
+    font-weight: 600; font-size: 26px;
+    color: var(--navy);
+    margin-top: 8px; text-transform: uppercase;
+    letter-spacing: 2px; opacity: 0.5;
+  }
+
+  .s2-light .location-tag {
+    position: absolute; top: 1300px;
+    left: 50%; transform: translateX(-50%);
+    background: var(--cloud);
+    border-radius: 40px;
+    padding: 16px 40px;
+    font-weight: 600; font-size: 30px;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .s2-light .swipe-cta .arrow svg { stroke: var(--orange); }
+  .s2-light .swipe-cta .label { color: var(--orange); }
+
+  .s2-light .deco-ring {
+    position: absolute; border-radius: 50%;
+    border: 3px solid rgba(232,99,26,0.06);
+  }
+  .s2-light .deco-ring.r1 { width: 600px; height: 600px; top: -200px; right: -250px; }
+  .s2-light .deco-ring.r2 { width: 400px; height: 400px; bottom: -100px; left: -150px; }
+
+
+  /* ═══════════════════════════════════════════
+     STORY 3 — QUIZ / ENGAJAMENTO
+     ═══════════════════════════════════════════ */
+
+  /* Dark */
+  .s3-dark {
+    background: linear-gradient(175deg, #0f1a2e 0%, var(--navy) 50%, #1e3054 100%);
+    color: var(--white);
+  }
+  .s3-dark .story-logo { top: 80px; left: 60px; }
+  .s3-dark .story-logo .logo-text { color: var(--white); }
+
+  .s3-dark .quiz-header {
+    position: absolute; top: 320px; left: 60px; right: 60px;
+    text-align: center;
+  }
+  .s3-dark .quiz-header .emoji {
+    font-size: 80px; margin-bottom: 24px; display: block;
+  }
+  .s3-dark .quiz-header h2 {
+    font-weight: 800; font-size: 64px;
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  .s3-dark .quiz-options {
+    position: absolute; top: 720px; left: 60px; right: 60px;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .s3-dark .quiz-options .option {
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 40px 48px;
+    display: flex; align-items: center; gap: 28px;
+    transition: all 0.2s;
+  }
+  .s3-dark .quiz-options .option .opt-icon {
+    width: 64px; height: 64px;
+    background: rgba(232,99,26,0.15);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    flex-shrink: 0;
+  }
+  .s3-dark .quiz-options .option .opt-label {
+    font-weight: 700; font-size: 42px;
+    color: var(--white);
+  }
+  .s3-dark .quiz-options .option .opt-arrow {
+    margin-left: auto;
+    font-size: 36px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .s3-dark .vote-cta {
+    position: absolute; bottom: 260px;
+    left: 60px; right: 60px;
+    text-align: center;
+  }
+  .s3-dark .vote-cta .btn {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800; font-size: 40px;
+    padding: 32px 100px;
+    border-radius: 20px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .s3-dark .bottom-logo {
+    position: absolute; bottom: 80px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .s3-dark .bottom-logo svg { width: 44px; height: auto; }
+  .s3-dark .bottom-logo .tagline {
+    font-weight: 600; font-size: 28px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .s3-dark .deco-dots {
+    position: absolute; top: 200px; right: 40px;
+    opacity: 0.04;
+  }
+
+  /* Light */
+  .s3-light {
+    background: var(--cloud);
+    color: var(--navy);
+  }
+  .s3-light .story-progress .bar { background: rgba(26,39,68,0.12); }
+  .s3-light .story-progress .bar.active { background: var(--navy); }
+  .s3-light .story-logo { top: 80px; left: 60px; }
+  .s3-light .story-logo .logo-text { color: var(--navy); }
+
+  .s3-light .quiz-header {
+    position: absolute; top: 320px; left: 60px; right: 60px;
+    text-align: center;
+  }
+  .s3-light .quiz-header .emoji {
+    font-size: 80px; margin-bottom: 24px; display: block;
+  }
+  .s3-light .quiz-header h2 {
+    font-weight: 800; font-size: 64px;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+
+  .s3-light .quiz-options {
+    position: absolute; top: 720px; left: 60px; right: 60px;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .s3-light .quiz-options .option {
+    background: var(--white);
+    border: 2px solid rgba(26,39,68,0.08);
+    border-radius: 24px;
+    padding: 40px 48px;
+    display: flex; align-items: center; gap: 28px;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.06);
+  }
+  .s3-light .quiz-options .option .opt-icon {
+    width: 64px; height: 64px;
+    background: var(--orange-wash);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    flex-shrink: 0;
+  }
+  .s3-light .quiz-options .option .opt-label {
+    font-weight: 700; font-size: 42px;
+    color: var(--navy);
+  }
+  .s3-light .quiz-options .option .opt-arrow {
+    margin-left: auto;
+    font-size: 36px;
+    color: rgba(26,39,68,0.2);
+  }
+
+  .s3-light .vote-cta {
+    position: absolute; bottom: 260px;
+    left: 60px; right: 60px;
+    text-align: center;
+  }
+  .s3-light .vote-cta .btn {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800; font-size: 40px;
+    padding: 32px 100px;
+    border-radius: 20px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .s3-light .bottom-logo {
+    position: absolute; bottom: 80px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .s3-light .bottom-logo svg { width: 44px; height: auto; }
+  .s3-light .bottom-logo .tagline {
+    font-weight: 600; font-size: 28px;
+    color: rgba(26,39,68,0.4);
+  }
+
+  .s3-light .deco-dots {
+    position: absolute; top: 200px; right: 40px;
+    opacity: 0.04;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-footer p {
+    font-size: 12px;
+    color: #484f58;
+  }
+  .page-footer .specs {
+    display: inline-flex; gap: 24px; margin-top: 8px;
+  }
+  .page-footer .specs span {
+    font-size: 11px;
+    color: #30363d;
+    background: rgba(255,255,255,0.04);
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE HEADER ═══════════ -->
+<header class="page-header">
+  <div class="brand-mark">
+    <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+    <span>TrabalhaMais</span>
+  </div>
+  <h1>Templates Instagram Stories</h1>
+  <p class="subtitle">1080 &times; 1920px &middot; 3 varia&ccedil;&otilde;es &middot; Dark &amp; Light</p>
+</header>
+
+<!-- ═══════════ DARK MODE SECTION ═══════════ -->
+<section class="mode-section">
+  <div class="mode-label"><span class="dot dark"></span> Dark Mode</div>
+  <div class="stories-row">
+
+    <!-- Story 1 Dark — Nova Vaga -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s1-dark">
+            <div class="deco-circle c1"></div>
+            <div class="deco-circle c2"></div>
+
+            <div class="story-progress">
+              <div class="bar active"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="tag">NOVA VAGA</div>
+            <div class="job-title">Repositor</div>
+            <div class="job-company">Supermercado BH</div>
+
+            <div class="job-details">
+              <div class="detail-row">
+                <div class="detail-icon">
+                  <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" opacity="0.8"/><circle cx="12" cy="9" r="2.5" fill="#1A2744"/></svg>
+                </div>
+                Vila Velha, ES
+              </div>
+              <div class="detail-row">
+                <div class="detail-icon">
+                  <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" fill="none"/><path d="M12 7v5l3.5 3.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                </div>
+                CLT &middot; 44h/semana
+              </div>
+            </div>
+
+            <div class="salary-highlight">
+              <span class="sal-label">Salario</span>
+              <span class="sal-value">R$ 1.680</span>
+            </div>
+
+            <div class="swipe-cta">
+              <span class="arrow">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                  <path d="M26 40V12M14 22l12-12 12 12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="label">Arraste pra cima</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>01</strong> &mdash; Nova Vaga</span>
+    </div>
+
+    <!-- Story 2 Dark — Countdown -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s2-dark">
+            <div class="deco-ring r1"></div>
+            <div class="deco-ring r2"></div>
+
+            <div class="story-progress">
+              <div class="bar"></div>
+              <div class="bar active"></div>
+              <div class="bar"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="white"/><rect x="21" y="4" width="30" height="12" rx="3" fill="#E8631A" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(232,99,26,0.18)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="urgency-badge">
+              <div class="pulse"></div>
+              <span class="text">Corre que acaba!</span>
+            </div>
+
+            <div class="main-text">
+              <h2>Ultimas<br>Vagas</h2>
+              <p>5 vagas abertas<br>em Vila Velha</p>
+            </div>
+
+            <div class="countdown">
+              <div class="unit">
+                <span class="num">02</span>
+                <span class="lbl">Dias</span>
+              </div>
+              <div class="unit">
+                <span class="num">14</span>
+                <span class="lbl">Horas</span>
+              </div>
+              <div class="unit">
+                <span class="num">37</span>
+                <span class="lbl">Min</span>
+              </div>
+            </div>
+
+            <div class="location-tag">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:8px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white" opacity="0.8"/></svg>
+              Vila Velha, ES
+            </div>
+
+            <div class="swipe-cta">
+              <span class="arrow">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                  <path d="M26 40V12M14 22l12-12 12 12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="label">Arraste pra cima</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>02</strong> &mdash; Countdown / Urg&ecirc;ncia</span>
+    </div>
+
+    <!-- Story 3 Dark — Quiz -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s3-dark">
+            <div class="story-progress">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar active"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="quiz-header">
+              <span class="emoji">&#128188;</span>
+              <h2>Qual area voce quer trabalhar?</h2>
+            </div>
+
+            <div class="quiz-options">
+              <div class="option">
+                <div class="opt-icon">&#128722;</div>
+                <span class="opt-label">Vendas</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#128230;</div>
+                <span class="opt-label">Logistica</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#127858;</div>
+                <span class="opt-label">Alimentacao</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#128679;</div>
+                <span class="opt-label">Construcao</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+            </div>
+
+            <div class="vote-cta">
+              <span class="btn">Vote!</span>
+            </div>
+
+            <div class="bottom-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="tagline">A vaga certa, na hora certa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>03</strong> &mdash; Quiz / Engajamento</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ LIGHT MODE SECTION ═══════════ -->
+<section class="mode-section">
+  <div class="mode-label"><span class="dot light"></span> Light Mode</div>
+  <div class="stories-row">
+
+    <!-- Story 1 Light — Nova Vaga -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s1-light">
+            <div class="deco-circle c1"></div>
+            <div class="deco-circle c2"></div>
+
+            <div class="story-progress">
+              <div class="bar active"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="tag">NOVA VAGA</div>
+            <div class="job-title">Repositor</div>
+            <div class="job-company">Supermercado BH</div>
+
+            <div class="job-details">
+              <div class="detail-row">
+                <div class="detail-icon">
+                  <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" opacity="0.8"/><circle cx="12" cy="9" r="2.5" fill="#F5F6FA"/></svg>
+                </div>
+                Vila Velha, ES
+              </div>
+              <div class="detail-row">
+                <div class="detail-icon">
+                  <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" fill="none"/><path d="M12 7v5l3.5 3.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                </div>
+                CLT &middot; 44h/semana
+              </div>
+            </div>
+
+            <div class="salary-highlight">
+              <span class="sal-label">Salario</span>
+              <span class="sal-value">R$ 1.680</span>
+            </div>
+
+            <div class="swipe-cta">
+              <span class="arrow">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                  <path d="M26 40V12M14 22l12-12 12 12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="label">Arraste pra cima</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>01</strong> &mdash; Nova Vaga</span>
+    </div>
+
+    <!-- Story 2 Light — Countdown -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s2-light">
+            <div class="deco-ring r1"></div>
+            <div class="deco-ring r2"></div>
+
+            <div class="story-progress">
+              <div class="bar"></div>
+              <div class="bar active"></div>
+              <div class="bar"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="urgency-badge">
+              <div class="pulse"></div>
+              <span class="text">Corre que acaba!</span>
+            </div>
+
+            <div class="main-text">
+              <h2>Ultimas<br>Vagas</h2>
+              <p>5 vagas abertas<br>em Vila Velha</p>
+            </div>
+
+            <div class="countdown">
+              <div class="unit">
+                <span class="num">02</span>
+                <span class="lbl">Dias</span>
+              </div>
+              <div class="unit">
+                <span class="num">14</span>
+                <span class="lbl">Horas</span>
+              </div>
+              <div class="unit">
+                <span class="num">37</span>
+                <span class="lbl">Min</span>
+              </div>
+            </div>
+
+            <div class="location-tag">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:8px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#1A2744" opacity="0.6"/></svg>
+              Vila Velha, ES
+            </div>
+
+            <div class="swipe-cta">
+              <span class="arrow">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                  <path d="M26 40V12M14 22l12-12 12 12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="label">Arraste pra cima</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>02</strong> &mdash; Countdown / Urg&ecirc;ncia</span>
+    </div>
+
+    <!-- Story 3 Light — Quiz -->
+    <div class="story-wrapper">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="story-canvas s3-light">
+            <div class="story-progress">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar active"></div>
+            </div>
+
+            <div class="story-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="logo-text">TrabalhaMais</span>
+            </div>
+
+            <div class="quiz-header">
+              <span class="emoji">&#128188;</span>
+              <h2>Qual area voce quer trabalhar?</h2>
+            </div>
+
+            <div class="quiz-options">
+              <div class="option">
+                <div class="opt-icon">&#128722;</div>
+                <span class="opt-label">Vendas</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#128230;</div>
+                <span class="opt-label">Logistica</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#127858;</div>
+                <span class="opt-label">Alimentacao</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+              <div class="option">
+                <div class="opt-icon">&#128679;</div>
+                <span class="opt-label">Construcao</span>
+                <span class="opt-arrow">&#8250;</span>
+              </div>
+            </div>
+
+            <div class="vote-cta">
+              <span class="btn">Vote!</span>
+            </div>
+
+            <div class="bottom-logo">
+              <svg viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+              <span class="tagline">A vaga certa, na hora certa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="story-caption"><strong>03</strong> &mdash; Quiz / Engajamento</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="page-footer">
+  <p>TrabalhaMais &mdash; Brand Assets &middot; Instagram Stories Templates</p>
+  <div class="specs">
+    <span>1080 &times; 1920 px</span>
+    <span>Nunito + Inter</span>
+    <span>3 Variations</span>
+    <span>Dark &amp; Light</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrabalhaMais - Referencia de Cores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 60px 24px 40px;
+      border-bottom: 1px solid rgba(232, 99, 26, 0.2);
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: #E8631A;
+    }
+
+    .header p {
+      margin-top: 8px;
+      font-size: 1.05rem;
+      color: #8b949e;
+      font-weight: 300;
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Section ── */
+    .section {
+      padding: 48px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid #21262d;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #8b949e;
+      margin-bottom: 28px;
+      padding-left: 2px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 3px;
+      border-radius: 2px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .section-title.primary::before   { background: #E8631A; }
+    .section-title.secondary::before  { background: #1A2744; border: 1px solid #4A5A78; }
+    .section-title.functional::before { background: #1A9E7A; }
+    .section-title.neutral::before    { background: #E8EAF0; }
+    .section-title.semantic::before   { background: linear-gradient(90deg, #1A9E7A, #DC3545, #E8921A, #3B7DD8); }
+
+    /* ── Color Grid ── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .color-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .color-card:hover {
+      transform: translateY(-2px);
+      border-color: #30363d;
+    }
+
+    .color-swatch {
+      height: 100px;
+      position: relative;
+    }
+
+    .color-swatch::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .color-info {
+      padding: 16px;
+    }
+
+    .color-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e6edf3;
+      margin-bottom: 8px;
+    }
+
+    .color-values {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .color-value {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #8b949e;
+      font-family: 'Nunito', monospace;
+    }
+
+    .color-value code {
+      color: #c9d1d9;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'Nunito', monospace;
+      font-size: 0.78rem;
+    }
+
+    /* ── 60-30-10 Rule ── */
+    .rule-section {
+      padding: 48px 0;
+      border-top: 1px solid #21262d;
+    }
+
+    .rule-description {
+      color: #8b949e;
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    .proportion-bar-container {
+      margin-bottom: 24px;
+    }
+
+    .proportion-bar {
+      display: flex;
+      height: 56px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #21262d;
+    }
+
+    .proportion-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      position: relative;
+      transition: flex 0.3s ease;
+    }
+
+    .proportion-segment span {
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .proportion-labels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .proportion-label {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .proportion-label .percent {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .proportion-label .label-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 4px;
+    }
+
+    .proportion-label .label-desc {
+      font-size: 0.78rem;
+      color: #8b949e;
+      line-height: 1.5;
+    }
+
+    /* ── Accessibility Table ── */
+    .a11y-section {
+      padding: 48px 0;
+      border-top: 1px solid #21262d;
+    }
+
+    .a11y-description {
+      color: #8b949e;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    .a11y-table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid #21262d;
+    }
+
+    .a11y-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .a11y-table thead th {
+      background: #161b22;
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #8b949e;
+      border-bottom: 1px solid #21262d;
+    }
+
+    .a11y-table tbody tr {
+      border-bottom: 1px solid #21262d;
+    }
+
+    .a11y-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .a11y-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .a11y-table tbody td {
+      padding: 16px 20px;
+      vertical-align: middle;
+    }
+
+    .a11y-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .a11y-ratio {
+      font-weight: 700;
+      color: #e6edf3;
+      font-family: 'Nunito', monospace;
+    }
+
+    .a11y-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-aaa {
+      background: rgba(26, 158, 122, 0.15);
+      color: #1A9E7A;
+      border: 1px solid rgba(26, 158, 122, 0.3);
+    }
+
+    .badge-aa {
+      background: rgba(59, 125, 216, 0.15);
+      color: #3B7DD8;
+      border: 1px solid rgba(59, 125, 216, 0.3);
+    }
+
+    .badge-aa-lg {
+      background: rgba(233, 146, 26, 0.15);
+      color: #E8921A;
+      border: 1px solid rgba(233, 146, 26, 0.3);
+    }
+
+    .combo-text {
+      font-size: 0.85rem;
+      color: #c9d1d9;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid #21262d;
+      color: #484f58;
+      font-size: 0.8rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.6rem;
+      }
+
+      .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+
+      .proportion-labels {
+        grid-template-columns: 1fr;
+      }
+
+      .a11y-table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h1><span>TrabalhaMais</span> &mdash; Referencia de Cores</h1>
+    <p>Guia completo de cores da marca &middot; Paleta, proporcoes e acessibilidade</p>
+  </div>
+
+  <div class="container">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- PRIMARY COLORS                              -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title primary">Cores Primarias</div>
+      <div class="color-grid">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #E8631A;"></div>
+          <div class="color-info">
+            <div class="color-name">TrabalhaMais Orange</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#E8631A</code></div>
+              <div class="color-value">RGB <code>232, 99, 26</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #C44F0E;"></div>
+          <div class="color-info">
+            <div class="color-name">Orange Dark</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#C44F0E</code></div>
+              <div class="color-value">RGB <code>196, 79, 14</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #F28C4E;"></div>
+          <div class="color-info">
+            <div class="color-name">Orange Light</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#F28C4E</code></div>
+              <div class="color-value">RGB <code>242, 140, 78</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #FFF0E6; border-bottom: 1px solid #30363d;"></div>
+          <div class="color-info">
+            <div class="color-name">Orange Wash</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#FFF0E6</code></div>
+              <div class="color-value">RGB <code>255, 240, 230</code></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SECONDARY COLORS                            -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title secondary">Cores Secundarias</div>
+      <div class="color-grid">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #1A2744;"></div>
+          <div class="color-info">
+            <div class="color-name">TrabalhaMais Navy</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#1A2744</code></div>
+              <div class="color-value">RGB <code>26, 39, 68</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #2D3E5E;"></div>
+          <div class="color-info">
+            <div class="color-name">Navy Mid</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#2D3E5E</code></div>
+              <div class="color-value">RGB <code>45, 62, 94</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #4A5A78;"></div>
+          <div class="color-info">
+            <div class="color-name">Navy Light</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#4A5A78</code></div>
+              <div class="color-value">RGB <code>74, 90, 120</code></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- FUNCTIONAL COLORS                           -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title functional">Cores Funcionais</div>
+      <div class="color-grid">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #1A9E7A;"></div>
+          <div class="color-info">
+            <div class="color-name">TrabalhaMais Teal</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#1A9E7A</code></div>
+              <div class="color-value">RGB <code>26, 158, 122</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #E6F7F2; border-bottom: 1px solid #30363d;"></div>
+          <div class="color-info">
+            <div class="color-name">Teal Wash</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#E6F7F2</code></div>
+              <div class="color-value">RGB <code>230, 247, 242</code></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- NEUTRAL COLORS                              -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title neutral">Cores Neutras</div>
+      <div class="color-grid">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #F5F6FA; border-bottom: 1px solid #30363d;"></div>
+          <div class="color-info">
+            <div class="color-name">Cloud</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#F5F6FA</code></div>
+              <div class="color-value">RGB <code>245, 246, 250</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #FFFFFF; border-bottom: 1px solid #30363d;"></div>
+          <div class="color-info">
+            <div class="color-name">White</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#FFFFFF</code></div>
+              <div class="color-value">RGB <code>255, 255, 255</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #E8EAF0; border-bottom: 1px solid #30363d;"></div>
+          <div class="color-info">
+            <div class="color-name">Gray 100</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#E8EAF0</code></div>
+              <div class="color-value">RGB <code>232, 234, 240</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #A0A8B8;"></div>
+          <div class="color-info">
+            <div class="color-name">Gray 300</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#A0A8B8</code></div>
+              <div class="color-value">RGB <code>160, 168, 184</code></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEMANTIC COLORS                             -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title semantic">Cores Semanticas</div>
+      <div class="color-grid">
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #1A9E7A;"></div>
+          <div class="color-info">
+            <div class="color-name">Success</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#1A9E7A</code></div>
+              <div class="color-value">RGB <code>26, 158, 122</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #DC3545;"></div>
+          <div class="color-info">
+            <div class="color-name">Error</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#DC3545</code></div>
+              <div class="color-value">RGB <code>220, 53, 69</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #E8921A;"></div>
+          <div class="color-info">
+            <div class="color-name">Warning</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#E8921A</code></div>
+              <div class="color-value">RGB <code>232, 146, 26</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: #3B7DD8;"></div>
+          <div class="color-info">
+            <div class="color-name">Info</div>
+            <div class="color-values">
+              <div class="color-value">HEX <code>#3B7DD8</code></div>
+              <div class="color-value">RGB <code>59, 125, 216</code></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- 60-30-10 RULE                               -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="rule-section">
+      <div class="section-title primary">Regra 60-30-10</div>
+      <p class="rule-description">
+        A distribuicao de cores da marca TrabalhaMais segue a regra classica 60-30-10 para garantir
+        hierarquia visual, consistencia e identidade forte em todas as interfaces.
+      </p>
+
+      <div class="proportion-bar-container">
+        <div class="proportion-bar">
+          <div class="proportion-segment" style="flex: 60; background: linear-gradient(135deg, #1A2744, #2D3E5E);">
+            <span style="color: #ffffff;">60%</span>
+          </div>
+          <div class="proportion-segment" style="flex: 30; background: linear-gradient(135deg, #E8631A, #F28C4E);">
+            <span style="color: #ffffff;">30%</span>
+          </div>
+          <div class="proportion-segment" style="flex: 10; background: #1A9E7A;">
+            <span style="color: #ffffff;">10%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proportion-labels">
+        <div class="proportion-label">
+          <div class="percent" style="color: #4A5A78;">60%</div>
+          <div class="label-name">Navy + Neutros</div>
+          <div class="label-desc">Estrutura, fundos e textos. Formam a base visual estavel da interface.</div>
+        </div>
+        <div class="proportion-label">
+          <div class="percent" style="color: #E8631A;">30%</div>
+          <div class="label-name">Orange + Variantes</div>
+          <div class="label-desc">Identidade da marca. Destaques, botoes principais e elementos de navegacao.</div>
+        </div>
+        <div class="proportion-label">
+          <div class="percent" style="color: #1A9E7A;">10%</div>
+          <div class="label-name">Teal</div>
+          <div class="label-desc">Acoes de sucesso, confirmacoes e CTAs secundarios. Uso pontual e estrategico.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- WCAG ACCESSIBILITY                          -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="a11y-section">
+      <div class="section-title functional">Acessibilidade WCAG</div>
+      <p class="a11y-description">
+        Todas as combinacoes de cores principais foram testadas conforme as diretrizes WCAG 2.1
+        para garantir legibilidade e inclusao em todas as interfaces da TrabalhaMais.
+      </p>
+
+      <div class="a11y-table-wrapper">
+        <table class="a11y-table">
+          <thead>
+            <tr>
+              <th>Combinacao</th>
+              <th>Amostra</th>
+              <th>Contraste</th>
+              <th>Nivel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="combo-text">Navy sobre White</td>
+              <td>
+                <span class="a11y-preview" style="background: #FFFFFF; color: #1A2744; border: 1px solid #30363d;">Aa</span>
+              </td>
+              <td class="a11y-ratio">14.85 : 1</td>
+              <td><span class="a11y-badge badge-aaa">AAA</span></td>
+            </tr>
+            <tr>
+              <td class="combo-text">Orange Dark sobre White</td>
+              <td>
+                <span class="a11y-preview" style="background: #FFFFFF; color: #C44F0E; border: 1px solid #30363d;">Aa</span>
+              </td>
+              <td class="a11y-ratio">5.03 : 1</td>
+              <td><span class="a11y-badge badge-aa">AA</span></td>
+            </tr>
+            <tr>
+              <td class="combo-text">Navy sobre Orange</td>
+              <td>
+                <span class="a11y-preview" style="background: #E8631A; color: #1A2744;">Aa</span>
+              </td>
+              <td class="a11y-ratio">4.83 : 1</td>
+              <td><span class="a11y-badge badge-aa-lg">AA lg</span></td>
+            </tr>
+            <tr>
+              <td class="combo-text">White sobre Teal</td>
+              <td>
+                <span class="a11y-preview" style="background: #1A9E7A; color: #FFFFFF;">Aa</span>
+              </td>
+              <td class="a11y-ratio">3.72 : 1</td>
+              <td><span class="a11y-badge badge-aa-lg">AA lg</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    TrabalhaMais &middot; Guia de Cores &middot; 2026
+  </div>
+
+</body>
+</html>

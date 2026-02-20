@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template Apresentacao — TrabalhaMais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange:      #E8631A;
+    --orange-dark: #C44F0E;
+    --navy:        #1A2744;
+    --navy-mid:    #2D3E5E;
+    --teal:        #1A9E7A;
+    --cloud:       #F5F6FA;
+    --white:       #FFFFFF;
+    --gray-100:    #E8EAF0;
+    --page-bg:     #0d1117;
+
+    --slide-w: 420px;
+    --slide-h: 236.25px; /* 420 * 9/16 */
+  }
+
+  body {
+    background: var(--page-bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    padding: 48px 24px 72px;
+    min-height: 100vh;
+  }
+
+  /* ── Page Title ───────────────────────────────────── */
+  .page-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .page-title span { color: var(--orange); }
+
+  .page-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #8b949e;
+    margin-bottom: 56px;
+  }
+
+  /* ── Section Headers ──────────────────────────────── */
+  .section-header {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .section-header::before,
+  .section-header::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: #30363d;
+  }
+  .mode-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .mode-badge.dark  { background: var(--navy); color: var(--gray-100); }
+  .mode-badge.light { background: var(--orange); color: var(--white); }
+
+  /* ── Slide Grid ───────────────────────────────────── */
+  .slide-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    max-width: 920px;
+    margin: 0 auto 64px;
+  }
+
+  .slide-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .slide-label {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8b949e;
+  }
+
+  /* ── Slide Frame ──────────────────────────────────── */
+  .slide {
+    width: var(--slide-w);
+    height: var(--slide-h);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+  }
+
+  /* ── Helpers ──────────────────────────────────────── */
+  .logo-svg { display: inline-block; }
+  .ff-nunito { font-family: 'Nunito', sans-serif; }
+  .ff-inter  { font-family: 'Inter', sans-serif; }
+
+  /* ─────────────────────────────────────────────────── *
+   *  SLIDE INTERNALS                                    *
+   * ─────────────────────────────────────────────────── */
+
+  /* --- 1. Capa ------------------------------------ */
+  .slide-capa {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .slide-capa .logo-wrap   { margin-bottom: 10px; }
+  .slide-capa .wordmark    { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.3px; }
+  .slide-capa .tagline     { font-family: 'Inter', sans-serif; font-size: 12px; margin-top: 6px; opacity: 0.75; }
+  .slide-capa .bottom-info { position: absolute; bottom: 14px; font-size: 9px; font-family: 'Inter', sans-serif; opacity: 0.5; letter-spacing: 0.3px; }
+
+  /* Dark */
+  .slide-capa.dark { background: var(--navy); color: var(--white); }
+  .slide-capa.dark .wordmark span { color: var(--orange); }
+  .slide-capa.dark .tagline { color: var(--gray-100); }
+
+  /* Light */
+  .slide-capa.light { background: var(--white); color: var(--navy); }
+  .slide-capa.light .wordmark span { color: var(--orange); }
+
+  /* --- 2. Conteudo -------------------------------- */
+  .slide-conteudo {
+    padding: 24px 28px;
+    position: relative;
+  }
+  .slide-conteudo .slide-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .slide-conteudo .title-underline {
+    width: 40px; height: 3px; border-radius: 2px;
+    background: var(--orange); margin-bottom: 18px;
+  }
+  .slide-conteudo .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .slide-conteudo .bullet-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 12px; line-height: 1.5;
+  }
+  .slide-conteudo .bullet-num {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--orange); color: var(--white);
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide-conteudo .mini-logo { position: absolute; bottom: 14px; right: 18px; opacity: 0.35; }
+
+  .slide-conteudo.dark  { background: var(--navy); color: var(--white); }
+  .slide-conteudo.light { background: var(--white); color: var(--navy); }
+  .slide-conteudo.light .bullet-text { color: var(--navy-mid); }
+
+  /* --- 3. Metricas -------------------------------- */
+  .slide-metricas {
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px;
+    gap: 0;
+  }
+  .slide-metricas .metrics-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: center;
+    letter-spacing: 0.2px;
+  }
+  .slide-metricas .cards {
+    display: flex; gap: 14px; width: 100%;
+    justify-content: center;
+  }
+  .slide-metricas .card {
+    flex: 1; max-width: 115px; text-align: center;
+    padding: 14px 8px; border-radius: 8px;
+  }
+  .slide-metricas .card .num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 24px; color: var(--orange);
+    line-height: 1.1;
+  }
+  .slide-metricas .card .desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px; margin-top: 6px; line-height: 1.4;
+    opacity: 0.7;
+  }
+
+  .slide-metricas.dark  { background: var(--navy); color: var(--white); }
+  .slide-metricas.dark .card { background: rgba(255,255,255,0.06); }
+  .slide-metricas.light { background: var(--white); color: var(--navy); }
+  .slide-metricas.light .card { background: var(--cloud); }
+  .slide-metricas.light .card .desc { color: var(--navy-mid); }
+
+  /* --- 4. Citacao --------------------------------- */
+  .slide-citacao {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 36px;
+  }
+  .slide-citacao .quote-mark {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 48px; color: var(--orange);
+    line-height: 0.6; margin-bottom: 6px;
+  }
+  .slide-citacao .quote-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 16px;
+    font-style: italic; line-height: 1.5;
+    max-width: 320px;
+  }
+  .slide-citacao .quote-sep {
+    width: 36px; height: 3px; border-radius: 2px;
+    background: var(--orange); margin: 14px auto 10px;
+  }
+  .slide-citacao .quote-attr {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; opacity: 0.55; letter-spacing: 0.3px;
+  }
+
+  .slide-citacao.dark  { background: var(--navy); color: var(--white); }
+  .slide-citacao.light { background: var(--white); color: var(--navy); }
+
+  /* --- 5. Encerramento ---------------------------- */
+  .slide-encerramento {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .slide-encerramento .logo-wrap { margin-bottom: 10px; }
+  .slide-encerramento .thanks {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 26px;
+  }
+  .slide-encerramento .contact {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; margin-top: 6px; opacity: 0.6;
+  }
+  .slide-encerramento .bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5px; background: var(--orange);
+  }
+
+  .slide-encerramento.dark  { background: var(--navy); color: var(--white); }
+  .slide-encerramento.light { background: var(--white); color: var(--navy); }
+</style>
+</head>
+
+<body>
+
+<!-- ================================================ *
+ *   PAGE HEADER                                       *
+ * ================================================ -->
+<h1 class="page-title">Template <span>Apresentacao</span></h1>
+<p class="page-subtitle">TrabalhaMais Brand Slides — 16:9 — 5 tipos, dark &amp; light</p>
+
+
+<!-- ================================================ *
+ *   DARK MODE                                         *
+ * ================================================ -->
+<div class="section-header">
+  Dark Mode <span class="mode-badge dark">Dark</span>
+</div>
+
+<div class="slide-grid">
+
+  <!-- 1. Capa — Dark -->
+  <div class="slide-wrapper">
+    <div class="slide slide-capa dark">
+      <div class="logo-wrap">
+        <svg class="logo-svg" width="40" height="56" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+      <div class="wordmark">Trabalha<span>Mais</span></div>
+      <div class="tagline">A vaga certa, na hora certa</div>
+      <div class="bottom-info">Fevereiro 2026 &middot; Nome do Apresentador</div>
+    </div>
+    <span class="slide-label">Capa</span>
+  </div>
+
+  <!-- 2. Conteudo — Dark -->
+  <div class="slide-wrapper">
+    <div class="slide slide-conteudo dark">
+      <div class="slide-title">Como funciona</div>
+      <div class="title-underline"></div>
+      <ol class="bullet-list">
+        <li>
+          <span class="bullet-num">1</span>
+          <span class="bullet-text">Cadastre seu perfil em menos de 2 minutos</span>
+        </li>
+        <li>
+          <span class="bullet-num">2</span>
+          <span class="bullet-text">Receba vagas no WhatsApp, personalizadas para voce</span>
+        </li>
+        <li>
+          <span class="bullet-num">3</span>
+          <span class="bullet-text">Candidate-se em 1 clique e acompanhe o status</span>
+        </li>
+      </ol>
+      <div class="mini-logo">
+        <svg width="20" height="28" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+    </div>
+    <span class="slide-label">Conteudo</span>
+  </div>
+
+  <!-- 3. Metricas — Dark -->
+  <div class="slide-wrapper">
+    <div class="slide slide-metricas dark">
+      <div class="metrics-title">Nossos Numeros</div>
+      <div class="cards">
+        <div class="card">
+          <div class="num">2.500+</div>
+          <div class="desc">candidatos cadastrados</div>
+        </div>
+        <div class="card">
+          <div class="num">340+</div>
+          <div class="desc">empresas parceiras</div>
+        </div>
+        <div class="card">
+          <div class="num">48h</div>
+          <div class="desc">tempo medio de contratacao</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-label">Metricas</span>
+  </div>
+
+  <!-- 4. Citacao — Dark -->
+  <div class="slide-wrapper">
+    <div class="slide slide-citacao dark">
+      <div class="quote-mark">&ldquo;</div>
+      <div class="quote-text">Encontrar trabalho nao deveria ser humilhante</div>
+      <div class="quote-sep"></div>
+      <div class="quote-attr">&mdash; Manifesto TrabalhaMais</div>
+    </div>
+    <span class="slide-label">Citacao</span>
+  </div>
+
+  <!-- 5. Encerramento — Dark -->
+  <div class="slide-wrapper">
+    <div class="slide slide-encerramento dark">
+      <div class="logo-wrap">
+        <svg class="logo-svg" width="48" height="67" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+      <div class="thanks">Obrigado!</div>
+      <div class="contact">trabalhamais.com.br</div>
+      <div class="bottom-bar"></div>
+    </div>
+    <span class="slide-label">Encerramento</span>
+  </div>
+
+</div>
+
+
+<!-- ================================================ *
+ *   LIGHT MODE                                        *
+ * ================================================ -->
+<div class="section-header">
+  Light Mode <span class="mode-badge light">Light</span>
+</div>
+
+<div class="slide-grid">
+
+  <!-- 1. Capa — Light -->
+  <div class="slide-wrapper">
+    <div class="slide slide-capa light">
+      <div class="logo-wrap">
+        <svg class="logo-svg" width="40" height="56" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+      <div class="wordmark">Trabalha<span>Mais</span></div>
+      <div class="tagline">A vaga certa, na hora certa</div>
+      <div class="bottom-info">Fevereiro 2026 &middot; Nome do Apresentador</div>
+    </div>
+    <span class="slide-label">Capa</span>
+  </div>
+
+  <!-- 2. Conteudo — Light -->
+  <div class="slide-wrapper">
+    <div class="slide slide-conteudo light">
+      <div class="slide-title">Como funciona</div>
+      <div class="title-underline"></div>
+      <ol class="bullet-list">
+        <li>
+          <span class="bullet-num">1</span>
+          <span class="bullet-text">Cadastre seu perfil em menos de 2 minutos</span>
+        </li>
+        <li>
+          <span class="bullet-num">2</span>
+          <span class="bullet-text">Receba vagas no WhatsApp, personalizadas para voce</span>
+        </li>
+        <li>
+          <span class="bullet-num">3</span>
+          <span class="bullet-text">Candidate-se em 1 clique e acompanhe o status</span>
+        </li>
+      </ol>
+      <div class="mini-logo">
+        <svg width="20" height="28" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+    </div>
+    <span class="slide-label">Conteudo</span>
+  </div>
+
+  <!-- 3. Metricas — Light -->
+  <div class="slide-wrapper">
+    <div class="slide slide-metricas light">
+      <div class="metrics-title">Nossos Numeros</div>
+      <div class="cards">
+        <div class="card">
+          <div class="num">2.500+</div>
+          <div class="desc">candidatos cadastrados</div>
+        </div>
+        <div class="card">
+          <div class="num">340+</div>
+          <div class="desc">empresas parceiras</div>
+        </div>
+        <div class="card">
+          <div class="num">48h</div>
+          <div class="desc">tempo medio de contratacao</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-label">Metricas</span>
+  </div>
+
+  <!-- 4. Citacao — Light -->
+  <div class="slide-wrapper">
+    <div class="slide slide-citacao light">
+      <div class="quote-mark">&ldquo;</div>
+      <div class="quote-text">Encontrar trabalho nao deveria ser humilhante</div>
+      <div class="quote-sep"></div>
+      <div class="quote-attr">&mdash; Manifesto TrabalhaMais</div>
+    </div>
+    <span class="slide-label">Citacao</span>
+  </div>
+
+  <!-- 5. Encerramento — Light -->
+  <div class="slide-wrapper">
+    <div class="slide slide-encerramento light">
+      <div class="logo-wrap">
+        <svg class="logo-svg" width="48" height="67" viewBox="0 0 72 100" fill="none">
+          <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+          <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+          <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+          <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+      </div>
+      <div class="thanks">Obrigado!</div>
+      <div class="contact">trabalhamais.com.br</div>
+      <div class="bottom-bar"></div>
+    </div>
+    <span class="slide-label">Encerramento</span>
+  </div>
+
+</div>
+
+</body>
+</html>

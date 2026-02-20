@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais — Crachá vs Porta Aberta</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8631A; --orange-dark: #C44F0E; --orange-light: #F28C4E; --orange-wash: #FFF0E6;
+    --navy: #1A2744; --navy-mid: #2D3E5E; --navy-light: #4A5A78;
+    --teal: #1A9E7A; --teal-wash: #E6F7F2;
+    --cloud: #F5F6FA; --white: #FFFFFF; --gray-100: #E8EAF0; --gray-300: #A0A8B8;
+    --bg: #0d1117;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: white; }
+
+  .header {
+    padding: 48px 32px 24px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .header h1 span { color: var(--orange); }
+  .header p { font-size: 14px; color: rgba(255,255,255,0.4); max-width: 500px; margin: 0 auto; }
+
+  .board { padding: 32px; max-width: 1400px; margin: 0 auto; }
+
+  .direction {
+    margin-bottom: 48px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .direction-header {
+    padding: 20px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .direction-header h2 { font-size: 20px; font-weight: 800; }
+  .direction-header .tag {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 4px 14px; border-radius: 20px;
+  }
+  .direction-desc {
+    padding: 16px 28px;
+    font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .direction-desc strong { color: rgba(255,255,255,0.85); }
+
+  .section-label {
+    padding: 16px 28px 8px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .variants {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.03);
+  }
+  .variant {
+    background: var(--bg);
+    padding: 32px 20px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px;
+    min-height: 220px;
+    transition: background 0.2s;
+  }
+  .variant:hover { background: rgba(255,255,255,0.02); }
+  .variant-label {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+  }
+
+  /* Size test row */
+  .size-test {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
+    padding: 32px 28px;
+    background: rgba(255,255,255,0.015);
+  }
+  .size-test-item {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+  }
+  .size-test-item span {
+    font-size: 9px; font-weight: 600;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* Light background row */
+  .light-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 28px;
+    background: white;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .light-row .label-dark {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: rgba(0,0,0,0.25);
+    text-align: center; margin-top: 8px;
+  }
+
+  /* Lockup helpers */
+  .lh { display: flex; align-items: center; gap: 12px; }
+  .lv { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .wm { font-family: 'Nunito'; font-weight: 800; letter-spacing: -0.02em; }
+
+  /* Context strip */
+  .context-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.03);
+  }
+  .ctx-item {
+    background: var(--bg);
+    padding: 28px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 14px;
+    min-height: 180px;
+    justify-content: center;
+  }
+  .ctx-label {
+    font-size: 10px; font-weight: 600;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+
+  /* Phone mockup */
+  .phone {
+    width: 140px;
+    background: #1a1a2e;
+    border-radius: 18px;
+    padding: 6px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .phone-screen {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .phone-nav {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .phone-body { padding: 8px 10px; }
+
+  .footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Exploracoes de <span>Logo</span></h1>
+  <p>2 direcoes finalistas com SVGs refinados. Testes de proporcionalidade em todos os tamanhos.</p>
+</div>
+
+<div class="board">
+
+<!-- ===== DIRECTION 1: CRACHÁ ===== -->
+<div class="direction">
+  <div class="direction-header">
+    <h2>1. Cracha</h2>
+    <span class="tag" style="background: var(--orange); color: white;">Finalista</span>
+  </div>
+  <div class="direction-desc">
+    O cracha e o simbolo de <strong>"voce esta dentro"</strong>. Todo trabalhador operacional recebe um quando e contratado. Forma universal, legivel em qualquer tamanho: retangulo vertical com cantos arredondados + presilha no topo.
+  </div>
+
+  <!-- VARIANTES PRINCIPAIS -->
+  <div class="section-label">Variantes de icone</div>
+  <div class="variants">
+
+    <!-- A: Crachá geometrico limpo -->
+    <div class="variant">
+      <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Presilha -->
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <!-- Corpo do crachá -->
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <!-- Furo da presilha -->
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <!-- Silhueta pessoa (cabeca + ombros) -->
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <div class="variant-label">A: Com pessoa</div>
+    </div>
+
+    <!-- B: Crachá ultra-limpo (sem pessoa) -->
+    <div class="variant">
+      <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Presilha -->
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <!-- Corpo -->
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <!-- Furo -->
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <!-- Linhas de info (nome, cargo) -->
+        <rect x="20" y="48" width="40" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
+        <rect x="24" y="58" width="32" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+        <rect x="26" y="67" width="28" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+        <!-- Check/aprovado -->
+        <circle cx="40" cy="82" r="7" fill="rgba(255,255,255,0.2)"/>
+        <path d="M35.5 82 L38.5 85 L45 78.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="variant-label">B: Info + check</div>
+    </div>
+
+    <!-- C: Crachá minimalista (mais icônico) -->
+    <div class="variant">
+      <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Presilha -->
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <!-- Corpo -->
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <!-- Furo -->
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <!-- Apenas uma linha forte (nome) e um ponto -->
+        <rect x="22" y="54" width="36" height="5" rx="2.5" fill="rgba(255,255,255,0.4)"/>
+        <rect x="28" y="64" width="24" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <div class="variant-label">C: Minimal</div>
+    </div>
+
+    <!-- D: Crachá outline (traço) -->
+    <div class="variant">
+      <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Presilha -->
+        <rect x="28" y="2" width="24" height="14" rx="5" stroke="#E8631A" stroke-width="4" fill="none"/>
+        <!-- Corpo outline -->
+        <rect x="8" y="12" width="64" height="82" rx="12" stroke="#E8631A" stroke-width="4" fill="none"/>
+        <!-- Furo -->
+        <circle cx="40" cy="28" r="5" stroke="#E8631A" stroke-width="3" fill="none"/>
+        <!-- Silhueta pessoa -->
+        <circle cx="40" cy="52" r="10" stroke="#E8631A" stroke-width="3" fill="none"/>
+        <path d="M22 84 C22 72, 30 66, 40 66 C50 66, 58 72, 58 84" stroke="#E8631A" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="variant-label">D: Outline</div>
+    </div>
+  </div>
+
+  <!-- TESTE DE TAMANHOS -->
+  <div class="section-label">Teste de proporcionalidade</div>
+  <div class="size-test">
+    <!-- 96px -->
+    <div class="size-test-item">
+      <svg width="64" height="80" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <span>64px</span>
+    </div>
+    <!-- 48px -->
+    <div class="size-test-item">
+      <svg width="38" height="48" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <span>48px</span>
+    </div>
+    <!-- 32px -->
+    <div class="size-test-item">
+      <svg width="26" height="32" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <span>32px</span>
+    </div>
+    <!-- 24px -->
+    <div class="size-test-item">
+      <svg width="19" height="24" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <span>24px</span>
+    </div>
+    <!-- 16px (favicon) -->
+    <div class="size-test-item">
+      <svg width="13" height="16" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <span>16px</span>
+    </div>
+  </div>
+
+  <!-- FUNDO CLARO -->
+  <div class="section-label">Fundo claro</div>
+  <div class="light-row">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="56" height="70" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <div class="label-dark">Colorido</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="56" height="70" viewBox="0 0 80 100" fill="none">
+        <rect x="28" y="0" width="24" height="16" rx="6" fill="#4A5A78"/>
+        <rect x="6" y="10" width="68" height="86" rx="12" fill="var(--navy)"/>
+        <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.25)"/>
+        <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.2)"/>
+        <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.12)"/>
+      </svg>
+      <div class="label-dark">Navy</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div class="lh">
+        <svg width="36" height="45" viewBox="0 0 80 100" fill="none">
+          <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+          <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+          <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+          <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+        <div class="wm" style="font-size: 28px; color: var(--navy);">Trabalha<span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="label-dark">Lockup horizontal</div>
+    </div>
+  </div>
+
+  <!-- LOCKUPS -->
+  <div class="section-label">Lockups</div>
+  <div class="variants" style="grid-template-columns: repeat(3, 1fr);">
+    <!-- Horizontal -->
+    <div class="variant">
+      <div class="lh">
+        <svg width="32" height="40" viewBox="0 0 80 100" fill="none">
+          <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+          <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+          <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+          <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+        <div class="wm" style="font-size: 26px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="variant-label">Horizontal</div>
+    </div>
+
+    <!-- Vertical -->
+    <div class="variant">
+      <div class="lv">
+        <svg width="40" height="50" viewBox="0 0 80 100" fill="none">
+          <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+          <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+          <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+          <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+        <div class="wm" style="font-size: 20px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="variant-label">Vertical</div>
+    </div>
+
+    <!-- App icon -->
+    <div class="variant">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect width="72" height="72" rx="16" fill="#E8631A"/>
+        <!-- Crachá dentro do squircle -->
+        <rect x="25" y="6" width="22" height="10" rx="4" fill="rgba(255,255,255,0.5)"/>
+        <rect x="14" y="12" width="44" height="54" rx="10" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="36" cy="22" r="4" fill="rgba(255,255,255,0.35)"/>
+        <circle cx="36" cy="36" r="8" fill="rgba(255,255,255,0.4)"/>
+        <path d="M20 58 C20 50, 27 46, 36 46 C45 46, 52 50, 52 58" fill="rgba(255,255,255,0.25)"/>
+      </svg>
+      <div class="variant-label">App icon</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== DIRECTION 2: PORTA ABERTA ===== -->
+<div class="direction">
+  <div class="direction-header">
+    <h2>2. Porta Aberta</h2>
+    <span class="tag" style="background: var(--orange); color: white;">Finalista</span>
+  </div>
+  <div class="direction-desc">
+    <strong>"Abrindo portas"</strong> — expressao brasileira universal para oportunidade. Uma porta/arco que se abre, convidando a entrar. Metafora de passagem: do desemprego para a oportunidade. Forma simples: arco com base aberta, opcionalmente com silhueta entrando.
+  </div>
+
+  <!-- VARIANTES PRINCIPAIS -->
+  <div class="section-label">Variantes de icone</div>
+  <div class="variants">
+
+    <!-- A: Porta com moldura -->
+    <div class="variant">
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Moldura da porta (retangulo com arco no topo) -->
+        <path d="M8 92 L8 24 C8 10, 64 10, 64 24 L64 92" stroke="#E8631A" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- Soleira/chão -->
+        <line x1="2" y1="92" x2="70" y2="92" stroke="#E8631A" stroke-width="5" stroke-linecap="round"/>
+        <!-- Macaneta -->
+        <circle cx="54" cy="58" r="4" fill="#E8631A"/>
+      </svg>
+      <div class="variant-label">A: Porta com macaneta</div>
+    </div>
+
+    <!-- B: Arco puro (portal) -->
+    <div class="variant">
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Arco grosso e limpo -->
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="variant-label">B: Arco puro</div>
+    </div>
+
+    <!-- C: Porta com pessoa entrando -->
+    <div class="variant">
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Arco da porta -->
+        <path d="M8 92 L8 26 C8 10, 64 10, 64 26 L64 92" stroke="#E8631A" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <!-- Pessoa entrando (simplificada: cabeça + corpo) -->
+        <circle cx="36" cy="46" r="8" fill="rgba(232,99,26,0.35)"/>
+        <path d="M28 56 L28 80 M44 56 L44 80" stroke="rgba(232,99,26,0.3)" stroke-width="5" stroke-linecap="round"/>
+        <line x1="28" y1="62" x2="44" y2="62" stroke="rgba(232,99,26,0.25)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="variant-label">C: Com pessoa</div>
+    </div>
+
+    <!-- D: Porta com seta/direcao -->
+    <div class="variant">
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Arco -->
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- Seta entrando -->
+        <path d="M24 58 L42 58" stroke="rgba(255,255,255,0.6)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M36 48 L46 58 L36 68" stroke="rgba(255,255,255,0.6)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="variant-label">D: Com seta</div>
+    </div>
+  </div>
+
+  <!-- TESTE DE TAMANHOS -->
+  <div class="section-label">Teste de proporcionalidade</div>
+  <div class="size-test">
+    <!-- 64px -->
+    <div class="size-test-item">
+      <svg width="48" height="64" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>64px</span>
+    </div>
+    <!-- 48px -->
+    <div class="size-test-item">
+      <svg width="36" height="48" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>48px</span>
+    </div>
+    <!-- 32px -->
+    <div class="size-test-item">
+      <svg width="24" height="32" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="12" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>32px</span>
+    </div>
+    <!-- 24px -->
+    <div class="size-test-item">
+      <svg width="18" height="24" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="14" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>24px</span>
+    </div>
+    <!-- 16px -->
+    <div class="size-test-item">
+      <svg width="12" height="16" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="16" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>16px</span>
+    </div>
+  </div>
+
+  <!-- FUNDO CLARO -->
+  <div class="section-label">Fundo claro</div>
+  <div class="light-row">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="42" height="56" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="label-dark">Orange</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="42" height="56" viewBox="0 0 72 96" fill="none">
+        <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="var(--navy)" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="label-dark">Navy</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div class="lh">
+        <svg width="28" height="38" viewBox="0 0 72 96" fill="none">
+          <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="wm" style="font-size: 28px; color: var(--navy);">Trabalha<span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="label-dark">Lockup horizontal</div>
+    </div>
+  </div>
+
+  <!-- LOCKUPS -->
+  <div class="section-label">Lockups</div>
+  <div class="variants" style="grid-template-columns: repeat(3, 1fr);">
+    <!-- Horizontal -->
+    <div class="variant">
+      <div class="lh">
+        <svg width="28" height="38" viewBox="0 0 72 96" fill="none">
+          <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="wm" style="font-size: 26px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="variant-label">Horizontal</div>
+    </div>
+
+    <!-- Vertical -->
+    <div class="variant">
+      <div class="lv">
+        <svg width="36" height="48" viewBox="0 0 72 96" fill="none">
+          <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="wm" style="font-size: 20px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+      </div>
+      <div class="variant-label">Vertical</div>
+    </div>
+
+    <!-- App icon -->
+    <div class="variant">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <rect width="72" height="72" rx="16" fill="#E8631A"/>
+        <path d="M18 60 L18 24 C18 12, 54 12, 54 24 L54 60" stroke="white" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9"/>
+      </svg>
+      <div class="variant-label">App icon</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== COMPARATIVO FINAL ===== -->
+<div class="direction" style="border-color: var(--orange); border-width: 2px;">
+  <div class="direction-header" style="background: rgba(232,99,26,0.06);">
+    <h2>Comparativo — Lado a Lado</h2>
+    <span class="tag" style="background: var(--orange); color: white;">Decisao</span>
+  </div>
+
+  <div class="context-strip">
+    <!-- Crachá no celular -->
+    <div class="ctx-item">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-nav">
+            <svg width="16" height="20" viewBox="0 0 80 100" fill="none">
+              <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+              <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+              <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+              <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+            </svg>
+            <div style="font-size:8px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></div>
+          </div>
+          <div class="phone-body">
+            <div style="font-size:8px; font-weight:700; color:var(--navy); margin-bottom:6px;">Oi, Wesley!</div>
+            <div style="background:var(--cloud); border-radius:6px; padding:6px; margin-bottom:4px;">
+              <div style="font-size:7px; font-weight:700; color:var(--navy);">Vendedor(a)</div>
+              <div style="font-size:6px; color:var(--navy-light);">Moda Center · R$ 1.800</div>
+            </div>
+            <div style="background:var(--orange-wash); border-radius:6px; padding:6px;">
+              <div style="font-size:7px; font-weight:700; color:var(--orange-dark);">Repositor</div>
+              <div style="font-size:6px; color:var(--navy-light);">Atacadao · R$ 1.500</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ctx-label">Cracha no app</div>
+    </div>
+
+    <!-- Porta no celular -->
+    <div class="ctx-item">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-nav">
+            <svg width="14" height="18" viewBox="0 0 72 96" fill="none">
+              <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div style="font-size:8px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></div>
+          </div>
+          <div class="phone-body">
+            <div style="font-size:8px; font-weight:700; color:var(--navy); margin-bottom:6px;">Oi, Wesley!</div>
+            <div style="background:var(--cloud); border-radius:6px; padding:6px; margin-bottom:4px;">
+              <div style="font-size:7px; font-weight:700; color:var(--navy);">Vendedor(a)</div>
+              <div style="font-size:6px; color:var(--navy-light);">Moda Center · R$ 1.800</div>
+            </div>
+            <div style="background:var(--orange-wash); border-radius:6px; padding:6px;">
+              <div style="font-size:7px; font-weight:700; color:var(--orange-dark);">Repositor</div>
+              <div style="font-size:6px; color:var(--navy-light);">Atacadao · R$ 1.500</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ctx-label">Porta no app</div>
+    </div>
+
+    <!-- App icons lado a lado -->
+    <div class="ctx-item">
+      <div style="display:flex; gap:16px; align-items:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <svg width="56" height="56" viewBox="0 0 72 72" fill="none">
+            <rect width="72" height="72" rx="16" fill="#E8631A"/>
+            <rect x="25" y="6" width="22" height="10" rx="4" fill="rgba(255,255,255,0.5)"/>
+            <rect x="14" y="12" width="44" height="54" rx="10" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="36" cy="22" r="4" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="36" cy="36" r="8" fill="rgba(255,255,255,0.4)"/>
+            <path d="M20 58 C20 50, 27 46, 36 46 C45 46, 52 50, 52 58" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+          <span style="font-size:8px; color:rgba(255,255,255,0.3); font-weight:600;">Cracha</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <svg width="56" height="56" viewBox="0 0 72 72" fill="none">
+            <rect width="72" height="72" rx="16" fill="#E8631A"/>
+            <path d="M18 60 L18 24 C18 12, 54 12, 54 24 L54 60" stroke="white" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9"/>
+          </svg>
+          <span style="font-size:8px; color:rgba(255,255,255,0.3); font-weight:600;">Porta</span>
+        </div>
+      </div>
+      <div class="ctx-label">App icons</div>
+    </div>
+
+    <!-- Favicon test -->
+    <div class="ctx-item">
+      <div style="display:flex; gap:20px; align-items:flex-end;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="background:white; border-radius:4px; padding:4px; display:flex; align-items:center; gap:4px;">
+            <svg width="14" height="17" viewBox="0 0 80 100" fill="none">
+              <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+              <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+              <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+              <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+            </svg>
+            <span style="font-size:8px; color:var(--navy); font-weight:600; font-family:Inter;">trabalhamais.com.br</span>
+          </div>
+          <span style="font-size:8px; color:rgba(255,255,255,0.3);">Cracha</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="background:white; border-radius:4px; padding:4px; display:flex; align-items:center; gap:4px;">
+            <svg width="12" height="16" viewBox="0 0 72 96" fill="none">
+              <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="14" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span style="font-size:8px; color:var(--navy); font-weight:600; font-family:Inter;">trabalhamais.com.br</span>
+          </div>
+          <span style="font-size:8px; color:rgba(255,255,255,0.3);">Porta</span>
+        </div>
+      </div>
+      <div class="ctx-label">Favicon na aba do browser</div>
+    </div>
+
+    <!-- Lockups -->
+    <div class="ctx-item" style="grid-column: span 2;">
+      <div style="display:flex; gap:48px; align-items:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <div class="lh">
+            <svg width="28" height="35" viewBox="0 0 80 100" fill="none">
+              <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+              <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+              <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+              <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+            </svg>
+            <div class="wm" style="font-size: 24px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+          </div>
+          <span style="font-size:9px; color:rgba(255,255,255,0.3); font-weight:600;">Cracha</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <div class="lh">
+            <svg width="22" height="30" viewBox="0 0 72 96" fill="none">
+              <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="wm" style="font-size: 24px;"><span style="color:white">Trabalha</span><span style="color:var(--orange)">+</span></div>
+          </div>
+          <span style="font-size:9px; color:rgba(255,255,255,0.3); font-weight:600;">Porta</span>
+        </div>
+      </div>
+      <div class="ctx-label">Lockups horizontais</div>
+    </div>
+
+    <!-- Business card mock -->
+    <div class="ctx-item" style="grid-column: span 2;">
+      <div style="display:flex; gap:20px;">
+        <!-- Card Crachá -->
+        <div style="width:160px; height:96px; background:white; border-radius:8px; padding:12px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 2px 12px rgba(0,0,0,0.3);">
+          <div class="lh" style="gap:6px;">
+            <svg width="14" height="18" viewBox="0 0 80 100" fill="none">
+              <rect x="28" y="0" width="24" height="16" rx="6" fill="var(--navy)"/>
+              <rect x="6" y="10" width="68" height="86" rx="12" fill="#E8631A"/>
+              <circle cx="40" cy="26" r="6" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="40" cy="52" r="12" fill="rgba(255,255,255,0.35)"/>
+              <path d="M20 84 C20 70, 28 64, 40 64 C52 64, 60 70, 60 84" fill="rgba(255,255,255,0.2)"/>
+            </svg>
+            <span style="font-size:9px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></span>
+          </div>
+          <div>
+            <div style="font-size:7px; font-weight:700; color:var(--navy);">Gabriel Cecco</div>
+            <div style="font-size:6px; color:var(--navy-light);">CEO & Founder</div>
+            <div style="font-size:5px; color:var(--gray-300); margin-top:2px;">trabalhamais.com.br</div>
+          </div>
+        </div>
+        <!-- Card Porta -->
+        <div style="width:160px; height:96px; background:white; border-radius:8px; padding:12px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 2px 12px rgba(0,0,0,0.3);">
+          <div class="lh" style="gap:6px;">
+            <svg width="11" height="15" viewBox="0 0 72 96" fill="none">
+              <path d="M10 92 L10 28 C10 10, 62 10, 62 28 L62 92" stroke="#E8631A" stroke-width="10" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span style="font-size:9px; font-weight:800; color:var(--navy); font-family:'Nunito';">Trabalha<span style="color:var(--orange)">+</span></span>
+          </div>
+          <div>
+            <div style="font-size:7px; font-weight:700; color:var(--navy);">Gabriel Cecco</div>
+            <div style="font-size:6px; color:var(--navy-light);">CEO & Founder</div>
+            <div style="font-size:5px; color:var(--gray-300); margin-top:2px;">trabalhamais.com.br</div>
+          </div>
+        </div>
+      </div>
+      <div class="ctx-label">Cartao de visita</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <strong style="color:var(--orange)">Trabalha+</strong> — Board Finalistas · Fevereiro 2026<br>
+  Cracha vs Porta Aberta — qual comunica melhor a essencia da marca?
+</div>
+
+</body>
+</html>

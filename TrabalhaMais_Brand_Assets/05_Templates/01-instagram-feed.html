@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrabalhaMais - Templates Instagram Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d1117;
+      font-family: 'Inter', sans-serif;
+      color: #F5F6FA;
+      padding: 48px 32px 64px;
+      min-width: 1120px;
+    }
+
+    /* ---- Page Header ---- */
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .page-header h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: rgba(245, 246, 250, 0.5);
+      font-weight: 400;
+    }
+
+    .page-header .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 99, 26, 0.12);
+      border: 1px solid rgba(232, 99, 26, 0.25);
+      border-radius: 100px;
+      padding: 6px 16px 6px 8px;
+      margin-bottom: 20px;
+    }
+
+    .page-header .brand-pill svg {
+      width: 22px;
+      height: 30px;
+    }
+
+    .page-header .brand-pill span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #E8631A;
+    }
+
+    /* ---- Section ---- */
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: rgba(245, 246, 250, 0.75);
+      margin-bottom: 24px;
+      padding-left: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .section-title .dot-dark {
+      background: #1A2744;
+      border: 2px solid rgba(245, 246, 250, 0.3);
+    }
+
+    .section-title .dot-light {
+      background: #F5F6FA;
+      border: 2px solid rgba(245, 246, 250, 0.3);
+    }
+
+    /* ---- Cards Row ---- */
+    .cards-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-caption {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(245, 246, 250, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- Instagram Post Frame ---- */
+    .ig-frame {
+      width: 320px;
+      height: 320px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ========================================================
+       VARIATION 1 - VAGA DESTAQUE
+       ======================================================== */
+
+    /* -- Dark -- */
+    .vaga-dark {
+      background: #1A2744;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vaga-dark .accent-bar {
+      height: 6px;
+      background: #E8631A;
+      flex-shrink: 0;
+    }
+
+    .vaga-dark .content {
+      flex: 1;
+      padding: 28px 26px 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vaga-dark .badge-tipo {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(232, 99, 26, 0.18);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .vaga-dark .badge-tipo span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: #E8631A;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .vaga-dark .badge-tipo .star {
+      color: #E8631A;
+      font-size: 10px;
+    }
+
+    .vaga-dark .job-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #FFFFFF;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .vaga-dark .company {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 20px;
+    }
+
+    .vaga-dark .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .vaga-dark .info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+    }
+
+    .vaga-dark .info-item .icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(232, 99, 26, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .vaga-dark .bottom-row {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .vaga-dark .cta-btn {
+      background: #E8631A;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 22px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #FFFFFF;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .vaga-dark .logo-small {
+      width: 24px;
+      height: 33px;
+      opacity: 0.5;
+    }
+
+    /* -- Light -- */
+    .vaga-light {
+      background: #F5F6FA;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vaga-light .accent-bar {
+      height: 6px;
+      background: #E8631A;
+      flex-shrink: 0;
+    }
+
+    .vaga-light .content {
+      flex: 1;
+      padding: 28px 26px 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vaga-light .badge-tipo {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(232, 99, 26, 0.12);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .vaga-light .badge-tipo span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: #E8631A;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .vaga-light .badge-tipo .star {
+      color: #E8631A;
+      font-size: 10px;
+    }
+
+    .vaga-light .job-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #1A2744;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .vaga-light .company {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(26, 39, 68, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .vaga-light .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .vaga-light .info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      color: rgba(26, 39, 68, 0.75);
+      font-weight: 600;
+    }
+
+    .vaga-light .info-item .icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(232, 99, 26, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .vaga-light .bottom-row {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .vaga-light .cta-btn {
+      background: #E8631A;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 22px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #FFFFFF;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .vaga-light .logo-small {
+      width: 24px;
+      height: 33px;
+      opacity: 0.35;
+    }
+
+    /* ========================================================
+       VARIATION 2 - DICA / CONTEUDO
+       ======================================================== */
+
+    /* -- Dark -- */
+    .dica-dark {
+      background: #1A2744;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 26px 22px;
+    }
+
+    .dica-dark .top-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #E8631A;
+      margin-bottom: 10px;
+    }
+
+    .dica-dark .big-number {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 72px;
+      line-height: 1;
+      color: #E8631A;
+      opacity: 0.25;
+      position: absolute;
+      top: 16px;
+      right: 22px;
+    }
+
+    .dica-dark .dica-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      max-width: 240px;
+    }
+
+    .dica-dark .dica-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      max-width: 250px;
+    }
+
+    .dica-dark .tips-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: auto;
+    }
+
+    .dica-dark .tips-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.4;
+    }
+
+    .dica-dark .tips-list li .bullet {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(232, 99, 26, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+      color: #E8631A;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .dica-dark .bottom-bar {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dica-dark .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.3);
+      font-style: italic;
+    }
+
+    .dica-dark .logo-bottom {
+      width: 22px;
+      height: 30px;
+      opacity: 0.4;
+    }
+
+    /* -- Light -- */
+    .dica-light {
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 26px 22px;
+    }
+
+    .dica-light .top-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #E8631A;
+      margin-bottom: 10px;
+    }
+
+    .dica-light .big-number {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 72px;
+      line-height: 1;
+      color: #E8631A;
+      opacity: 0.12;
+      position: absolute;
+      top: 16px;
+      right: 22px;
+    }
+
+    .dica-light .dica-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #1A2744;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      max-width: 240px;
+    }
+
+    .dica-light .dica-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: rgba(26, 39, 68, 0.45);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      max-width: 250px;
+    }
+
+    .dica-light .tips-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: auto;
+    }
+
+    .dica-light .tips-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(26, 39, 68, 0.7);
+      line-height: 1.4;
+    }
+
+    .dica-light .tips-list li .bullet {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(232, 99, 26, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+      color: #E8631A;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .dica-light .bottom-bar {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(26, 39, 68, 0.08);
+    }
+
+    .dica-light .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(26, 39, 68, 0.3);
+      font-style: italic;
+    }
+
+    .dica-light .logo-bottom {
+      width: 22px;
+      height: 30px;
+      opacity: 0.3;
+    }
+
+    /* ========================================================
+       VARIATION 3 - RESULTADO / DEPOIMENTO
+       ======================================================== */
+
+    /* -- Dark -- */
+    .depo-dark {
+      background: linear-gradient(145deg, #E8631A 0%, #c44e0e 60%, #a3400b 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 26px 22px;
+    }
+
+    .depo-dark .quote-marks {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.25);
+      margin-bottom: 0;
+      height: 40px;
+    }
+
+    .depo-dark .depo-text {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #FFFFFF;
+      line-height: 1.35;
+      margin-bottom: 18px;
+      max-width: 260px;
+    }
+
+    .depo-dark .depo-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 12px;
+    }
+
+    .depo-dark .badge-contratado {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #1A9E7A;
+      border-radius: 4px;
+      padding: 5px 12px;
+      align-self: flex-start;
+    }
+
+    .depo-dark .badge-contratado span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .depo-dark .badge-contratado .check {
+      font-size: 11px;
+    }
+
+    .depo-dark .bottom-bar {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .depo-dark .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      font-style: italic;
+    }
+
+    .depo-dark .logo-bottom {
+      width: 22px;
+      height: 30px;
+      opacity: 0.4;
+    }
+
+    /* -- Light -- */
+    .depo-light {
+      background: #F5F6FA;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 26px 22px;
+    }
+
+    .depo-light .quote-marks {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: #E8631A;
+      opacity: 0.3;
+      margin-bottom: 0;
+      height: 40px;
+    }
+
+    .depo-light .depo-text {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #1A2744;
+      line-height: 1.35;
+      margin-bottom: 18px;
+      max-width: 260px;
+    }
+
+    .depo-light .depo-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: rgba(26, 39, 68, 0.55);
+      margin-bottom: 12px;
+    }
+
+    .depo-light .badge-contratado {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #1A9E7A;
+      border-radius: 4px;
+      padding: 5px 12px;
+      align-self: flex-start;
+    }
+
+    .depo-light .badge-contratado span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .depo-light .badge-contratado .check {
+      font-size: 11px;
+    }
+
+    .depo-light .bottom-bar {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(26, 39, 68, 0.08);
+    }
+
+    .depo-light .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(26, 39, 68, 0.3);
+      font-style: italic;
+    }
+
+    .depo-light .logo-bottom {
+      width: 22px;
+      height: 30px;
+      opacity: 0.25;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ PAGE HEADER ============ -->
+  <header class="page-header">
+    <div class="brand-pill">
+      <svg viewBox="0 0 72 100" fill="none">
+        <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+        <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+        <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+        <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+      <span>TrabalhaMais</span>
+    </div>
+    <h1>Templates Instagram Feed</h1>
+    <p>1080 &times; 1080 px &mdash; 3 varia&ccedil;&otilde;es &mdash; Dark &amp; Light</p>
+  </header>
+
+  <!-- ============ DARK MODE SECTION ============ -->
+  <section class="section">
+    <h2 class="section-title"><span class="dot dot-dark"></span> Dark Mode</h2>
+    <div class="cards-row">
+
+      <!-- Variation 1 Dark - Vaga Destaque -->
+      <div class="card-wrapper">
+        <div class="ig-frame vaga-dark">
+          <div class="accent-bar"></div>
+          <div class="content">
+            <div class="badge-tipo">
+              <span class="star">&#9733;</span>
+              <span>Vaga Destaque</span>
+            </div>
+            <div class="job-title">Vendedor</div>
+            <div class="company">Loja Centro</div>
+            <div class="info-row">
+              <div class="info-item">
+                <div class="icon-circle">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                R$ 1.800/m&ecirc;s
+              </div>
+              <div class="info-item">
+                <div class="icon-circle">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                Vila Velha - ES
+              </div>
+            </div>
+            <div class="bottom-row">
+              <button class="cta-btn">Candidate-se</button>
+              <svg class="logo-small" viewBox="0 0 72 100" fill="none">
+                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <span class="card-caption">Vaga Destaque</span>
+      </div>
+
+      <!-- Variation 2 Dark - Dica / Conteudo -->
+      <div class="card-wrapper">
+        <div class="ig-frame dica-dark" style="position:relative;">
+          <div class="top-label">Dica TrabalhaMais</div>
+          <div class="big-number">01</div>
+          <div class="dica-title">3 erros que te eliminam na entrevista</div>
+          <div class="dica-subtitle">Evite essas falhas comuns e aumente suas chances de conquista a vaga.</div>
+          <ul class="tips-list">
+            <li>
+              <span class="bullet">1</span>
+              Chegar atrasado sem avisar
+            </li>
+            <li>
+              <span class="bullet">2</span>
+              Falar mal do emprego anterior
+            </li>
+            <li>
+              <span class="bullet">3</span>
+              N&atilde;o pesquisar sobre a empresa
+            </li>
+          </ul>
+          <div class="bottom-bar">
+            <span class="tagline">A vaga certa, na hora certa</span>
+            <svg class="logo-bottom" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+          </div>
+        </div>
+        <span class="card-caption">Dica / Conte&uacute;do</span>
+      </div>
+
+      <!-- Variation 3 Dark - Resultado / Depoimento -->
+      <div class="card-wrapper">
+        <div class="ig-frame depo-dark">
+          <div class="quote-marks">&ldquo;</div>
+          <div class="depo-text">Encontrei minha vaga em 2 dias</div>
+          <div class="depo-name">Wesley S. &mdash; Vendedor</div>
+          <div class="badge-contratado">
+            <span class="check">&#10003;</span>
+            <span>Contratado</span>
+          </div>
+          <div class="bottom-bar">
+            <span class="tagline">A vaga certa, na hora certa</span>
+            <svg class="logo-bottom" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="white"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="#E8631A" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(232,99,26,0.3)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(232,99,26,0.18)"/>
+            </svg>
+          </div>
+        </div>
+        <span class="card-caption">Resultado / Depoimento</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ LIGHT MODE SECTION ============ -->
+  <section class="section">
+    <h2 class="section-title"><span class="dot dot-light"></span> Light Mode</h2>
+    <div class="cards-row">
+
+      <!-- Variation 1 Light - Vaga Destaque -->
+      <div class="card-wrapper">
+        <div class="ig-frame vaga-light">
+          <div class="accent-bar"></div>
+          <div class="content">
+            <div class="badge-tipo">
+              <span class="star">&#9733;</span>
+              <span>Vaga Destaque</span>
+            </div>
+            <div class="job-title">Vendedor</div>
+            <div class="company">Loja Centro</div>
+            <div class="info-row">
+              <div class="info-item">
+                <div class="icon-circle">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                R$ 1.800/m&ecirc;s
+              </div>
+              <div class="info-item">
+                <div class="icon-circle">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                Vila Velha - ES
+              </div>
+            </div>
+            <div class="bottom-row">
+              <button class="cta-btn">Candidate-se</button>
+              <svg class="logo-small" viewBox="0 0 72 100" fill="none">
+                <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+                <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+                <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+                <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <span class="card-caption">Vaga Destaque</span>
+      </div>
+
+      <!-- Variation 2 Light - Dica / Conteudo -->
+      <div class="card-wrapper">
+        <div class="ig-frame dica-light" style="position:relative;">
+          <div class="top-label">Dica TrabalhaMais</div>
+          <div class="big-number">01</div>
+          <div class="dica-title">3 erros que te eliminam na entrevista</div>
+          <div class="dica-subtitle">Evite essas falhas comuns e aumente suas chances de conquista a vaga.</div>
+          <ul class="tips-list">
+            <li>
+              <span class="bullet">1</span>
+              Chegar atrasado sem avisar
+            </li>
+            <li>
+              <span class="bullet">2</span>
+              Falar mal do emprego anterior
+            </li>
+            <li>
+              <span class="bullet">3</span>
+              N&atilde;o pesquisar sobre a empresa
+            </li>
+          </ul>
+          <div class="bottom-bar">
+            <span class="tagline">A vaga certa, na hora certa</span>
+            <svg class="logo-bottom" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+          </div>
+        </div>
+        <span class="card-caption">Dica / Conte&uacute;do</span>
+      </div>
+
+      <!-- Variation 3 Light - Resultado / Depoimento -->
+      <div class="card-wrapper">
+        <div class="ig-frame depo-light">
+          <div class="quote-marks">&ldquo;</div>
+          <div class="depo-text">Encontrei minha vaga em 2 dias</div>
+          <div class="depo-name">Wesley S. &mdash; Vendedor</div>
+          <div class="badge-contratado">
+            <span class="check">&#10003;</span>
+            <span>Contratado</span>
+          </div>
+          <div class="bottom-bar">
+            <span class="tagline">A vaga certa, na hora certa</span>
+            <svg class="logo-bottom" viewBox="0 0 72 100" fill="none">
+              <rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/>
+              <rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/>
+              <circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/>
+              <path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/>
+            </svg>
+          </div>
+        </div>
+        <span class="card-caption">Resultado / Depoimento</span>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>

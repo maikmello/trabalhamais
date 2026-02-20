@@ -1,0 +1,55 @@
+TrabalhaMais - Brand Assets v1.0
+==================================
+Fevereiro 2026
+
+ESTRUTURA DE PASTAS
+-------------------
+
+01_Logo/
+   Todas as variantes do logo em SVG.
+   - Icone principal (cracha) - escuro, navy, claro, monocromatico
+   - App icon (formato quadrado 72x72)
+   - Lockups horizontal e vertical (fundo escuro e claro)
+   - Wordmark solo
+
+02_Color/
+   Referencia visual de cores com HEX, RGB e regras de uso.
+
+03_Typography/
+   Referencia tipografica. Fontes Nunito e Inter sao do Google Fonts (gratuitas).
+   - Nunito: https://fonts.google.com/specimen/Nunito
+   - Inter: https://fonts.google.com/specimen/Inter
+
+04_Imagery/
+   Guia de direcao fotografica e iconografia.
+
+05_Templates/
+   Templates HTML prontos para uso (Instagram, YouTube, apresentacao, email).
+   Cada template possui versao dark e light mode.
+
+06_Brand_Guidelines/
+   Brand Book oficial (brand_book.html).
+
+07_Motion_Audio/
+   Reservado para animacoes de logo e vinhetas (futuro).
+
+08_Source_Files/
+   Arquivos editaveis (HTML fonte dos templates).
+
+TIPOGRAFIA
+----------
+Fonte principal: Nunito (Google Fonts, licenca OFL)
+Fonte auxiliar: Inter (Google Fonts, licenca OFL)
+
+CORES PRINCIPAIS
+----------------
+Orange:  #E8631A
+Navy:    #1A2744
+Teal:    #1A9E7A
+Cloud:   #F5F6FA
+White:   #FFFFFF
+
+CONTATO
+-------
+Projeto: TrabalhaMais
+Fundador: Maik Mello

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Referencia Tipografica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E8631A;--navy:#1A2744;--teal:#1A9E7A;--cloud:#F5F6FA;--bg:#0d1117;--card:#161b22;--border:rgba(255,255,255,0.08);--text:#e6edf3;--muted:#8b949e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);padding:48px 24px;line-height:1.6}
+.inner{max-width:1000px;margin:0 auto}
+.badge{display:inline-block;background:var(--orange);color:#fff;border-radius:20px;font-size:13px;padding:4px 16px;font-weight:700;margin-bottom:16px}
+h1{font-weight:800;font-size:2.5rem;color:#fff;margin-bottom:48px;letter-spacing:-0.02em}
+h2{font-weight:700;font-size:1.4rem;color:#fff;margin:48px 0 24px;letter-spacing:-0.01em}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:24px}
+.weight-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border)}
+.weight-row:last-child{border-bottom:none}
+.weight-label{font-size:13px;color:var(--muted);width:140px;flex-shrink:0;font-family:Inter,sans-serif}
+.sample{font-size:28px;color:var(--text)}
+.hierarchy .card{display:flex;flex-direction:column;gap:8px}
+.hierarchy .spec{font-size:12px;color:var(--orange);font-weight:700;font-family:Inter,sans-serif}
+.rule{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:15px}
+.rule .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:12px 16px;text-align:left;border:1px solid var(--border);font-size:14px}
+th{background:rgba(232,99,26,0.1);color:var(--orange);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.03em}
+</style>
+</head>
+<body>
+<div class="inner">
+
+<span class="badge">Tipografia</span>
+<h1>Referencia Tipografica</h1>
+
+<h2>Nunito - Fonte Principal</h2>
+<p style="color:var(--muted);font-size:14px;margin-bottom:16px">Sans-serif geometrica arredondada. Transmite acolhimento e acessibilidade. Licenca: OFL (Google Fonts).</p>
+<div class="card">
+<div class="weight-row"><span class="weight-label">ExtraLight 200</span><span class="sample" style="font-weight:200">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Light 300</span><span class="sample" style="font-weight:300">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Regular 400</span><span class="sample" style="font-weight:400">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">SemiBold 600</span><span class="sample" style="font-weight:600">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Bold 700</span><span class="sample" style="font-weight:700">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">ExtraBold 800</span><span class="sample" style="font-weight:800">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Black 900</span><span class="sample" style="font-weight:900">Aa Bb Cc Dd 0123456789</span></div>
+</div>
+
+<h2>Inter - Fonte Auxiliar</h2>
+<p style="color:var(--muted);font-size:14px;margin-bottom:16px">Uso restrito a dashboards B2B, tabelas e metricas. Licenca: OFL (Google Fonts).</p>
+<div class="card">
+<div class="weight-row"><span class="weight-label">Regular 400</span><span class="sample" style="font-family:Inter;font-weight:400">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Medium 500</span><span class="sample" style="font-family:Inter;font-weight:500">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">SemiBold 600</span><span class="sample" style="font-family:Inter;font-weight:600">Aa Bb Cc Dd 0123456789</span></div>
+<div class="weight-row"><span class="weight-label">Bold 700</span><span class="sample" style="font-family:Inter;font-weight:700">Aa Bb Cc Dd 0123456789</span></div>
+</div>
+
+<h2>Hierarquia Tipografica</h2>
+<div class="hierarchy">
+<div class="card">
+<p class="spec">H1 - Nunito 800 · 48px · lh 1.15 · ls -0.02em</p>
+<p style="font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.15;letter-spacing:-0.02em;color:#fff">Encontre seu proximo trabalho</p>
+</div>
+<div class="card">
+<p class="spec">H2 - Nunito 700 · 36px · lh 1.2 · ls -0.02em</p>
+<p style="font-weight:700;font-size:clamp(22px,3vw,36px);line-height:1.2;letter-spacing:-0.02em;color:#fff">Vagas perto de voce</p>
+</div>
+<div class="card">
+<p class="spec">H3 - Nunito 700 · 24px · lh 1.3</p>
+<p style="font-weight:700;font-size:clamp(18px,2.5vw,24px);line-height:1.3;color:#fff">Como funciona</p>
+</div>
+<div class="card">
+<p class="spec">Body - Nunito 400 · 16px · lh 1.6</p>
+<p style="font-weight:400;font-size:16px;line-height:1.6;color:var(--text);max-width:65ch">O TrabalhaMais conecta empresas a trabalhadores operacionais de forma rapida e inteligente, usando IA para encontrar o candidato ideal.</p>
+</div>
+<div class="card">
+<p class="spec">Body Strong - Nunito 600 · 16px · lh 1.6</p>
+<p style="font-weight:600;font-size:16px;line-height:1.6;color:var(--text)">Texto em destaque dentro do corpo.</p>
+</div>
+<div class="card" style="display:flex;flex-direction:row;gap:48px;flex-wrap:wrap">
+<div><p class="spec">Caption - Nunito 400 · 14px</p><p style="font-size:14px;color:var(--muted)">Texto auxiliar e metadados</p></div>
+<div><p class="spec">CTA - Nunito 700 · 16px</p><p style="font-size:16px;font-weight:700;color:var(--orange)">Ver vagas agora →</p></div>
+<div><p class="spec">Tag - Nunito 700 · 12px · uppercase</p><p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--teal);background:rgba(26,158,122,0.15);display:inline-block;padding:4px 12px;border-radius:4px">Nova vaga</p></div>
+</div>
+</div>
+
+<h2>Regras</h2>
+<div class="card">
+<div class="rule"><span class="dot"></span>Tamanho minimo de corpo: <strong>16px</strong> (inegociavel)</div>
+<div class="rule"><span class="dot"></span>Line-height do corpo: <strong>1.6</strong></div>
+<div class="rule"><span class="dot"></span>Largura maxima de paragrafo: <strong>65-75 caracteres</strong></div>
+<div class="rule"><span class="dot"></span>Nunca usar peso abaixo de <strong>400</strong> para texto corrido</div>
+<div class="rule"><span class="dot"></span>Headlines sempre com letter-spacing negativo (<strong>-0.02em</strong>)</div>
+</div>
+
+<h2>Onde usar cada fonte</h2>
+<table>
+<tr><th>Contexto</th><th>Fonte</th><th>Peso</th></tr>
+<tr><td>Headlines, titulos, CTAs</td><td>Nunito</td><td>700-800</td></tr>
+<tr><td>Corpo de texto</td><td>Nunito</td><td>400-600</td></tr>
+<tr><td>Wordmark do logo</td><td>Nunito</td><td>800</td></tr>
+<tr><td>Tags, labels</td><td>Nunito</td><td>700</td></tr>
+<tr><td>Dashboards B2B</td><td>Inter</td><td>400-600</td></tr>
+<tr><td>Tabelas e metricas</td><td>Inter</td><td>500-700</td></tr>
+<tr><td>Codigo, valores tecnicos</td><td>Inter</td><td>400</td></tr>
+</table>
+
+<h2>Links de Download</h2>
+<div class="card">
+<p style="margin-bottom:12px"><strong style="color:#fff">Nunito:</strong> <a href="https://fonts.google.com/specimen/Nunito" style="color:var(--orange)">fonts.google.com/specimen/Nunito</a></p>
+<p><strong style="color:#fff">Inter:</strong> <a href="https://fonts.google.com/specimen/Inter" style="color:var(--orange)">fonts.google.com/specimen/Inter</a></p>
+</div>
+
+</div>
+</body>
+</html>

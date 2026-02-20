@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrabalhaMais - Brand Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E8631A;--orange-dark:#C44F0E;--navy:#1A2744;--navy-mid:#2D3E5E;--teal:#1A9E7A;--cloud:#F5F6FA;--bg:#0d1117;--bg-card:#161b22;--bg-hover:#1c2333;--border:rgba(255,255,255,0.08);--text:#e6edf3;--muted:#8b949e}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* HERO */
+.hero{padding:clamp(48px,10vw,96px) clamp(16px,4vw,48px) clamp(32px,6vw,64px);text-align:center;position:relative;overflow:hidden}
+.hero-logo{display:inline-flex;align-items:center;gap:16px;margin-bottom:24px}
+.hero h1{font-weight:800;font-size:clamp(2rem,5vw,3.5rem);color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px}
+.hero h1 .plus{color:var(--orange)}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);color:var(--muted);max-width:520px;margin:0 auto 32px}
+.hero-badge{display:inline-block;background:rgba(232,99,26,0.15);color:var(--orange);font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;letter-spacing:0.02em}
+
+/* NAV CARDS */
+.container{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 64px}
+.section-label{font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;padding-left:4px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:48px}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:var(--text);transition:all 0.2s ease;display:flex;gap:20px;align-items:flex-start;position:relative;overflow:hidden}
+.card:hover{background:var(--bg-hover);border-color:rgba(232,99,26,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card:active{transform:translateY(0)}
+
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.card-icon.orange{background:rgba(232,99,26,0.15);color:var(--orange)}
+.card-icon.navy{background:rgba(26,39,68,0.4);color:#7B8DB5}
+.card-icon.teal{background:rgba(26,158,122,0.15);color:var(--teal)}
+.card-icon.cloud{background:rgba(245,246,250,0.1);color:var(--cloud)}
+
+.card-body h3{font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:4px;letter-spacing:-0.01em}
+.card-body p{font-size:14px;color:var(--muted);line-height:1.5}
+.card-badge{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.04em}
+.card-badge.main{background:var(--orange);color:#fff}
+.card-badge.ref{background:rgba(26,158,122,0.2);color:var(--teal)}
+
+/* ASSET GRID */
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:48px}
+.asset-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:var(--text);transition:all 0.15s ease;display:flex;flex-direction:column;gap:8px}
+.asset-card:hover{background:var(--bg-hover);border-color:rgba(255,255,255,0.15)}
+.asset-card .icon{font-size:28px;margin-bottom:4px}
+.asset-card h4{font-weight:700;font-size:14px;color:#fff}
+.asset-card p{font-size:12px;color:var(--muted)}
+
+/* FILE LIST */
+.file-list{display:flex;flex-direction:column;gap:4px;margin-bottom:48px}
+.file-item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:8px;text-decoration:none;color:var(--text);transition:background 0.15s;font-size:14px}
+.file-item:hover{background:var(--bg-hover)}
+.file-item .fi-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0}
+.file-item .fi-name{font-weight:600;color:#fff;flex:1}
+.file-item .fi-meta{font-size:12px;color:var(--muted)}
+
+/* SEPARATOR */
+.sep{height:1px;background:var(--border);margin:16px 0 32px}
+
+/* FOOTER */
+.footer{text-align:center;padding:32px 16px 48px;color:var(--muted);font-size:13px}
+.footer a{color:var(--orange);text-decoration:none}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .cards{grid-template-columns:1fr}
+  .asset-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">
+    <svg viewBox="0 0 72 100" fill="none" style="height:56px"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+  </div>
+  <h1><span>Trabalha</span><span class="plus">+</span></h1>
+  <p>Central da marca - todos os assets, guidelines e templates em um lugar.</p>
+  <span class="hero-badge">Brand Hub v1.0 - Fev 2026</span>
+</div>
+
+<div class="container">
+
+  <!-- PRINCIPAL -->
+  <p class="section-label">Documentos Principais</p>
+  <div class="cards">
+    <a class="card" href="06_Brand_Guidelines/brand_book.html">
+      <div class="card-icon orange">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+      </div>
+      <div class="card-body">
+        <h3>Brand Book</h3>
+        <p>Documento completo com 10 seções - logo, cores, tipografia, tom de voz, aplicações e mais.</p>
+      </div>
+      <span class="card-badge main">Principal</span>
+    </a>
+    <a class="card" href="06_Brand_Guidelines/quick-reference.html">
+      <div class="card-icon teal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <div class="card-body">
+        <h3>Quick Reference</h3>
+        <p>Resumo de 1 página com cores, fontes, logo e tom de voz - ideal para consulta rápida.</p>
+      </div>
+      <span class="card-badge ref">Referência</span>
+    </a>
+    <a class="card" href="../BRAND_STUDIO.md" target="_blank">
+      <div class="card-icon navy">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="card-body">
+        <h3>Brand Studio</h3>
+        <p>Documento de processo completo - todas as 6 fases do desenvolvimento da marca.</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ASSETS -->
+  <p class="section-label">Biblioteca de Assets</p>
+
+  <div class="asset-grid">
+    <!-- Logos -->
+    <a class="asset-card" href="01_Logo/" target="_blank">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 72 100" fill="none"><rect x="2" y="10" width="68" height="88" rx="8" fill="#E8631A"/><rect x="21" y="4" width="30" height="12" rx="3" fill="white" opacity="0.85"/><circle cx="36" cy="38" r="11" fill="rgba(255,255,255,0.4)"/><path d="M18 69 C18 59, 26 52, 36 52 C46 52, 54 59, 54 69 L54 79 C54 81, 52 83, 49 83 L23 83 C20 83, 18 81, 18 79Z" fill="rgba(255,255,255,0.22)"/></svg>
+      </span>
+      <h4>Logos</h4>
+      <p>11 SVGs - ícone, lockups, wordmarks, monocromáticos</p>
+    </a>
+    <!-- Cores -->
+    <a class="asset-card" href="02_Color/cores-referencia.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="8" fill="#E8631A" opacity="0.9"/><circle cx="18" cy="10" r="8" fill="#1A2744" opacity="0.9"/><circle cx="14" cy="18" r="8" fill="#1A9E7A" opacity="0.9"/></svg>
+      </span>
+      <h4>Cores</h4>
+      <p>Paleta completa, WCAG, regra 60-30-10</p>
+    </a>
+    <!-- Tipografia -->
+    <a class="asset-card" href="03_Typography/tipografia-referencia.html">
+      <span class="icon" style="font-family:Nunito;font-weight:800;font-size:28px;color:var(--orange)">Aa</span>
+      <h4>Tipografia</h4>
+      <p>Nunito + Inter - pesos, hierarquia, regras</p>
+    </a>
+    <!-- Fotografia -->
+    <a class="asset-card" href="04_Imagery/direcao-fotografica.txt" target="_blank">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A9E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </span>
+      <h4>Direção Visual</h4>
+      <p>Fotografia, iconografia e tratamento de imagem</p>
+    </a>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- TEMPLATES -->
+  <p class="section-label">Templates Prontos (Dark + Light Mode)</p>
+
+  <div class="asset-grid">
+    <a class="asset-card" href="05_Templates/01-instagram-feed.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#E8631A" stroke="none"/></svg>
+      </span>
+      <h4>Instagram Feed</h4>
+      <p>3 variações - Vaga, Dica, Depoimento</p>
+    </a>
+    <a class="asset-card" href="05_Templates/02-instagram-stories.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+      </span>
+      <h4>Instagram Stories</h4>
+      <p>3 variações - Vaga, Countdown, Quiz</p>
+    </a>
+    <a class="asset-card" href="05_Templates/03-instagram-carrossel.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="16" height="16" rx="2"/><rect x="6" y="2" width="16" height="16" rx="2" opacity="0.5"/></svg>
+      </span>
+      <h4>Instagram Carrossel</h4>
+      <p>5 slides - Capa, Dicas, CTA</p>
+    </a>
+    <a class="asset-card" href="05_Templates/04-youtube-thumbnail.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polygon points="10,8 16,12 10,16" fill="#E8631A" stroke="none"/></svg>
+      </span>
+      <h4>YouTube Thumbnail</h4>
+      <p>3 estilos - Tutorial, Ranking, Urgência</p>
+    </a>
+    <a class="asset-card" href="05_Templates/05-apresentacao.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A2744" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#E8631A"/><path d="M8 21h8" stroke="#E8631A"/><path d="M12 17v4" stroke="#E8631A"/></svg>
+      </span>
+      <h4>Apresentação</h4>
+      <p>5 slides 16:9 - Capa a Encerramento</p>
+    </a>
+    <a class="asset-card" href="05_Templates/06-assinatura-email.html">
+      <span class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8631A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+      </span>
+      <h4>Assinatura de Email</h4>
+      <p>3 variações - Completa, Compacta, Banner</p>
+    </a>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- PROCESSO -->
+  <p class="section-label">Arquivos de Processo</p>
+
+  <div class="file-list">
+    <a class="file-item" href="../_Processo/Fase_1_Discovery/analise_competitiva.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <span class="fi-name">Análise Competitiva</span>
+      <span class="fi-meta">Fase 1 - Discovery</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_3_Creative_Direction/creative_direction.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </span>
+      <span class="fi-name">Direção Criativa</span>
+      <span class="fi-meta">Fase 3 - Creative Direction</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_4_Visual_Identity/visual_identity.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </span>
+      <span class="fi-name">Identidade Visual</span>
+      <span class="fi-meta">Fase 4 - Visual Identity</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_4_Visual_Identity/visual_identity_v2.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </span>
+      <span class="fi-name">Identidade Visual v2</span>
+      <span class="fi-meta">Fase 4 - Visual Identity</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_4_Visual_Identity/logo_explorations.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3z"/></svg>
+      </span>
+      <span class="fi-name">Explorações de Logo</span>
+      <span class="fi-meta">Fase 4 - Visual Identity</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_4_Visual_Identity/logo_aplicacoes.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </span>
+      <span class="fi-name">Aplicações do Logo</span>
+      <span class="fi-meta">Fase 4 - Visual Identity</span>
+    </a>
+    <a class="file-item" href="../_Processo/Fase_4_Visual_Identity/cracha_icon_test.html">
+      <span class="fi-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+      </span>
+      <span class="fi-name">Teste do Crachá</span>
+      <span class="fi-meta">Fase 4 - Visual Identity</span>
+    </a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Trabalha<span style="color:var(--orange)">+</span></strong> - A vaga certa, na hora certa</p>
+  <p style="margin-top:8px">Brand Hub v1.0 - Fevereiro 2026 - Criado por Maik Mello</p>
+</div>
+
+</body>
+</html>
